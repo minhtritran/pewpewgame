@@ -84,6 +84,7 @@ private:
 
 	float shootTimer;
 	float enemySpawnTimer;
+	float jumpTimer;
 
 	Mix_Chunk* gunshot;
 	Mix_Chunk* jump;

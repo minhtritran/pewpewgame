@@ -73,6 +73,7 @@ void SideScroller::Update(float elapsed) {
 
 	shootTimer += elapsed;
 	enemySpawnTimer += elapsed;
+	jumpTimer+= elapsed;
 }
 
 void SideScroller::FixedUpdate() {
@@ -216,9 +217,10 @@ bool SideScroller::UpdateAndRender() {
 	}
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_W]) {
-		if (!player->isJumping) {
+		if (!player->isJumping && jumpTimer > 0.25f) {
 			Mix_PlayChannel(-1, jump, 0);
 			player->jump();
+			jumpTimer = 0.0f;
 		}
 		
 	}
@@ -531,7 +533,7 @@ void SideScroller::doLevelCollisionY(Entity *entity) {
 	adjust = checkPointForGridCollisionY(entity->x, entity->y + entity->height*0.5);
 	if (adjust != 0.0f) {
 		entity->y -= adjust;
-		entity->velocity_y += 0.0f;
+		entity->velocity_y = 0.0f;
 		entity->collidedTop = true;
 	}
 }
