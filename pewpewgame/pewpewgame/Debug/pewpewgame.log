@@ -1,0 +1,38 @@
+﻿Build started 12/7/2014 3:44:18 PM.
+     1>Project "C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bullet.cpp Entity.cpp main.cpp Player.cpp SheetSprite.cpp SideScroller.cpp
+         SideScroller.cpp
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(303): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(318): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(323): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(390): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(391): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(465): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(466): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(472): warning C4018: '>' : signed/unsigned mismatch
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(486): warning C4018: '>' : signed/unsigned mismatch
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(501): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(510): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(522): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(531): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         SheetSprite.cpp
+         Player.cpp
+         main.cpp
+         Entity.cpp
+         Bullet.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\SDL2_mixer\lib\x86 SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.lib" /MACHINE:X86 Debug\Bullet.obj
+         Debug\Entity.obj
+         Debug\main.obj
+         Debug\Player.obj
+         Debug\SheetSprite.obj
+         Debug\SideScroller.obj
+     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+         pewpewgame.vcxproj -> C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.exe
+     1>Done Building Project "C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.88
