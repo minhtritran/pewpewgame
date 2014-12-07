@@ -354,8 +354,8 @@ bool SideScroller::readEntityData(ifstream& stream) {
 			getline(lineStream, xPosition, ',');
 			getline(lineStream, yPosition, ',');
 			
-			float placeX = (atoi(xPosition.c_str()) + 8.0f - 128.0f * 16.0f / 2.0f) / 16.0f * TILE_SIZE;
-			float placeY = (atoi(yPosition.c_str()) - 8.0f - 32.0f * 16.0f / 2.0f) / 16.0f * -TILE_SIZE;
+			float placeX = (atoi(xPosition.c_str()) + 8.0f - mapWidth * 16.0f / 2.0f) / 16.0f * TILE_SIZE;
+			float placeY = (atoi(yPosition.c_str()) - 8.0f - mapHeight * 16.0f / 2.0f) / 16.0f * -TILE_SIZE;
 			
 			placeEntity(type, placeX, placeY);
 		}
@@ -462,19 +462,19 @@ bool SideScroller::isSolid(unsigned char tile) {
 }
 
 void SideScroller::worldToTileCoordinates(float worldX, float worldY, int*gridX, int*gridY) {
-	*gridX = (int)(((worldX * 16.0f) / TILE_SIZE) + (128.0f * 16.0f / 2.0f)) / 16.0f;
-	*gridY = (int)(((worldY * 16.0f) / -TILE_SIZE) + (32.0f * 16.0f / 2.0f)) / 16.0f;
+	*gridX = (int)(((worldX * 16.0f) / TILE_SIZE) + (mapWidth * 16.0f / 2.0f)) / 16.0f;
+	*gridY = (int)(((worldY * 16.0f) / -TILE_SIZE) + (mapHeight * 16.0f / 2.0f)) / 16.0f;
 }
 
 float SideScroller::checkPointForGridCollisionX(float x, float y) {
 	int gridX, gridY;
 	worldToTileCoordinates(x, y, &gridX, &gridY);
-	if (gridX < 0 || gridX > 128 || gridY < 0 || gridY > 32) {
+	if (gridX < 0 || gridX > mapWidth || gridY < 0 || gridY > mapHeight) {
 		return 0.0f;
 	}
 		
 	if (isSolid(levelData[gridY][gridX])) {
-		float xCoordinate = (((gridX * 16.0f - (128.0f * 16.0f / 2.0f)) * TILE_SIZE) / 16.0f) + TILE_SIZE/2.0f;
+		float xCoordinate = (((gridX * 16.0f - (mapWidth * 16.0f / 2.0f)) * TILE_SIZE) / 16.0f) + TILE_SIZE / 2.0f;
 		return fabs(x - xCoordinate) - (TILE_SIZE / 2.0f);
 	}
 	return 0.0f;
@@ -483,12 +483,12 @@ float SideScroller::checkPointForGridCollisionX(float x, float y) {
 float SideScroller::checkPointForGridCollisionY(float x, float y) {
 	int gridX, gridY;
 	worldToTileCoordinates(x, y, &gridX, &gridY);
-	if (gridX < 0 || gridX > 128 || gridY < 0 || gridY > 32) {
+	if (gridX < 0 || gridX > mapWidth || gridY < 0 || gridY > mapHeight) {
 		return 0.0f;
 	}
 
 	if (isSolid(levelData[gridY][gridX])) {
-		float yCoordinate = (((gridY * 16.0f - (32.0f * 16.0f / 2.0f)) * -TILE_SIZE) / 16.0f) + TILE_SIZE / 2.0f;
+		float yCoordinate = (((gridY * 16.0f - (mapHeight * 16.0f / 2.0f)) * -TILE_SIZE) / 16.0f) + TILE_SIZE / 2.0f;
 		return fabs(y - yCoordinate) - (TILE_SIZE / 2.0f);
 		
 	}
