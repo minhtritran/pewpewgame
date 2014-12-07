@@ -474,7 +474,8 @@ float SideScroller::checkPointForGridCollisionX(float x, float y) {
 	}
 		
 	if (isSolid(levelData[gridY][gridX])) {
-		return 0.004f;
+		float xCoordinate = (((gridX * 16.0f - (128.0f * 16.0f / 2.0f)) * TILE_SIZE) / 16.0f) + TILE_SIZE/2.0f;
+		return fabs(x - xCoordinate) - (TILE_SIZE / 2.0f);
 	}
 	return 0.0f;
 }
@@ -487,9 +488,8 @@ float SideScroller::checkPointForGridCollisionY(float x, float y) {
 	}
 
 	if (isSolid(levelData[gridY][gridX])) {
-		
-		float yCoordinate = (gridY * TILE_SIZE) - (TILE_SIZE*16.0);
-		return -y - yCoordinate;
+		float yCoordinate = (((gridY * 16.0f - (32.0f * 16.0f / 2.0f)) * -TILE_SIZE) / 16.0f) + TILE_SIZE / 2.0f;
+		return fabs(y - yCoordinate) - (TILE_SIZE / 2.0f);
 		
 	}
 	return 0.0f;
@@ -500,7 +500,7 @@ void SideScroller::doLevelCollisionX(Entity *entity) {
 
 	float adjust = checkPointForGridCollisionX(entity->x + entity->width*0.5, entity->y);
 	if (adjust != 0.0f) {
-		entity->x -= adjust;
+		entity->x += adjust;
 		entity->velocity_x = 0.0f;
 		entity->collidedRight = true;
 	}
@@ -509,7 +509,7 @@ void SideScroller::doLevelCollisionX(Entity *entity) {
 
 	adjust = checkPointForGridCollisionX(entity->x - entity->width*0.5, entity->y);
 	if (adjust != 0.0f) {
-		entity->x += adjust;
+		entity->x -= adjust;
 		entity->velocity_x = 0.0f;
 		entity->collidedLeft = true;
 	}
@@ -526,7 +526,14 @@ void SideScroller::doLevelCollisionY(Entity *entity) {
 		entity->collidedBottom = true;
 	}
 
+	//check top
 
+	adjust = checkPointForGridCollisionY(entity->x, entity->y + entity->height*0.5);
+	if (adjust != 0.0f) {
+		entity->y -= adjust;
+		entity->velocity_y += 0.0f;
+		entity->collidedTop = true;
+	}
 }
 
 float lerp(float v0, float v1, float t) {
