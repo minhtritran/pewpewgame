@@ -1,17 +1,24 @@
 #include "SheetSprite.h"
 
 SheetSprite::SheetSprite() {
-	spriteCountX = 1;
-	spriteCountY = 1;
 }
 
+SheetSprite::SheetSprite(unsigned int textureID, float u, float v, float spriteWidth, float spriteHeight)
+	: textureID(textureID), u(u), v(v), spriteWidth(spriteWidth), spriteHeight(spriteHeight)
+{}
+
 SheetSprite::SheetSprite(GLuint textureID, unsigned int spriteCountX, unsigned int spriteCountY, unsigned int index)
-	: textureID(textureID), spriteCountX(spriteCountX), spriteCountY(spriteCountY), index(index) {
+	: textureID(textureID) {
 	
 	if (spriteCountX == 0)
 		spriteCountX = 1;
 	if (spriteCountY == 0)
-		spriteCountY = 0;
+		spriteCountY = 1;
+
+	u = (float)(((int)index) % spriteCountX) / (float)spriteCountX;
+	v = (float)(((int)index) / spriteCountX) / (float)spriteCountY;
+	spriteWidth = 1.0f / (float)spriteCountX;
+	spriteHeight = 1.0f / (float)spriteCountY;
 }
 
 void SheetSprite::Draw(float width, float height, float x, float y, float rotation) {
@@ -23,11 +30,6 @@ void SheetSprite::Draw(float width, float height, float x, float y, float rotati
 	glPushMatrix();
 	glTranslatef(x, y, 0.0);
 	glRotatef(rotation, 0.0, 0.0, 1.0);
-
-	float u = (float)(((int)index) % spriteCountX) / (float)spriteCountX;
-	float v = (float)(((int)index) / spriteCountX) / (float)spriteCountY;
-	float spriteWidth = 1.0f / (float)spriteCountX;
-	float spriteHeight = 1.0f / (float)spriteCountY;
 
 	GLfloat quad[] = { -width * 0.5f, height * 0.5f, -width * 0.5f, -height * 0.5f, width * 0.5f, -height * 0.5f, width * 0.5f, height * 0.5f };
 	glVertexPointer(2, GL_FLOAT, 0, quad);

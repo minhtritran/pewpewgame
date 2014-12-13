@@ -7,14 +7,17 @@
 class SheetSprite{
 public:
 	SheetSprite();
+	SheetSprite(unsigned int textureID, float u, float v, float spriteWidth, float spriteHeight);
 	SheetSprite(GLuint textureID, unsigned int spriteCountX, unsigned int spriteCountY, unsigned int index);
 
 	void Draw(float width, float height, float x, float y, float rotation);
 
 	GLuint textureID;
-	unsigned int spriteCountX;
-	unsigned int spriteCountY;
-	unsigned int index;
+	float u;
+	float v;
+	float spriteWidth;
+	float spriteHeight;
+
 };
 
 GLuint LoadTexture(const char *image_path);

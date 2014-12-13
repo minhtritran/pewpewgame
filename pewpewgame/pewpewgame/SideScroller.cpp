@@ -16,15 +16,15 @@ SideScroller::SideScroller() {
 	bulletIndex = 0;
 	shootTimer = 0.1f;
 
-	brickSpriteSheetTexture = LoadTexture("sheet_4.png");
-	characterSpriteSheetTexture = LoadTexture("characters_1.png");
-	fontTexture = LoadTexture("pixel_font.png");
+	brickSpriteSheetTexture = LoadTexture("resources/sheet_4.png");
+	characterSpriteSheetTexture = LoadTexture("resources/characters_1.png");
+	fontTexture = LoadTexture("resources/pixel_font.png");
 	bulletSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 3);
 	buildLevel();
 
-	gunshot = Mix_LoadWAV("gunshot.wav");
-	jump = Mix_LoadWAV("jump.wav");
-	music = Mix_LoadMUS("music.wav");
+	gunshot = Mix_LoadWAV("resources/gunshot.wav");
+	jump = Mix_LoadWAV("resources/jump.wav");
+	music = Mix_LoadMUS("resources/music.wav");
 	if (Mix_PlayMusic(music, -1) < 0) {
 		cout << "Error";
 	}
@@ -293,7 +293,7 @@ bool SideScroller::UpdateAndRender() {
 }
 
 void SideScroller::buildLevel() {
-	ifstream infile("levelFile.txt");
+	ifstream infile("resources/levelFile.txt");
 	string line;
 	while (getline(infile, line)) {
 		if (line == "[header]") {
