@@ -1,9 +1,11 @@
 #include "SideScroller.h"
 
+enum GameState { STATE_TITLE, STATE_GAME, STATE_GAMEOVER };
+
 SideScroller::SideScroller() {
 	Init();
 	
-
+	state = STATE_TITLE;
 	done = false;
 	lastFrameTicks = 0.0f;
 	timeLeftOver = 0.0f;
@@ -16,6 +18,7 @@ SideScroller::SideScroller() {
 
 	brickSpriteSheetTexture = LoadTexture("sheet_4.png");
 	characterSpriteSheetTexture = LoadTexture("characters_1.png");
+	fontTexture = LoadTexture("pixel_font.png");
 	bulletSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 3);
 	buildLevel();
 
@@ -25,9 +28,6 @@ SideScroller::SideScroller() {
 	if (Mix_PlayMusic(music, -1) < 0) {
 		cout << "Error";
 	}
-	
-
-	
 	
 }
 
@@ -50,150 +50,171 @@ void SideScroller::Init() {
 }
 
 void SideScroller::Update(float elapsed) {
-	if (enemySpawnTimer > 1.0f && enemyIndex < 8) {
-		SheetSprite enemySprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 2);
-		enemies[enemyIndex].sprite = enemySprite;
-		enemies[enemyIndex].y = 0.85f;
-		enemies[enemyIndex].x = 0.65f;
-		enemies[enemyIndex].width = 0.2f;
-		enemies[enemyIndex].height = 0.2f;
-		enemies[enemyIndex].acceleration_x = -2.0f;
-		entities.push_back(&enemies[enemyIndex]);
-		enemyIndex++;
-		enemySpawnTimer = 0.0f;
+	if (state == STATE_TITLE)
+	{
+		return;
 	}
+	else if (state == STATE_GAME)
+	{
+		if (enemySpawnTimer > 1.0f && enemyIndex < 8) {
+			SheetSprite enemySprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 2);
+			enemies[enemyIndex].sprite = enemySprite;
+			enemies[enemyIndex].y = 0.85f;
+			enemies[enemyIndex].x = 0.65f;
+			enemies[enemyIndex].width = 0.2f;
+			enemies[enemyIndex].height = 0.2f;
+			enemies[enemyIndex].acceleration_x = -2.0f;
+			entities.push_back(&enemies[enemyIndex]);
+			enemyIndex++;
+			enemySpawnTimer = 0.0f;
+		}
 
-	for (size_t i = 0; i < entities.size(); i++) {
-		entities[i]->Update(elapsed);
+		for (size_t i = 0; i < entities.size(); i++) {
+			entities[i]->Update(elapsed);
+		}
+
+		for (size_t i = 0; i < MAX_BULLETS; i++) {
+			bullets[i].Update(elapsed);
+		}
+
+		shootTimer += elapsed;
+		enemySpawnTimer += elapsed;
+		jumpTimer += elapsed;
 	}
-
-	for (size_t i = 0; i < MAX_BULLETS; i++) {
-		bullets[i].Update(elapsed);
-	}
-
-	shootTimer += elapsed;
-	enemySpawnTimer += elapsed;
-	jumpTimer+= elapsed;
 }
 
 void SideScroller::FixedUpdate() {
-
-	for (size_t i = 0; i < entities.size(); i++) {
-		entities[i]->FixedUpdate();
-
-		if (entities[i]->collidedBottom) {
-			entities[i]->isJumping = false;
-			entities[i]->velocity_y = 0.0f;
-		}
-		if (entities[i]->collidedTop)
-			entities[i]->velocity_y = 0.0f;
-		if (entities[i]->collidedLeft)
-			entities[i]->velocity_x = 0.0f;
-		if (entities[i]->collidedRight)
-			entities[i]->velocity_x = 0.0f;
-
-		entities[i]->collidedBottom = false;
-		entities[i]->collidedTop = false;
-		entities[i]->collidedLeft = false;
-		entities[i]->collidedRight = false;
-
-		if (!entities[i]->isStatic) {
-			entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
-			entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
-		}
-
-		entities[i]->velocity_x = lerp(entities[i]->velocity_x, 0.0f, FIXED_TIMESTEP * entities[i]->friction_x);
-		entities[i]->velocity_y = lerp(entities[i]->velocity_y, 0.0f, FIXED_TIMESTEP * entities[i]->friction_y);
-
-		entities[i]->velocity_x += entities[i]->acceleration_x * FIXED_TIMESTEP;
-		entities[i]->velocity_y += entities[i]->acceleration_y * FIXED_TIMESTEP;
-
-		entities[i]->y += entities[i]->velocity_y * FIXED_TIMESTEP;
-		//do Y collisions
-		if (!entities[i]->isStatic) {
-			for (size_t j = 0; j < entities.size(); j++) {
-				if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j]) {
-					float yPenetration = fabs(fabs(entities[j]->y - entities[i]->y) - entities[i]->height / 2.0f - entities[j]->height / 2.0f);
-					if (entities[i]->y > entities[j]->y) {
-						entities[i]->y += yPenetration + 0.001f;
-						entities[i]->collidedBottom = true;
-					}
-					else if (entities[i]->y < entities[j]->y) {
-						entities[i]->y -= yPenetration + 0.001f;
-						entities[i]->collidedTop = true;
-					}
-				}
-			}
-			
-		}
-		doLevelCollisionY(entities[i]);
-		entities[i]->x += entities[i]->velocity_x * FIXED_TIMESTEP;
-		//do X collisions
-		if (!entities[i]->isStatic) {
-			for (size_t j = 0; j < entities.size(); j++) {
-				if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j]) {
-					float xPenetration = fabs(fabs(entities[j]->x - entities[i]->x) - entities[i]->width / 2.0f - entities[j]->width / 2.0f);
-					if (entities[i]->x > entities[j]->x) {
-						entities[i]->x += xPenetration + 0.001f;
-						entities[i]->collidedLeft = true;
-					}
-					else if (entities[i]->x < entities[j]->x) {
-						entities[i]->x -= xPenetration + 0.001f;
-						entities[i]->collidedRight = true;
-					}
-				}
-			}
-		}
-		doLevelCollisionX(entities[i]);
+	if (state == STATE_TITLE)
+	{
+		return;
 	}
+	else if (state == STATE_GAME)
+	{
+		for (size_t i = 0; i < entities.size(); i++) {
+			entities[i]->FixedUpdate();
 
-
-	for (int i = 0; i < MAX_ENEMIES; i++) {
-		if (enemies[i].collidedRight) {
-			enemies[i].acceleration_x = -2.0f;
-		}
-
-		if (enemies[i].collidedLeft) {
-			enemies[i].acceleration_x = 2.0f;
-		}
-		//enemy gets hit
-		for (int k = 0; k < MAX_BULLETS; k++) {
-			if (enemies[i].collidesWith(&bullets[k])) {
-				bullets[k].visible = false;
-				enemies[i].y = 1.3f;
-				enemies[i].x = 0.0f;
+			if (entities[i]->collidedBottom) {
+				entities[i]->isJumping = false;
+				entities[i]->velocity_y = 0.0f;
 			}
+			if (entities[i]->collidedTop)
+				entities[i]->velocity_y = 0.0f;
+			if (entities[i]->collidedLeft)
+				entities[i]->velocity_x = 0.0f;
+			if (entities[i]->collidedRight)
+				entities[i]->velocity_x = 0.0f;
+
+			entities[i]->collidedBottom = false;
+			entities[i]->collidedTop = false;
+			entities[i]->collidedLeft = false;
+			entities[i]->collidedRight = false;
+
+			if (!entities[i]->isStatic) {
+				entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
+				entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
+			}
+
+			entities[i]->velocity_x = lerp(entities[i]->velocity_x, 0.0f, FIXED_TIMESTEP * entities[i]->friction_x);
+			entities[i]->velocity_y = lerp(entities[i]->velocity_y, 0.0f, FIXED_TIMESTEP * entities[i]->friction_y);
+
+			entities[i]->velocity_x += entities[i]->acceleration_x * FIXED_TIMESTEP;
+			entities[i]->velocity_y += entities[i]->acceleration_y * FIXED_TIMESTEP;
+
+			entities[i]->y += entities[i]->velocity_y * FIXED_TIMESTEP;
+			//do Y collisions
+			if (!entities[i]->isStatic) {
+				for (size_t j = 0; j < entities.size(); j++) {
+					if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j]) {
+						float yPenetration = fabs(fabs(entities[j]->y - entities[i]->y) - entities[i]->height / 2.0f - entities[j]->height / 2.0f);
+						if (entities[i]->y > entities[j]->y) {
+							entities[i]->y += yPenetration + 0.001f;
+							entities[i]->collidedBottom = true;
+						}
+						else if (entities[i]->y < entities[j]->y) {
+							entities[i]->y -= yPenetration + 0.001f;
+							entities[i]->collidedTop = true;
+						}
+					}
+				}
+
+			}
+			doLevelCollisionY(entities[i]);
+			entities[i]->x += entities[i]->velocity_x * FIXED_TIMESTEP;
+			//do X collisions
+			if (!entities[i]->isStatic) {
+				for (size_t j = 0; j < entities.size(); j++) {
+					if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j]) {
+						float xPenetration = fabs(fabs(entities[j]->x - entities[i]->x) - entities[i]->width / 2.0f - entities[j]->width / 2.0f);
+						if (entities[i]->x > entities[j]->x) {
+							entities[i]->x += xPenetration + 0.001f;
+							entities[i]->collidedLeft = true;
+						}
+						else if (entities[i]->x < entities[j]->x) {
+							entities[i]->x -= xPenetration + 0.001f;
+							entities[i]->collidedRight = true;
+						}
+					}
+				}
+			}
+			doLevelCollisionX(entities[i]);
 		}
-			
+
+
+		for (int i = 0; i < MAX_ENEMIES; i++) {
+			if (enemies[i].collidedRight) {
+				enemies[i].acceleration_x = -2.0f;
+			}
+
+			if (enemies[i].collidedLeft) {
+				enemies[i].acceleration_x = 2.0f;
+			}
+			//enemy gets hit
+			for (int k = 0; k < MAX_BULLETS; k++) {
+				if (enemies[i].collidesWith(&bullets[k])) {
+					bullets[k].visible = false;
+					enemies[i].y = 1.3f;
+					enemies[i].x = 0.0f;
+				}
+			}
+
+		}
 	}
 }
 
 void SideScroller::Render() {
 	glClear(GL_COLOR_BUFFER_BIT);
-	float translateX = -player->x;
-	float translateY = -player->y;
-
-	if (translateY > 1.5)
-		translateY = 1.5;
-	if (translateX > 8.0)
-		translateX = 8.0;
-	if (translateX < -8.0)
-		translateX = -8.0;
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(translateX, translateY, 0.0f);
-
-
-
-	for (size_t i = 0; i < entities.size(); i++) {
-		entities[i]->Render();
+	
+	if (state == STATE_TITLE)
+	{
+		DrawText(fontTexture, "Press SPACE to start", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
+	else if (state == STATE_GAME)
+	{
+		float translateX = -player->x;
+		float translateY = -player->y;
 
-	for (size_t i = 0; i < MAX_BULLETS; i++) {
-		bullets[i].Render();
+		if (translateY > 1.5)
+			translateY = 1.5;
+		if (translateX > 8.0)
+			translateX = 8.0;
+		if (translateX < -8.0)
+			translateX = -8.0;
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glTranslatef(translateX, translateY, 0.0f);
+
+
+
+		for (size_t i = 0; i < entities.size(); i++) {
+			entities[i]->Render();
+		}
+
+		for (size_t i = 0; i < MAX_BULLETS; i++) {
+			bullets[i].Render();
+		}
+		RenderLevel();
 	}
-	RenderLevel();
 
 	SDL_GL_SwapWindow(displayWindow);
 }
@@ -210,37 +231,51 @@ bool SideScroller::UpdateAndRender() {
 		}
 		else if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
-				if (shootTimer > 0.1f)
-					shootBullet();
+				if (state == STATE_GAME)
+				{
+					if (shootTimer > 0.1f)
+						shootBullet();
+				}
+				else if (state == STATE_TITLE)
+					state = STATE_GAME;
 			}
 		}
 	}
+
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
-	if (keys[SDL_SCANCODE_UP]) {
-		if (!player->isJumping && jumpTimer > 0.25f) {
-			Mix_PlayChannel(-1, jump, 0);
-			player->jump();
-			jumpTimer = 0.0f;
+
+	if (state == STATE_TITLE)
+	{
+		//do nothing
+	}
+	else if (state == STATE_GAME)
+	{
+		if (keys[SDL_SCANCODE_UP]) {
+			if (!player->isJumping && jumpTimer > 0.25f) {
+				Mix_PlayChannel(-1, jump, 0);
+				player->jump();
+				jumpTimer = 0.0f;
+			}
+
 		}
-		
-	}
-	if (keys[SDL_SCANCODE_RIGHT]) {
-		SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 27);
-		player->sprite = playerSprite;
-		player->setWalkRight();
-	}
-	else if (keys[SDL_SCANCODE_LEFT]) {
-		SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 15);
-		player->sprite = playerSprite;
-		player->setWalkLeft();
-	}
-	else {
-		player->setIdle();
-	}
-	if (keys[SDL_SCANCODE_X]) {
-		if (shootTimer > 0.1f) {
-			shootTimer = 0.0f;
-			shootBullet();
+		if (keys[SDL_SCANCODE_RIGHT]) {
+			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 27);
+			player->sprite = playerSprite;
+			player->setWalkRight();
+		}
+		else if (keys[SDL_SCANCODE_LEFT]) {
+			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 15);
+			player->sprite = playerSprite;
+			player->setWalkLeft();
+		}
+		else {
+			player->setIdle();
+		}
+		if (keys[SDL_SCANCODE_X]) {
+			if (shootTimer > 0.1f) {
+				shootTimer = 0.0f;
+				shootBullet();
+			}
 		}
 	}
 
@@ -540,4 +575,38 @@ void SideScroller::doLevelCollisionY(Entity *entity) {
 
 float lerp(float v0, float v1, float t) {
 	return (1.0f - t)*v0 + t*v1;
+}
+
+void DrawText(int textureID, string text, float size, float spacing, float r, float g, float b, float a)
+{
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	vector<float> vertexData;
+	vector<float> uvData;
+	vector<float> colorData;
+
+	float textureSize = 1.0f / 16.0f;
+
+	for (int i = 0; i < text.size(); i++)
+	{
+		float textureX = (float)((int)text[i] % 16) / 16.0f;
+		float textureY = (float)((int)text[i] / 16) / 16.0f;
+
+		vertexData.insert(vertexData.end(), { ((size + spacing) * i) + (-0.5f * size), 0.5f * size, ((size + spacing) * i) +
+			(-0.5f * size), -0.5f * size, ((size + spacing) * i) + (0.5f * size), -0.5f * size, ((size + spacing) * i) + (0.5f * size), 0.5f
+			* size });
+		colorData.insert(colorData.end(), { r, g, b, a, r, g, b, a, r, g, b, a, r, g, b, a });
+		uvData.insert(uvData.end(), { textureX, textureY, textureX, textureY + textureSize, textureX + textureSize, textureY + textureSize, textureX + textureSize, textureY });
+	}
+	glColorPointer(4, GL_FLOAT, 0, colorData.data());
+	glEnableClientState(GL_COLOR_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, vertexData.data());
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, 0, uvData.data());
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glDrawArrays(GL_QUADS, 0, text.size() * 4);
 }

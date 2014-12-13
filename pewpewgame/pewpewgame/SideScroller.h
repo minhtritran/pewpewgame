@@ -54,12 +54,14 @@ public:
 
 private:
 	bool done;
+	int state;
 	float lastFrameTicks;
 	float timeLeftOver;
 	SDL_Window* displayWindow;
 
 	GLuint characterSpriteSheetTexture;
 	GLuint brickSpriteSheetTexture;
+	GLuint fontTexture;
 	SheetSprite bulletSprite;
 
 	float gravity_x;
@@ -93,3 +95,4 @@ private:
 };
 
 float lerp(float v0, float v1, float t);
+void DrawText(int textureID, string text, float size, float spacing, float r, float g, float b, float a);
