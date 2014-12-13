@@ -10,6 +10,7 @@ public:
 	Entity();
 	~Entity();
 
+	void setScale(float scale);
 	virtual void Update(float elapsed);
 	virtual void Render();
 

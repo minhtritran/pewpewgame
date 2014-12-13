@@ -17,7 +17,7 @@ SideScroller::SideScroller() {
 	shootTimer = 0.1f;
 
 	brickSpriteSheetTexture = LoadTexture("resources/sheet_4.png");
-	characterSpriteSheetTexture = LoadTexture("resources/characters_1.png");
+	characterSpriteSheetTexture = LoadTexture("resources/Sprites_Characters.png");
 	fontTexture = LoadTexture("resources/pixel_font.png");
 	bulletSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 3);
 	buildLevel();
@@ -57,7 +57,7 @@ void SideScroller::Update(float elapsed) {
 	else if (state == STATE_GAME)
 	{
 		if (enemySpawnTimer > 1.0f && enemyIndex < 8) {
-			SheetSprite enemySprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 2);
+			SheetSprite enemySprite = SheetSprite(characterSpriteSheetTexture, 405.0f / 2048.0f, 167.0f / 2048.0f, 132.0f / 2048.0f, 161.0f / 2048.0f);
 			enemies[enemyIndex].sprite = enemySprite;
 			enemies[enemyIndex].y = 0.85f;
 			enemies[enemyIndex].x = 0.65f;
@@ -257,12 +257,12 @@ bool SideScroller::UpdateAndRender() {
 
 		}
 		if (keys[SDL_SCANCODE_RIGHT]) {
-			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 27);
+			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
 			player->sprite = playerSprite;
 			player->setWalkRight();
 		}
 		else if (keys[SDL_SCANCODE_LEFT]) {
-			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 15);
+			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
 			player->sprite = playerSprite;
 			player->setWalkLeft();
 		}
@@ -400,13 +400,12 @@ bool SideScroller::readEntityData(ifstream& stream) {
 
 void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 	if (type == "Player") {
-		SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 15);
+		SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
 		player = new Player();
 		player->sprite = playerSprite;
 		player->x = placeX;
 		player->y = placeY;
-		player->width = 0.2f;
-		player->height = 0.2f;
+		player->setScale(3.0f);
 		player->friction_x = 3.0f;
 		entities.push_back(player);
 	}
@@ -534,6 +533,9 @@ void SideScroller::doLevelCollisionX(Entity *entity) {
 	//check right
 
 	float adjust = checkPointForGridCollisionX(entity->x + entity->width*0.5, entity->y);
+	if (adjust == 0.0f) {
+		adjust = checkPointForGridCollisionX(entity->x + entity->width*0.5, entity->y + entity->height*0.5);
+	}
 	if (adjust != 0.0f) {
 		entity->x += adjust;
 		entity->velocity_x = 0.0f;
@@ -543,11 +545,15 @@ void SideScroller::doLevelCollisionX(Entity *entity) {
 	//check left
 
 	adjust = checkPointForGridCollisionX(entity->x - entity->width*0.5, entity->y);
+	if (adjust == 0.0f) {
+		adjust = checkPointForGridCollisionX(entity->x - entity->width*0.5, entity->y + entity->height*0.5);
+	}
 	if (adjust != 0.0f) {
 		entity->x -= adjust;
 		entity->velocity_x = 0.0f;
 		entity->collidedLeft = true;
 	}
+
 
 }
 

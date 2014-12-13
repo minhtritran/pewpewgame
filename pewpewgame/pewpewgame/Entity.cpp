@@ -24,6 +24,11 @@ Entity::Entity() {
 
 Entity::~Entity() {}
 
+void Entity::setScale(float scale) {
+	width = scale * sprite.spriteWidth;
+	height = scale * sprite.spriteHeight;
+}
+
 void Entity::Update(float elapsed) {
 		
 }
