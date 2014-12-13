@@ -366,7 +366,7 @@ bool SideScroller::readLayerData(ifstream& stream) {
 					getline(lineStream, tile, ',');
 					unsigned char val = (unsigned char)atoi(tile.c_str());
 					if (val > 0) {
-						levelData[y][x] = val;
+						levelData[y][x] = val - 1;
 					}
 					else {
 						levelData[y][x] = 0;
@@ -492,19 +492,19 @@ void SideScroller::shootBullet() {
 
 bool SideScroller::isSolid(unsigned char tile) {
 	switch (tile) {
-	case 171:
+	case 170:
 		return true;
 		break;
-	case 87:
-		return true;
-		break;
-	case 74:
+	case 86:
 		return true;
 		break;
 	case 73:
 		return true;
 		break;
-	case 59:
+	case 72:
+		return true;
+		break;
+	case 58:
 		return true;
 		break;
 	default:
