@@ -233,8 +233,6 @@ bool SideScroller::UpdateAndRender() {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
 				if (state == STATE_GAME)
 				{
-					if (shootTimer > 0.1f)
-						shootBullet();
 				}
 				else if (state == STATE_TITLE)
 					state = STATE_GAME;
@@ -271,8 +269,8 @@ bool SideScroller::UpdateAndRender() {
 		else {
 			player->setIdle();
 		}
-		if (keys[SDL_SCANCODE_X]) {
-			if (shootTimer > 0.1f) {
+		if (keys[SDL_SCANCODE_SPACE]) {
+			if (shootTimer > 0.15f) {
 				shootTimer = 0.0f;
 				shootBullet();
 			}
