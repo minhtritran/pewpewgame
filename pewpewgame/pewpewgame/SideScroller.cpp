@@ -216,7 +216,7 @@ bool SideScroller::UpdateAndRender() {
 		}
 	}
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
-	if (keys[SDL_SCANCODE_W]) {
+	if (keys[SDL_SCANCODE_UP]) {
 		if (!player->isJumping && jumpTimer > 0.25f) {
 			Mix_PlayChannel(-1, jump, 0);
 			player->jump();
@@ -224,12 +224,12 @@ bool SideScroller::UpdateAndRender() {
 		}
 		
 	}
-	if (keys[SDL_SCANCODE_D]) {
+	if (keys[SDL_SCANCODE_RIGHT]) {
 		SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 27);
 		player->sprite = playerSprite;
 		player->setWalkRight();
 	}
-	else if (keys[SDL_SCANCODE_A]) {
+	else if (keys[SDL_SCANCODE_LEFT]) {
 		SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 15);
 		player->sprite = playerSprite;
 		player->setWalkLeft();
