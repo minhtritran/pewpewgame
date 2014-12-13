@@ -60,7 +60,7 @@ void SideScroller::Update(float elapsed) {
 			SheetSprite enemySprite = SheetSprite(characterSpriteSheetTexture, 405.0f / 2048.0f, 167.0f / 2048.0f, 132.0f / 2048.0f, 161.0f / 2048.0f);
 			enemies[enemyIndex].sprite = enemySprite;
 			enemies[enemyIndex].y = 0.85f;
-			enemies[enemyIndex].x = 0.65f;
+			enemies[enemyIndex].x = -10.0f;
 			enemies[enemyIndex].width = 0.2f;
 			enemies[enemyIndex].height = 0.2f;
 			enemies[enemyIndex].acceleration_x = -2.0f;
@@ -172,10 +172,17 @@ void SideScroller::FixedUpdate() {
 			for (int k = 0; k < MAX_BULLETS; k++) {
 				if (enemies[i].collidesWith(&bullets[k])) {
 					bullets[k].visible = false;
-					enemies[i].y = 1.3f;
-					enemies[i].x = 0.0f;
+					enemies[i].y = 0.85f;
+					enemies[i].x = -10.0f;
 				}
 			}
+
+			//enemies fall to death
+			if (enemies[i].y < -2.5f) {
+				enemies[i].y = 0.85f;
+				enemies[i].x = -10.0f;
+			}
+
 
 		}
 	}
@@ -195,9 +202,9 @@ void SideScroller::Render() {
 
 		if (translateY > 1.5)
 			translateY = 1.5;
-		if (translateX > 8.0)
+		if (translateX > mapWidth * TILE_SIZE / 2.0f)
 			translateX = 8.0;
-		if (translateX < -8.0)
+		if (translateX < -1.0f * mapWidth * TILE_SIZE / 2.0f)
 			translateX = -8.0;
 
 		glMatrixMode(GL_MODELVIEW);
@@ -389,8 +396,9 @@ bool SideScroller::readEntityData(ifstream& stream) {
 			getline(lineStream, xPosition, ',');
 			getline(lineStream, yPosition, ',');
 			
-			float placeX = (atoi(xPosition.c_str()) + 8.0f - mapWidth * 16.0f / 2.0f) / 16.0f * TILE_SIZE;
-			float placeY = (atoi(yPosition.c_str()) - 8.0f - mapHeight * 16.0f / 2.0f) / 16.0f * -TILE_SIZE;
+			float placeX = (atoi(xPosition.c_str()) + 8.0f - mapWidth * 64.0f / 2.0f) / 64.0f * TILE_SIZE;
+			float placeY = (atoi(yPosition.c_str()) - 8.0f - mapHeight * 64.0f / 2.0f) / 64.0f * -TILE_SIZE;
+
 			
 			placeEntity(type, placeX, placeY);
 		}
@@ -428,6 +436,7 @@ void SideScroller::RenderLevel() {
 				float v = (float)(((int)levelData[y][x]) / SPRITE_COUNT_X) / (float)SPRITE_COUNT_Y;
 				float spriteWidth = 1.0f / (float)SPRITE_COUNT_X;
 				float spriteHeight = 1.0f / (float)SPRITE_COUNT_Y;
+
 				vertexData.insert(vertexData.end(), {
 					TILE_SIZE* x, -TILE_SIZE* y,
 					TILE_SIZE* x, (-TILE_SIZE* y) - TILE_SIZE,
@@ -483,10 +492,19 @@ void SideScroller::shootBullet() {
 
 bool SideScroller::isSolid(unsigned char tile) {
 	switch (tile) {
-	case 9:
+	case 171:
 		return true;
 		break;
-	case 11:
+	case 87:
+		return true;
+		break;
+	case 74:
+		return true;
+		break;
+	case 73:
+		return true;
+		break;
+	case 59:
 		return true;
 		break;
 	default:

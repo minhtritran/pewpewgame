@@ -21,8 +21,8 @@
 #define MAX_BRICKS 200
 #define MAX_ENEMIES 8
 #define SPRITE_COUNT_X 14
-#define SPRITE_COUNT_Y 8
-#define TILE_SIZE 0.8f
+#define SPRITE_COUNT_Y 14
+#define TILE_SIZE 0.2f
 
 using namespace std;
 
