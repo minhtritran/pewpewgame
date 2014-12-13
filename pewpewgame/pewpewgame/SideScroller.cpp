@@ -609,4 +609,5 @@ void DrawText(int textureID, string text, float size, float spacing, float r, fl
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glDrawArrays(GL_QUADS, 0, text.size() * 4);
+	glDisableClientState(GL_COLOR_ARRAY);
 }

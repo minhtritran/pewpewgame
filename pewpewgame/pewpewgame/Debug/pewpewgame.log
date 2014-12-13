@@ -1,4 +1,4 @@
-﻿Build started 12/13/2014 2:18:17 PM.
+﻿Build started 12/13/2014 3:15:43 PM.
      1>Project "C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SideScroller.cpp
@@ -24,9 +24,10 @@
          Debug\Player.obj
          Debug\SheetSprite.obj
          Debug\SideScroller.obj
+     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
          pewpewgame.vcxproj -> C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.exe
      1>Done Building Project "C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.90
+Time Elapsed 00:00:00.92
