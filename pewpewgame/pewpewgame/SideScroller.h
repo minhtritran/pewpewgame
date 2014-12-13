@@ -22,7 +22,7 @@
 #define MAX_ENEMIES 8
 #define SPRITE_COUNT_X 14
 #define SPRITE_COUNT_Y 8
-#define TILE_SIZE 0.2f
+#define TILE_SIZE 0.8f
 
 using namespace std;
 

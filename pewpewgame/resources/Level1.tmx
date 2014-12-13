@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="192" height="32" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="spriteTiles" tilewidth="64" tileheight="64" spacing="2">
+  <image source="spriteTiles.png" width="924" height="924"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="192" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt2cEJg0AQhlFrSDtJA6YBi7TJeEhuRtQhLvn3PZjTIu7AdxAcBgAAAAAAAAAAAACA/zAuc299iR9K34+a+T2p0vejJr2P9P2oSe8jfT9q0vtI34+a9D7S96OmRR/PZaYD8yi8S/9sSe8jfT9qzvYxFc+von+2fPo48j0y7Xhm7bz6H2o8eU/988188bS6K6zRPz3TPz3TPz3TPz3TPz27DfqnXy+7R/Q7
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object name="Player" type="Player" gid="58" x="222" y="1490"/>
+ </objectgroup>
+</map>

@@ -16,7 +16,7 @@ SideScroller::SideScroller() {
 	bulletIndex = 0;
 	shootTimer = 0.1f;
 
-	brickSpriteSheetTexture = LoadTexture("resources/sheet_4.png");
+	brickSpriteSheetTexture = LoadTexture("resources/spriteTiles.png");
 	characterSpriteSheetTexture = LoadTexture("resources/Sprites_Characters.png");
 	fontTexture = LoadTexture("resources/pixel_font.png");
 	bulletSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 3);
@@ -293,7 +293,7 @@ bool SideScroller::UpdateAndRender() {
 }
 
 void SideScroller::buildLevel() {
-	ifstream infile("resources/levelFile.txt");
+	ifstream infile("resources/Level1.txt");
 	string line;
 	while (getline(infile, line)) {
 		if (line == "[header]") {
