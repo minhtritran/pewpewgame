@@ -11,8 +11,8 @@ public:
 	virtual void FixedUpdate();
 	virtual void Render();
 	void jump();
-	void setWalkRight();
-	void setWalkLeft();
+	void setWalkRight(float multiple);
+	void setWalkLeft(float multiple);
 	void setIdle();
 
 	void shoot(Projectile* projectile);

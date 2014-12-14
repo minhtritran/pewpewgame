@@ -24,7 +24,7 @@ SideScroller::SideScroller() {
 
 	gunshot = Mix_LoadWAV("resources/gunshot.wav");
 	jump = Mix_LoadWAV("resources/jump.wav");
-	music = Mix_LoadMUS("resources/music.wav");
+	//music = Mix_LoadMUS("resources/music.wav");
 	if (Mix_PlayMusic(music, -1) < 0) {
 		cout << "Error";
 	}
@@ -62,8 +62,9 @@ void SideScroller::Update(float elapsed) {
 			enemies[enemyIndex].y = 0.85f;
 			enemies[enemyIndex].x = -10.0f;
 			enemies[enemyIndex].setScale(2.5f);
-			enemies[enemyIndex].acceleration_x = -2.0f;
+			enemies[enemyIndex].friction_x = 3.0f;
 			enemies[enemyIndex].hp = 2;
+			enemies[enemyIndex].setWalkLeft(0.8f);
 			entities.push_back(&enemies[enemyIndex]);
 			enemyIndex++;
 			enemySpawnTimer = 0.0f;
@@ -91,18 +92,11 @@ void SideScroller::FixedUpdate() {
 	else if (state == STATE_GAME)
 	{
 		for (size_t i = 0; i < entities.size(); i++) {
-			entities[i]->FixedUpdate();
-
 			if (!entities[i]->isStatic) {
 				entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
 				entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
 			}
-
-			entities[i]->velocity_x = lerp(entities[i]->velocity_x, 0.0f, FIXED_TIMESTEP * entities[i]->friction_x);
-			entities[i]->velocity_y = lerp(entities[i]->velocity_y, 0.0f, FIXED_TIMESTEP * entities[i]->friction_y);
-
-			entities[i]->velocity_x += entities[i]->acceleration_x * FIXED_TIMESTEP;
-			entities[i]->velocity_y += entities[i]->acceleration_y * FIXED_TIMESTEP;
+			entities[i]->FixedUpdate();
 
 			entities[i]->y += entities[i]->velocity_y * FIXED_TIMESTEP;
 			//do Y collisions
@@ -123,6 +117,7 @@ void SideScroller::FixedUpdate() {
 
 			}
 			doLevelCollisionY(entities[i]);
+
 			entities[i]->x += entities[i]->velocity_x * FIXED_TIMESTEP;
 			//do X collisions
 			if (!entities[i]->isStatic) {
@@ -145,48 +140,20 @@ void SideScroller::FixedUpdate() {
 
 
 		for (int i = 0; i < MAX_ENEMIES; i++) {
-			if (enemies[i].collidedRight) {
-				enemies[i].acceleration_x = -2.0f;
-			}
-
-			if (enemies[i].collidedLeft) {
-				enemies[i].acceleration_x = 2.0f;
-			}
 			//enemy gets hit
 			for (int k = 0; k < MAX_PROJECTILES; k++) {
 				if (checkPointForGridCollisionX(projectiles[k].x, projectiles[k].y) != 0)
 					projectiles[k].visible = false;
 				if (enemies[i].collidesWith(&projectiles[k]) && projectiles[k].visible) {
-					if (enemies[i].hp <= 1)
-					{
-						projectiles[k].visible = false;
-						enemies[i].y = 0.85f;
-						enemies[i].x = -10.0f;
-						enemies[i].hp = 2.0f;
-					}
-					else {
-						projectiles[k].visible = false;
-						enemies[i].hp--;
-					}
-						
+					projectiles[k].visible = false;
+					enemies[i].hp--;
 				}
 			}
-
-			//enemies fall to death
-			if (enemies[i].y < -2.5f) {
-				enemies[i].y = 0.85f;
-				enemies[i].x = -10.0f;
-			}
-
-			//player falls to death
-			if (player->y < -2.5f) {
-				player->hp -= 10;
-			}
-
-			//check if player is dead
-			if (player->hp <= 0)
-				state = STATE_GAMEOVER;
 		}
+
+		//check if player is dead
+		if (player->hp <= 0)
+			state = STATE_GAMEOVER;
 	}
 }
 
@@ -300,12 +267,12 @@ bool SideScroller::UpdateAndRender() {
 		if (keys[SDL_SCANCODE_RIGHT]) {
 			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
 			player->sprite = playerSprite;
-			player->setWalkRight();
+			player->setWalkRight(1.0f);
 		}
 		else if (keys[SDL_SCANCODE_LEFT]) {
 			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
 			player->sprite = playerSprite;
-			player->setWalkLeft();
+			player->setWalkLeft(1.0f);
 		}
 		else {
 			player->setIdle();
@@ -615,10 +582,6 @@ void SideScroller::doLevelCollisionY(Entity *entity) {
 		entity->velocity_y = 0.0f;
 		entity->collidedTop = true;
 	}
-}
-
-float lerp(float v0, float v1, float t) {
-	return (1.0f - t)*v0 + t*v1;
 }
 
 void DrawText(int textureID, string text, float size, float spacing, float r, float g, float b, float a)

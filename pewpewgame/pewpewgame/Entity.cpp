@@ -74,6 +74,12 @@ void Entity::FixedUpdate() {
 		collidedLeft = false;
 		collidedRight = false;
 	}
+
+	velocity_x = lerp(velocity_x, 0.0f, FIXED_TIMESTEP * friction_x);
+	velocity_y = lerp(velocity_y, 0.0f, FIXED_TIMESTEP * friction_y);
+
+	velocity_x += acceleration_x * FIXED_TIMESTEP;
+	velocity_y += acceleration_y * FIXED_TIMESTEP;
 }
 
 void Entity::Render() {
@@ -102,4 +108,8 @@ bool Entity::collidesWith(Entity* entity) {
 		return false;
 		
 	return true;
+}
+
+float lerp(float v0, float v1, float t) {
+	return (1.0f - t)*v0 + t*v1;
 }

@@ -15,6 +15,12 @@ void Character::FixedUpdate() {
 	if (collidedBottom) {
 		isJumping = false;
 	}
+
+	//falls to death
+	if (y < -2.5f) {
+		hp -= 10;
+	}
+
 	Entity::FixedUpdate();
 }
 
@@ -28,19 +34,19 @@ void Character::jump() {
 	velocity_y = 3.5f;
 }
 
-void Character::setWalkRight() {
+void Character::setWalkRight(float multiple) {
 	face_left = false;
 	if (velocity_x < 0.0f)
 		velocity_x = 0.0f;
 	if (velocity_x < 2.0f)
-		acceleration_x = 9.0f;
+		acceleration_x = 9.0f * multiple;
 }
-void Character::setWalkLeft() {
+void Character::setWalkLeft(float multiple) {
 	face_left = true;
 	if (velocity_x > 0.0f)
 		velocity_x = 0.0f;
 	if (velocity_x > -2.0f)
-		acceleration_x = -9.0f;
+		acceleration_x = -9.0f * multiple;
 }
 void Character::setIdle() {
 	velocity_x = 0.0f;

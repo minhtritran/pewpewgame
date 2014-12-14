@@ -6,6 +6,8 @@
 #include "SheetSprite.h"
 #include "Matrix.h"
 
+#define FIXED_TIMESTEP 0.0166666f
+
 
 class Entity {
 public:
@@ -46,3 +48,5 @@ public:
 	bool collidedLeft;
 	bool collidedRight;
 };
+
+float lerp(float v0, float v1, float t);

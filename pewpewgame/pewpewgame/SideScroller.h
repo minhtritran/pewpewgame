@@ -17,7 +17,6 @@
 #include "Player.h"
 #include "Enemy.h"
 
-#define FIXED_TIMESTEP 0.0166666f
 #define MAX_TIMESTEPS 6
 #define MAX_PROJECTILES 30
 #define MAX_BRICKS 200
