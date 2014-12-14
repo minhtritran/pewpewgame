@@ -171,7 +171,9 @@ void SideScroller::FixedUpdate() {
 			}
 			//enemy gets hit
 			for (int k = 0; k < MAX_BULLETS; k++) {
-				if (enemies[i].collidesWith(&bullets[k])) {
+				if (checkPointForGridCollisionX(bullets[k].x, bullets[k].y) != 0)
+					bullets[k].visible = false;
+				if (enemies[i].collidesWith(&bullets[k]) && bullets[k].visible) {
 					if (enemies[i].hp <= 1)
 					{
 						bullets[k].visible = false;
@@ -220,6 +222,7 @@ void SideScroller::Render() {
 		float translateX = -player->x;
 		float translateY = -player->y;
 
+		//scrolling boundaries
 		if (translateY > (float)(mapHeight * TILE_SIZE / 2.0f) - 2.00f)
 			translateY = (float)(mapHeight * TILE_SIZE / 2.0f) - 2.00f;
 		else if (translateY < -(float)(mapHeight * TILE_SIZE / 2.0f) + 2.00f)
