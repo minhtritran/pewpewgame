@@ -1,14 +1,9 @@
-#include "Entity.h"
+#include "Character.h"
 
-class Player : public Entity {
+class Player : public Character {
 public:
 	Player();
 	void Update(float elapsed);
+	void FixedUpdate();
 	void Render();
-	void jump();
-	void setWalkRight();
-	void setWalkLeft();
-	void setIdle();
-
-	bool face_left;
 };

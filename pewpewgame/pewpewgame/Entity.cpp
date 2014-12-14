@@ -19,7 +19,6 @@ Entity::Entity() {
 	collidedBottom = false;
 	collidedLeft = false;
 	collidedRight = false;
-	isJumping = false;
 }
 
 Entity::~Entity() {}
@@ -31,6 +30,25 @@ void Entity::setScale(float scale) {
 
 void Entity::Update(float elapsed) {
 		
+}
+
+void Entity::FixedUpdate() {
+	if (!isStatic) {
+		if (collidedBottom) {
+			velocity_y = 0.0f;
+		}
+		if (collidedTop)
+			velocity_y = 0.0f;
+		if (collidedLeft)
+			velocity_x = 0.0f;
+		if (collidedRight)
+			velocity_x = 0.0f;
+
+		collidedBottom = false;
+		collidedTop = false;
+		collidedLeft = false;
+		collidedRight = false;
+	}
 }
 
 void Entity::Render() {
@@ -58,10 +76,4 @@ bool Entity::collidesWith(Entity* entity) {
 		return false;
 		
 	return true;
-}
-void Entity::FixedUpdate() {
-	if (!isStatic) {
-		//velocity_x = lerp(velocity_x, 0.0f, ....);
-		//...
-	}
 }

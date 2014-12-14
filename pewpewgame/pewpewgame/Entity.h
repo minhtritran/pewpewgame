@@ -5,6 +5,7 @@
 #include <SDL_image.h>
 #include "SheetSprite.h"
 
+
 class Entity {
 public:
 	Entity();
@@ -12,10 +13,11 @@ public:
 
 	void setScale(float scale);
 	virtual void Update(float elapsed);
+	virtual void FixedUpdate();
 	virtual void Render();
 
 	bool collidesWith(Entity* entity);
-	void FixedUpdate();
+	
 
 	SheetSprite sprite;
 
@@ -38,5 +40,4 @@ public:
 	bool collidedBottom;
 	bool collidedLeft;
 	bool collidedRight;
-	bool isJumping;
 };

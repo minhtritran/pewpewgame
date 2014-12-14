@@ -11,13 +11,14 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "Bullet.h"
 #include "Entity.h"
+#include "Projectile.h"
+#include "Character.h"
 #include "Player.h"
 
 #define FIXED_TIMESTEP 0.0166666f
 #define MAX_TIMESTEPS 6
-#define MAX_BULLETS 30
+#define MAX_PROJECTILES 30
 #define MAX_BRICKS 200
 #define MAX_ENEMIES 8
 #define SPRITE_COUNT_X 14
@@ -67,8 +68,8 @@ private:
 	float gravity_x;
 	float gravity_y;
 
-	int bulletIndex;
-	Bullet bullets[MAX_BULLETS];
+	int projectileIndex;
+	Projectile projectiles[MAX_PROJECTILES];
 
 	int brickIndex;
 	Entity bricks[MAX_BRICKS];

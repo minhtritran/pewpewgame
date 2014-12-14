@@ -13,7 +13,7 @@ SideScroller::SideScroller() {
 	gravity_x = 0.0f;
 	gravity_y = -9.8f;
 
-	bulletIndex = 0;
+	projectileIndex = 0;
 	shootTimer = 0.1f;
 
 	brickSpriteSheetTexture = LoadTexture("resources/spriteTiles.png");
@@ -74,8 +74,8 @@ void SideScroller::Update(float elapsed) {
 			entities[i]->Update(elapsed);
 		}
 
-		for (size_t i = 0; i < MAX_BULLETS; i++) {
-			bullets[i].Update(elapsed);
+		for (size_t i = 0; i < MAX_PROJECTILES; i++) {
+			projectiles[i].Update(elapsed);
 		}
 
 		shootTimer += elapsed;
@@ -93,22 +93,6 @@ void SideScroller::FixedUpdate() {
 	{
 		for (size_t i = 0; i < entities.size(); i++) {
 			entities[i]->FixedUpdate();
-
-			if (entities[i]->collidedBottom) {
-				entities[i]->isJumping = false;
-				entities[i]->velocity_y = 0.0f;
-			}
-			if (entities[i]->collidedTop)
-				entities[i]->velocity_y = 0.0f;
-			if (entities[i]->collidedLeft)
-				entities[i]->velocity_x = 0.0f;
-			if (entities[i]->collidedRight)
-				entities[i]->velocity_x = 0.0f;
-
-			entities[i]->collidedBottom = false;
-			entities[i]->collidedTop = false;
-			entities[i]->collidedLeft = false;
-			entities[i]->collidedRight = false;
 
 			if (!entities[i]->isStatic) {
 				entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
@@ -170,19 +154,19 @@ void SideScroller::FixedUpdate() {
 				enemies[i].acceleration_x = 2.0f;
 			}
 			//enemy gets hit
-			for (int k = 0; k < MAX_BULLETS; k++) {
-				if (checkPointForGridCollisionX(bullets[k].x, bullets[k].y) != 0)
-					bullets[k].visible = false;
-				if (enemies[i].collidesWith(&bullets[k]) && bullets[k].visible) {
+			for (int k = 0; k < MAX_PROJECTILES; k++) {
+				if (checkPointForGridCollisionX(projectiles[k].x, projectiles[k].y) != 0)
+					projectiles[k].visible = false;
+				if (enemies[i].collidesWith(&projectiles[k]) && projectiles[k].visible) {
 					if (enemies[i].hp <= 1)
 					{
-						bullets[k].visible = false;
+						projectiles[k].visible = false;
 						enemies[i].y = 0.85f;
 						enemies[i].x = -10.0f;
 						enemies[i].hp = 2.0f;
 					}
 					else {
-						bullets[k].visible = false;
+						projectiles[k].visible = false;
 						enemies[i].hp--;
 					}
 						
@@ -244,8 +228,8 @@ void SideScroller::Render() {
 			entities[i]->Render();
 		}
 
-		for (size_t i = 0; i < MAX_BULLETS; i++) {
-			bullets[i].Render();
+		for (size_t i = 0; i < MAX_PROJECTILES; i++) {
+			projectiles[i].Render();
 		}
 		RenderLevel();
 	}
@@ -312,8 +296,19 @@ bool SideScroller::UpdateAndRender() {
 		}
 		if (keys[SDL_SCANCODE_SPACE]) {
 			if (shootTimer > 0.15f) {
+
+				Mix_PlayChannel(-1, gunshot, 0);
+				projectiles[projectileIndex].sprite = bulletSprite;
+
+				player->shoot(&projectiles[projectileIndex]);
+				
+				projectileIndex++;
+				if (projectileIndex > MAX_PROJECTILES - 1) {
+					projectileIndex = 0;
+				}
 				shootTimer = 0.0f;
-				shootBullet();
+				
+
 			}
 		}
 	}
@@ -510,18 +505,18 @@ void SideScroller::RenderLevel() {
 
 void SideScroller::shootBullet() {
 	Mix_PlayChannel(-1, gunshot, 0);
-	bullets[bulletIndex].sprite = bulletSprite;
-	bullets[bulletIndex].visible = true;
-	bullets[bulletIndex].x = player->x;
-	bullets[bulletIndex].y = player->y;
-	bullets[bulletIndex].rotation = 0.0f;
+	projectiles[projectileIndex].sprite = bulletSprite;
+	projectiles[projectileIndex].visible = true;
+	projectiles[projectileIndex].x = player->x;
+	projectiles[projectileIndex].y = player->y;
+	projectiles[projectileIndex].rotation = 0.0f;
 	if (player->face_left)
-		bullets[bulletIndex].velocity_x = -3.5f;
+		projectiles[projectileIndex].velocity_x = -3.5f;
 	else
-		bullets[bulletIndex].velocity_x = 3.5f;
-	bulletIndex++;
-	if (bulletIndex > MAX_BULLETS - 1) {
-		bulletIndex = 0;
+		projectiles[projectileIndex].velocity_x = 3.5f;
+	projectileIndex++;
+	if (projectileIndex > MAX_PROJECTILES - 1) {
+		projectileIndex = 0;
 	}
 	shootTimer = 0;
 }
