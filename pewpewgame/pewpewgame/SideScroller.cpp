@@ -454,6 +454,7 @@ void SideScroller::RenderLevel() {
 				float v = (float)(((int)levelData[y][x]) / SPRITE_COUNT_X) / (float)SPRITE_COUNT_Y;
 				float spriteWidth = 1.0f / (float)SPRITE_COUNT_X;
 				float spriteHeight = 1.0f / (float)SPRITE_COUNT_Y;
+				float spacing = 1.0f / 924.0f;
 
 				vertexData.insert(vertexData.end(), {
 					TILE_SIZE* x, -TILE_SIZE* y,
@@ -461,10 +462,10 @@ void SideScroller::RenderLevel() {
 					(TILE_SIZE* x) + TILE_SIZE, (-TILE_SIZE* y) - TILE_SIZE,
 					(TILE_SIZE* x) + TILE_SIZE, -TILE_SIZE* y
 				});
-				texCoordData.insert(texCoordData.end(), { u, v,
-					u, v + (spriteHeight),
-					u + spriteWidth, v + (spriteHeight),
-					u + spriteWidth, v
+				texCoordData.insert(texCoordData.end(), { u + spacing, v + spacing,
+					u + spacing, v + (spriteHeight)-spacing,
+					u + spriteWidth - spacing, v + (spriteHeight)-spacing,
+					u + spriteWidth - spacing, v + spacing
 				});
 
 				numVertices += 4;
