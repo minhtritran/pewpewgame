@@ -213,7 +213,7 @@ void SideScroller::Render(float elapsed) {
 		}
 
 		for (size_t i = 0; i < MAX_PROJECTILES; i++) {
-			projectiles[i].Render();
+			projectiles[i].Render(elapsed);
 		}
 		RenderLevel();
 	}
