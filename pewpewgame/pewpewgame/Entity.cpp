@@ -77,6 +77,7 @@ void Entity::FixedUpdate() {
 }
 
 void Entity::Render() {
+	BuildMatrix();
 	sprite.Draw(width, height, matrix);
 }
 

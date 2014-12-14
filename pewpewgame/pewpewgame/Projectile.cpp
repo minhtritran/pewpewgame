@@ -17,6 +17,6 @@ void Projectile::Update(float elapsed) {
 
 void Projectile::Render() {
 	if (visible) {
-		sprite.Draw(width, height, matrix);
+		Entity::Render();
 	}
 }
