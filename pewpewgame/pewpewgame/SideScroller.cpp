@@ -206,12 +206,14 @@ void SideScroller::Render() {
 	
 	if (state == STATE_TITLE)
 	{
-		//glLoadIdentity();
-		//glTranslatef(-0.3f, 0.0f, 0.0f);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glTranslatef(-0.9f, 0.0f, 0.0f);
 		DrawText(fontTexture, "Press SPACE to start", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 	else if (state == STATE_GAME)
 	{
+		DrawText(fontTexture, "HPHPHPHPHPHPHHP", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		float translateX = -player->x;
 		float translateY = -player->y;
 
@@ -255,10 +257,7 @@ bool SideScroller::UpdateAndRender() {
 		}
 		else if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
-				if (state == STATE_GAME)
-				{
-				}
-				else if (state == STATE_TITLE)
+				if (state == STATE_TITLE)
 					state = STATE_GAME;
 			}
 		}
