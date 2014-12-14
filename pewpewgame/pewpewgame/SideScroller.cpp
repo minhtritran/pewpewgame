@@ -21,7 +21,7 @@ SideScroller::SideScroller() {
 	fontTexture = LoadTexture("resources/pixel_font.png");
 	bulletSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 3);
 	buildLevel();
-
+	 
 	gunshot = Mix_LoadWAV("resources/gunshot.wav");
 	jump = Mix_LoadWAV("resources/jump.wav");
 	//music = Mix_LoadMUS("resources/music.wav");
