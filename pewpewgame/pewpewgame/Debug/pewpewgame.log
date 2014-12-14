@@ -1,34 +1,9 @@
-﻿Build started 12/13/2014 7:44:44 PM.
-     1>Project "C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SideScroller.cpp
-         SideScroller.cpp
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(369): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(384): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(389): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(457): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(458): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(543): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(544): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(550): warning C4018: '>' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(564): warning C4018: '>' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(579): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(581): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(591): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(593): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(607): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(616): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(641): warning C4018: '<' : signed/unsigned mismatch
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\SDL2_mixer\lib\x86 SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.lib" /MACHINE:X86 Debug\Bullet.obj
-         Debug\Entity.obj
-         Debug\main.obj
-         Debug\Player.obj
-         Debug\SheetSprite.obj
-         Debug\SideScroller.obj
-         pewpewgame.vcxproj -> C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.exe
-     1>Done Building Project "C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" (Build target(s)).
+﻿Build started 12/13/2014 7:48:38 PM.
+     1>Project "E:\Git Repositories\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         pewpewgame.vcxproj -> E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.exe
+     1>Done Building Project "E:\Git Repositories\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.86
+Time Elapsed 00:00:00.04
