@@ -16,11 +16,10 @@
 #include "Character.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "MobRunner.h"
 
 #define MAX_TIMESTEPS 6
-#define MAX_PROJECTILES 30
 #define MAX_BRICKS 200
-#define MAX_ENEMIES 8
 #define SPRITE_COUNT_X 14
 #define SPRITE_COUNT_Y 14
 #define TILE_SIZE 0.2f
@@ -67,16 +66,12 @@ private:
 	float gravity_x;
 	float gravity_y;
 
-	//int projectileIndex;
-	//Projectile projectiles[MAX_PROJECTILES];
-
 	vector<Projectile*> projectiles;
 
 	int brickIndex;
 	Entity bricks[MAX_BRICKS];
 
-	int enemyIndex;
-	Enemy enemies[MAX_ENEMIES];
+	vector<Enemy*> enemies;
 
 	unsigned int mapWidth;
 	unsigned int mapHeight;

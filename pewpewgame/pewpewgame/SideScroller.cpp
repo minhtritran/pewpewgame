@@ -56,17 +56,20 @@ void SideScroller::Update(float elapsed) {
 	}
 	else if (state == STATE_GAME)
 	{
-		if (enemySpawnTimer > 1.0f && enemyIndex < 8) {
+		if (enemySpawnTimer > 0.1f && enemies.size() < 15) {
+			Enemy* tempEnemy = new Enemy();
 			SheetSprite enemySprite = SheetSprite(characterSpriteSheetTexture, 405.0f / 2048.0f, 167.0f / 2048.0f, 132.0f / 2048.0f, 161.0f / 2048.0f);
-			enemies[enemyIndex].sprite = enemySprite;
-			enemies[enemyIndex].y = 0.85f;
-			enemies[enemyIndex].x = -10.0f;
-			enemies[enemyIndex].setScale(2.5f);
-			enemies[enemyIndex].friction_x = 3.0f;
-			enemies[enemyIndex].hp = 2;
-			enemies[enemyIndex].setWalkLeft(0.8f);
-			entities.push_back(&enemies[enemyIndex]);
-			enemyIndex++;
+			tempEnemy->sprite = enemySprite;
+			tempEnemy->y = 0.85f;
+			tempEnemy->x = -10.0f;
+			tempEnemy->setScale(2.5f);
+			tempEnemy->friction_x = 3.0f;
+			tempEnemy->hp = 2;
+			tempEnemy->setWalkLeft(0.8f);
+			
+			enemies.push_back(tempEnemy);
+			entities.push_back(tempEnemy);
+			
 			enemySpawnTimer = 0.0f;
 		}
 
@@ -139,16 +142,38 @@ void SideScroller::FixedUpdate() {
 		}
 
 
-		for (int i = 0; i < MAX_ENEMIES; i++) {
+		for each (auto enemy in enemies) {
 			//enemy gets hit
 			for each (auto projectile in projectiles) {
 				if (checkPointForGridCollisionX(projectile->x, projectile->y) != 0)
 					projectile->visible = false;
-				if (enemies[i].collidesWith(projectile) && projectile->visible) {
+				if (enemy->collidesWith(projectile) && projectile->visible) {
 					projectile->visible = false;
-					enemies[i].hp--;
+					enemy->hp--;
 				}
 			}
+		}
+
+		//clean up memory caused by enemies
+		for each (auto enemy in enemies) {
+			if (enemy->hp <= 0) {
+				entities.erase(std::remove(entities.begin(), entities.end(), enemy), entities.end());
+				enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
+				delete enemy;
+				break;
+				
+			}
+			
+		}
+
+		//clean up memory caused by projectiles
+		for each (auto projectile in projectiles) {
+			if (!projectile->visible) {
+				projectiles.erase(std::remove(projectiles.begin(), projectiles.end(), projectile), projectiles.end());
+				delete projectile;
+				break;
+			}
+
 		}
 
 		//check if player is dead
