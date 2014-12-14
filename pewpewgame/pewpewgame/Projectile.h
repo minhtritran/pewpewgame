@@ -7,7 +7,7 @@ class Projectile : public Entity {
 public:
 	Projectile();
 	void Update(float elapsed);
-	void Render();
+	void Render(float elapsed = 0.0f);
 
 	bool visible;
 };

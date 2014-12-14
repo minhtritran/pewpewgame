@@ -10,6 +10,6 @@ void Player::FixedUpdate() {
 	Character::FixedUpdate();
 }
 
-void Player::Render() {
-	Character::Render();
+void Player::Render(float elapsed) {
+	Character::Render(elapsed);
 }

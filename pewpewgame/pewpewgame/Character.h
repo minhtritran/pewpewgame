@@ -9,7 +9,7 @@ public:
 	Character();
 	virtual void Update(float elapsed);
 	virtual void FixedUpdate();
-	virtual void Render();
+	virtual void Render(float elapsed = 0.0f);
 	void jump();
 	void setWalkRight(float multiple);
 	void setWalkLeft(float multiple);

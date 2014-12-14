@@ -5,5 +5,5 @@ public:
 	Player();
 	void Update(float elapsed);
 	void FixedUpdate();
-	void Render();
+	void Render(float elapsed = 0.0f);
 };

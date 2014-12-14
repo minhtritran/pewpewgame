@@ -24,8 +24,8 @@ void Character::FixedUpdate() {
 	Entity::FixedUpdate();
 }
 
-void Character::Render() {
-	Entity::Render();
+void Character::Render(float elapsed) {
+	Entity::Render(elapsed);
 }
 
 void Character::jump() {

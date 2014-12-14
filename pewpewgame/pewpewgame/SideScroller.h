@@ -35,7 +35,7 @@ public:
 	void Init();
 	void Update(float elapsed);
 	void FixedUpdate();
-	void Render();
+	void Render(float elapsed);
 	bool UpdateAndRender();
 
 	void buildLevel();

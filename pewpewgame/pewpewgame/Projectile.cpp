@@ -15,8 +15,8 @@ void Projectile::Update(float elapsed) {
 	x += velocity_x * elapsed;
 }
 
-void Projectile::Render() {
+void Projectile::Render(float elapsed) {
 	if (visible) {
-		Entity::Render();
+		Entity::Render(elapsed);
 	}
 }

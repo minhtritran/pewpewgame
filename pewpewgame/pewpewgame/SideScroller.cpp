@@ -157,7 +157,7 @@ void SideScroller::FixedUpdate() {
 	}
 }
 
-void SideScroller::Render() {
+void SideScroller::Render(float elapsed) {
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	if (state == STATE_TITLE)
@@ -209,7 +209,7 @@ void SideScroller::Render() {
 		tempMatrix.m[3][1] = translateY;
 		glMultMatrixf(tempMatrix.ml);
 		for (size_t i = 0; i < entities.size(); i++) {
-			entities[i]->Render();
+			entities[i]->Render(elapsed);
 		}
 
 		for (size_t i = 0; i < MAX_PROJECTILES; i++) {
@@ -311,7 +311,7 @@ bool SideScroller::UpdateAndRender() {
 	timeLeftOver = fixedElapsed;
 
 	Update(elapsed);
-	Render();
+	Render(elapsed);
 	return done;
 }
 
@@ -432,6 +432,18 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->setScale(3.0f);
 		player->friction_x = 3.0f;
 		player->hp = 5;
+
+		//Set player animation
+		vector<float> framesU;
+		vector<float> framesV;
+		framesU.push_back(918.0f / 2048.0f);
+		framesU.push_back(918.0f / 2048.0f);
+		framesU.push_back(917.0f / 2048.0f);
+		framesV.push_back(1323.0f / 2048.0f);
+		framesV.push_back(662.0f / 2048.0f);
+		framesV.push_back(495.0f / 2048.0f);
+		player->sprite.setAnimated(true, 8.0f, framesU, framesV);
+
 		entities.push_back(player);
 	}
 }

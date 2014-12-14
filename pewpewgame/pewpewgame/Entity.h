@@ -18,7 +18,7 @@ public:
 	void BuildMatrix();
 	virtual void Update(float elapsed);
 	virtual void FixedUpdate();
-	virtual void Render();
+	virtual void Render(float elapsed = 0.0f);
 
 	bool collidesWith(Entity* entity);
 	

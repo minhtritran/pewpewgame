@@ -82,9 +82,9 @@ void Entity::FixedUpdate() {
 	velocity_y += acceleration_y * FIXED_TIMESTEP;
 }
 
-void Entity::Render() {
+void Entity::Render(float elapsed) {
 	BuildMatrix();
-	sprite.Draw(width, height, matrix);
+	sprite.Draw(width, height, matrix, elapsed);
 }
 
 bool Entity::collidesWith(Entity* entity) {
