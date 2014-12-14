@@ -21,15 +21,14 @@ SheetSprite::SheetSprite(GLuint textureID, unsigned int spriteCountX, unsigned i
 	spriteHeight = 1.0f / (float)spriteCountY;
 }
 
-void SheetSprite::Draw(float width, float height, float x, float y, float rotation) {
+void SheetSprite::Draw(float width, float height, Matrix m1) {
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
 	glMatrixMode(GL_MODELVIEW);
 
 	glPushMatrix();
-	glTranslatef(x, y, 0.0);
-	glRotatef(rotation, 0.0, 0.0, 1.0);
+	glMultMatrixf(m1.ml);
 
 	GLfloat quad[] = { -width * 0.5f, height * 0.5f, -width * 0.5f, -height * 0.5f, width * 0.5f, -height * 0.5f, width * 0.5f, height * 0.5f };
 	glVertexPointer(2, GL_FLOAT, 0, quad);

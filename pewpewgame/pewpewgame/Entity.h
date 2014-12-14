@@ -4,6 +4,7 @@
 #include <SDL_opengl.h>
 #include <SDL_image.h>
 #include "SheetSprite.h"
+#include "Matrix.h"
 
 
 class Entity {
@@ -12,6 +13,7 @@ public:
 	~Entity();
 
 	void setScale(float scale);
+	void BuildMatrix();
 	virtual void Update(float elapsed);
 	virtual void FixedUpdate();
 	virtual void Render();
@@ -26,6 +28,10 @@ public:
 	float width;
 	float height;
 	float rotation;
+	float scale_x;
+	float scale_y;
+
+	Matrix matrix;
 	
 	float velocity_x;
 	float velocity_y;

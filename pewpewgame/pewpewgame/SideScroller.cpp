@@ -197,15 +197,26 @@ void SideScroller::Render() {
 	{
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glTranslatef(-0.9f, 0.0f, 0.0f);
+		Matrix tempMatrix;
+		tempMatrix.identity();
+		tempMatrix.m[3][0] = -0.9f;
+		glMultMatrixf(tempMatrix.ml);
 		DrawText(fontTexture, "Press SPACE to start", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 	else if (state == STATE_GAME)
 	{
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glTranslatef(-2.4f, 1.85f, 0.0f);
+
+		glPushMatrix();
+		Matrix tempMatrix;
+		tempMatrix.identity();
+		tempMatrix.m[3][0] = -2.4f;
+		tempMatrix.m[3][1] = 1.85f;
+		glMultMatrixf(tempMatrix.ml);
 		DrawText(fontTexture, "HP: " + to_string(player->hp) + "/5", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		glPopMatrix();
+
 		float translateX = -player->x;
 		float translateY = -player->y;
 
@@ -222,7 +233,10 @@ void SideScroller::Render() {
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glTranslatef(translateX, translateY, 0.0f);
+		tempMatrix.identity();
+		tempMatrix.m[3][0] = translateX;
+		tempMatrix.m[3][1] = translateY;
+		glMultMatrixf(tempMatrix.ml);
 		for (size_t i = 0; i < entities.size(); i++) {
 			entities[i]->Render();
 		}
@@ -236,7 +250,10 @@ void SideScroller::Render() {
 	{
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glTranslatef(-0.8f, 0.0f, 0.0f);
+		Matrix tempMatrix;
+		tempMatrix.identity();
+		tempMatrix.m[3][0] = -0.8f;
+		glMultMatrixf(tempMatrix.ml);
 		if (player->hp <= 0)
 			DrawText(fontTexture, "Game Over! You Died!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		else
@@ -494,7 +511,12 @@ void SideScroller::RenderLevel() {
 
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	glTranslatef(-TILE_SIZE* mapWidth / 2, TILE_SIZE* mapHeight / 2, 0.0f);
+
+	Matrix tempMatrix;
+	tempMatrix.identity();
+	tempMatrix.m[3][0] = -TILE_SIZE* mapWidth / 2;
+	tempMatrix.m[3][1] = TILE_SIZE* mapHeight / 2, 0.0f;
+	glMultMatrixf(tempMatrix.ml);
 
 	glDrawArrays(GL_QUADS, 0, numVertices);
 	glDisable(GL_TEXTURE_2D);

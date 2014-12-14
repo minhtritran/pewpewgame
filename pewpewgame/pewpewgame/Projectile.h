@@ -9,5 +9,5 @@ public:
 	void Update(float elapsed);
 	void Render();
 
-	float visible;
+	bool visible;
 };

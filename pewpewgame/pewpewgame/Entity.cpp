@@ -6,6 +6,8 @@ Entity::Entity() {
 	width = 0.2f;
 	height = 0.2f;
 	rotation = 0.0f;
+	scale_x = 1.0f;
+	scale_y = 1.0f;
 
 	velocity_x = 0.0f;
 	velocity_y = 0.0f;
@@ -22,6 +24,29 @@ Entity::Entity() {
 }
 
 Entity::~Entity() {}
+
+void Entity::BuildMatrix()
+{
+	Matrix translateMatrix;
+	Matrix rotateMatrix;
+	Matrix scaleMatrix;
+
+	translateMatrix.identity();
+	translateMatrix.m[3][0] = x;
+	translateMatrix.m[3][1] = y;
+
+	rotateMatrix.identity();
+	rotateMatrix.m[0][0] = cos(rotation);
+	rotateMatrix.m[1][0] = -1.0f * sin(rotation);
+	rotateMatrix.m[0][1] = sin(rotation);
+	rotateMatrix.m[1][1] = cos(rotation);
+
+	scaleMatrix.identity();
+	scaleMatrix.m[0][0] = scale_x;
+	scaleMatrix.m[1][1] = scale_y;
+
+	matrix = scaleMatrix * rotateMatrix * translateMatrix;
+}
 
 void Entity::setScale(float scale) {
 	width = scale * sprite.spriteWidth;
@@ -52,7 +77,7 @@ void Entity::FixedUpdate() {
 }
 
 void Entity::Render() {
-	sprite.Draw(width, height, x, y, rotation);
+	sprite.Draw(width, height, matrix);
 }
 
 bool Entity::collidesWith(Entity* entity) {
