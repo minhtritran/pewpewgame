@@ -15,6 +15,7 @@
 #include "Projectile.h"
 #include "Character.h"
 #include "Player.h"
+#include "Enemy.h"
 
 #define FIXED_TIMESTEP 0.0166666f
 #define MAX_TIMESTEPS 6
@@ -74,7 +75,7 @@ private:
 	Entity bricks[MAX_BRICKS];
 
 	int enemyIndex;
-	Entity enemies[MAX_ENEMIES];
+	Enemy enemies[MAX_ENEMIES];
 
 	unsigned int mapWidth;
 	unsigned int mapHeight;

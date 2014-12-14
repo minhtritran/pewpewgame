@@ -2,6 +2,7 @@
 #include "Projectile.h"
 
 Character::Character() {
+	hp = 1;
 	face_left = false;
 	isJumping = false;
 }

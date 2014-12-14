@@ -26,7 +26,6 @@ public:
 	float width;
 	float height;
 	float rotation;
-	int hp;
 	
 	float velocity_x;
 	float velocity_y;

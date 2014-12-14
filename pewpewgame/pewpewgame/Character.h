@@ -17,6 +17,7 @@ public:
 
 	void shoot(Projectile* projectile);
 
+	int hp;
 	bool face_left;
 	bool isJumping;
 };

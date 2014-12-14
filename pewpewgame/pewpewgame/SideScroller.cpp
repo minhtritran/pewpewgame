@@ -61,8 +61,7 @@ void SideScroller::Update(float elapsed) {
 			enemies[enemyIndex].sprite = enemySprite;
 			enemies[enemyIndex].y = 0.85f;
 			enemies[enemyIndex].x = -10.0f;
-			enemies[enemyIndex].width = 0.2f;
-			enemies[enemyIndex].height = 0.2f;
+			enemies[enemyIndex].setScale(2.5f);
 			enemies[enemyIndex].acceleration_x = -2.0f;
 			enemies[enemyIndex].hp = 2;
 			entities.push_back(&enemies[enemyIndex]);
