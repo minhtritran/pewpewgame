@@ -53,14 +53,16 @@ void SheetSprite::Draw(float width, float height, Matrix m1, float elapsed) {
 		{
 			animationIndex++;
 			animationElapsed = 0.0f;
-			if (animationIndex > framesU.size() - 1)
+			if (animationIndex > (framesU.size() - 1))
 			{
 				animationIndex = 0;
 			}
 		}
-
-		GLfloat quadUVs[] = { framesU[animationIndex], framesV[animationIndex], framesU[animationIndex], framesV[animationIndex] + height, framesU[animationIndex] + width, framesV[animationIndex] + height, framesU[animationIndex] + width, framesV[animationIndex] };
-		glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
+		if (animationIndex >= 0) {
+			GLfloat quadUVs[] = { framesU[animationIndex], framesV[animationIndex], framesU[animationIndex], framesV[animationIndex] + height, framesU[animationIndex] + width, framesV[animationIndex] + height, framesU[animationIndex] + width, framesV[animationIndex] };
+			glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
+		}
+		
 	}
 	else
 	{

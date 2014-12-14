@@ -67,8 +67,10 @@ private:
 	float gravity_x;
 	float gravity_y;
 
-	int projectileIndex;
-	Projectile projectiles[MAX_PROJECTILES];
+	//int projectileIndex;
+	//Projectile projectiles[MAX_PROJECTILES];
+
+	vector<Projectile*> projectiles;
 
 	int brickIndex;
 	Entity bricks[MAX_BRICKS];

@@ -13,7 +13,7 @@ SideScroller::SideScroller() {
 	gravity_x = 0.0f;
 	gravity_y = -9.8f;
 
-	projectileIndex = 0;
+	//projectileIndex = 0;
 	shootTimer = 0.1f;
 
 	brickSpriteSheetTexture = LoadTexture("resources/spriteTiles.png");
@@ -74,8 +74,8 @@ void SideScroller::Update(float elapsed) {
 			entities[i]->Update(elapsed);
 		}
 
-		for (size_t i = 0; i < MAX_PROJECTILES; i++) {
-			projectiles[i].Update(elapsed);
+		for (size_t i = 0; i < projectiles.size(); i++) {
+			projectiles[i]->Update(elapsed);
 		}
 
 		shootTimer += elapsed;
@@ -141,11 +141,11 @@ void SideScroller::FixedUpdate() {
 
 		for (int i = 0; i < MAX_ENEMIES; i++) {
 			//enemy gets hit
-			for (int k = 0; k < MAX_PROJECTILES; k++) {
-				if (checkPointForGridCollisionX(projectiles[k].x, projectiles[k].y) != 0)
-					projectiles[k].visible = false;
-				if (enemies[i].collidesWith(&projectiles[k]) && projectiles[k].visible) {
-					projectiles[k].visible = false;
+			for each (auto projectile in projectiles) {
+				if (checkPointForGridCollisionX(projectile->x, projectile->y) != 0)
+					projectile->visible = false;
+				if (enemies[i].collidesWith(projectile) && projectile->visible) {
+					projectile->visible = false;
 					enemies[i].hp--;
 				}
 			}
@@ -212,8 +212,8 @@ void SideScroller::Render(float elapsed) {
 			entities[i]->Render(elapsed);
 		}
 
-		for (size_t i = 0; i < MAX_PROJECTILES; i++) {
-			projectiles[i].Render(elapsed);
+		for (size_t i = 0; i < projectiles.size(); i++) {
+			projectiles[i]->Render(elapsed);
 		}
 		RenderLevel();
 	}
@@ -285,14 +285,15 @@ bool SideScroller::UpdateAndRender() {
 			if (shootTimer > 0.15f) {
 
 				Mix_PlayChannel(-1, gunshot, 0);
-				projectiles[projectileIndex].sprite = bulletSprite;
-
-				player->shoot(&projectiles[projectileIndex]);
+				Projectile* tempProjectile = new Projectile();
+				tempProjectile->sprite = bulletSprite;
+				projectiles.push_back(tempProjectile);
+				player->shoot(tempProjectile);
 				
-				projectileIndex++;
-				if (projectileIndex > MAX_PROJECTILES - 1) {
-					projectileIndex = 0;
-				}
+				//projectileIndex++;
+				//if (projectileIndex > MAX_PROJECTILES - 1) {
+				//	projectileIndex = 0;
+				//}
 				shootTimer = 0.0f;
 				
 
