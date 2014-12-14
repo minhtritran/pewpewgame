@@ -503,24 +503,6 @@ void SideScroller::RenderLevel() {
 	
 }
 
-void SideScroller::shootBullet() {
-	Mix_PlayChannel(-1, gunshot, 0);
-	projectiles[projectileIndex].sprite = bulletSprite;
-	projectiles[projectileIndex].visible = true;
-	projectiles[projectileIndex].x = player->x;
-	projectiles[projectileIndex].y = player->y;
-	projectiles[projectileIndex].rotation = 0.0f;
-	if (player->face_left)
-		projectiles[projectileIndex].velocity_x = -3.5f;
-	else
-		projectiles[projectileIndex].velocity_x = 3.5f;
-	projectileIndex++;
-	if (projectileIndex > MAX_PROJECTILES - 1) {
-		projectileIndex = 0;
-	}
-	shootTimer = 0;
-}
-
 bool SideScroller::isSolid(unsigned char tile) {
 	switch (tile) {
 	case 0:

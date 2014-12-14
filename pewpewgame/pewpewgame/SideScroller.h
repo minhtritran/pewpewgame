@@ -44,7 +44,6 @@ public:
 	bool readEntityData(ifstream& stream);
 	void placeEntity(string& type, float placeX, float placeY);
 	void RenderLevel();
-	void shootBullet();
 	bool isSolid(unsigned char tile);
 	void worldToTileCoordinates(float worldX, float worldY, int* gridX, int* gridY);
 	float SideScroller::checkPointForGridCollisionX(float x, float y);
