@@ -64,6 +64,7 @@ void SideScroller::Update(float elapsed) {
 			enemies[enemyIndex].width = 0.2f;
 			enemies[enemyIndex].height = 0.2f;
 			enemies[enemyIndex].acceleration_x = -2.0f;
+			enemies[enemyIndex].hp = 2;
 			entities.push_back(&enemies[enemyIndex]);
 			enemyIndex++;
 			enemySpawnTimer = 0.0f;
@@ -171,9 +172,14 @@ void SideScroller::FixedUpdate() {
 			//enemy gets hit
 			for (int k = 0; k < MAX_BULLETS; k++) {
 				if (enemies[i].collidesWith(&bullets[k])) {
-					bullets[k].visible = false;
-					enemies[i].y = 0.85f;
-					enemies[i].x = -10.0f;
+					if (enemies[i].hp <= 1)
+					{
+						bullets[k].visible = false;
+						enemies[i].y = 0.85f;
+						enemies[i].x = -10.0f;
+					}
+					else
+						enemies[i].hp--;
 				}
 			}
 
@@ -183,7 +189,14 @@ void SideScroller::FixedUpdate() {
 				enemies[i].x = -10.0f;
 			}
 
+			//player falls to death
+			if (player->y < -2.5f) {
+				player->hp -= 10;
+			}
 
+			//check if player is dead
+			if (player->hp <= 0)
+				state = STATE_GAMEOVER;
 		}
 	}
 }
@@ -193,6 +206,8 @@ void SideScroller::Render() {
 	
 	if (state == STATE_TITLE)
 	{
+		//glLoadIdentity();
+		//glTranslatef(-0.3f, 0.0f, 0.0f);
 		DrawText(fontTexture, "Press SPACE to start", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 	else if (state == STATE_GAME)
@@ -210,9 +225,6 @@ void SideScroller::Render() {
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		glTranslatef(translateX, translateY, 0.0f);
-
-
-
 		for (size_t i = 0; i < entities.size(); i++) {
 			entities[i]->Render();
 		}
@@ -221,6 +233,11 @@ void SideScroller::Render() {
 			bullets[i].Render();
 		}
 		RenderLevel();
+	}
+	else if (state = STATE_GAMEOVER)
+	{
+		glLoadIdentity();
+		DrawText(fontTexture, "Game Over!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	SDL_GL_SwapWindow(displayWindow);
@@ -415,6 +432,7 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->y = placeY;
 		player->setScale(3.0f);
 		player->friction_x = 3.0f;
+		player->hp = 5;
 		entities.push_back(player);
 	}
 }

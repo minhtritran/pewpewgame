@@ -82,6 +82,7 @@ private:
 	unsigned char** levelData;
 
 	Player* player;
+	int hp;
 	vector<Entity*> entities;
 
 	float shootTimer;
