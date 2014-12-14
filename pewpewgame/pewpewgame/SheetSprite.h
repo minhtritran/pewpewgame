@@ -14,7 +14,7 @@ public:
 	SheetSprite(unsigned int textureID, float u, float v, float spriteWidth, float spriteHeight);
 	SheetSprite(GLuint textureID, unsigned int spriteCountX, unsigned int spriteCountY, unsigned int index);
 
-	void setAnimated(bool val, float fps, vector<float> framesU, vector<float> framesV);
+	void setAnimated(bool val, float fps, vector<vector<float>> frames);
 	void Draw(float width, float height, Matrix m1, float elapsed = 0.0f);
 
 	GLuint textureID;
@@ -25,8 +25,7 @@ public:
 
 	bool animated;
 	float framesPerSecond;
-	vector<float> framesU;
-	vector<float> framesV;
+	vector<vector<float>> frames;
 	int animationIndex;
 	float animationElapsed;
 

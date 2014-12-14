@@ -26,12 +26,11 @@ SheetSprite::SheetSprite(GLuint textureID, unsigned int spriteCountX, unsigned i
 	animated = 0;
 }
 
-void SheetSprite::setAnimated(bool val, float fps, vector<float> framesU, vector<float> framesV)
+void SheetSprite::setAnimated(bool val, float fps, vector<vector<float>> frames)
 {
 	animated = val;
 	framesPerSecond = fps;
-	this->framesU = framesU;
-	this->framesV = framesV;
+	this->frames = frames;
 	animationIndex = 0;
 	animationElapsed = 0.0f;
 }
@@ -58,21 +57,22 @@ void SheetSprite::Draw(float width, float height, Matrix m1, float elapsed) {
 		{
 			animationIndex++;
 			animationElapsed = 0.0f;
-			if (animationIndex > (framesU.size() - 1))
+			if (animationIndex > (frames.size() - 1))
 			{
 				animationIndex = 0;
 			}
 		}
+		u = frames[animationIndex][0];
+		v = frames[animationIndex][1];
+		spriteWidth = frames[animationIndex][2];
+		spriteHeight = frames[animationIndex][3];
+	}
 
-		GLfloat quadUVs[] = { framesU[animationIndex], framesV[animationIndex], framesU[animationIndex], framesV[animationIndex] + spriteHeight, framesU[animationIndex] + spriteWidth, framesV[animationIndex] + spriteHeight, framesU[animationIndex] + spriteWidth, framesV[animationIndex] };
-		glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
 		
-	}
-	else
-	{
-		GLfloat quadUVs[] = { u, v, u, v + spriteHeight, u + spriteWidth, v + spriteHeight, u + spriteWidth, v };
-		glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
-	}
+
+	GLfloat quadUVs[] = { u, v, u, v + spriteHeight, u + spriteWidth, v + spriteHeight, u + spriteWidth, v };
+	glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
+
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glEnable(GL_BLEND);

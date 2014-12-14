@@ -269,16 +269,18 @@ bool SideScroller::UpdateAndRender() {
 
 		}
 		if (keys[SDL_SCANCODE_RIGHT]) {
-			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
-			player->sprite = playerSprite;
+			player->sprite_in_use = ANIMATION_WALK_RIGHT;
 			player->setWalkRight(1.0f);
 		}
 		else if (keys[SDL_SCANCODE_LEFT]) {
-			SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
-			player->sprite = playerSprite;
+			player->sprite_in_use = ANIMATION_WALK_LEFT;
 			player->setWalkLeft(1.0f);
 		}
 		else {
+			if (player->face_left)
+				player->sprite_in_use = SPRITE_FACE_LEFT;
+			else
+				player->sprite_in_use = SPRITE_FACE_RIGHT;
 			player->setIdle();
 		}
 		if (keys[SDL_SCANCODE_SPACE]) {
@@ -425,25 +427,32 @@ bool SideScroller::readEntityData(ifstream& stream) {
 
 void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 	if (type == "Player") {
-		SheetSprite playerSprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
 		player = new Player();
-		player->sprite = playerSprite;
+		player->sprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
 		player->x = placeX;
 		player->y = placeY;
 		player->setScale(3.0f);
 		player->friction_x = 3.0f;
 		player->hp = 5;
 
-		//Set player animation
-		vector<float> framesU;
-		vector<float> framesV;
-		framesU.push_back(918.0f / 2048.0f);
-		framesU.push_back(918.0f / 2048.0f);
-		framesU.push_back(917.0f / 2048.0f);
-		framesV.push_back(1323.0f / 2048.0f);
-		framesV.push_back(662.0f / 2048.0f);
-		framesV.push_back(495.0f / 2048.0f);
-		player->sprite.setAnimated(true, 8.0f, framesU, framesV);
+		player->sprite_face_right = SheetSprite(characterSpriteSheetTexture, 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
+		player->sprite_face_left = SheetSprite(characterSpriteSheetTexture, 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
+		
+		//walk right animation
+		vector<vector<float>> frames;
+		frames.push_back({ 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+		frames.push_back({ 918.0f / 2048.0f, 662.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+		frames.push_back({ 917.0f / 2048.0f, 495.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+		player->animation_walk_right = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
+		player->animation_walk_right.setAnimated(true, 8.0f, frames);
+
+		//walk left animation
+		frames.clear();
+		frames.push_back({ 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+		frames.push_back({ 1038.0f / 2048.0f, 996.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+		frames.push_back({ 1038.0f / 2048.0f, 829.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+		player->animation_walk_left = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
+		player->animation_walk_left.setAnimated(true, 8.0f, frames);
 
 		entities.push_back(player);
 	}

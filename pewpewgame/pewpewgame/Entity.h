@@ -8,6 +8,9 @@
 
 #define FIXED_TIMESTEP 0.0166666f
 
+enum sprite_in_use { SPRITE, SPRITE_FACE_RIGHT, SPRITE_FACE_LEFT, ANIMATION_WALK_RIGHT, ANIMATION_WALK_LEFT };
+
+using namespace std;
 
 class Entity {
 public:
@@ -24,6 +27,11 @@ public:
 	
 
 	SheetSprite sprite;
+	SheetSprite sprite_face_right;
+	SheetSprite sprite_face_left;
+	SheetSprite animation_walk_right;
+	SheetSprite animation_walk_left;
+	int sprite_in_use;
 
 	float x;
 	float y;

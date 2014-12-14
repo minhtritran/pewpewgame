@@ -51,6 +51,7 @@ void Character::setWalkLeft(float multiple) {
 void Character::setIdle() {
 	velocity_x = 0.0f;
 	acceleration_x = 0.0f;
+	sprite.animated = false;
 }
 
 void Character::shoot(Projectile* projectile) {

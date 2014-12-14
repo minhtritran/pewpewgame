@@ -21,6 +21,8 @@ Entity::Entity() {
 	collidedBottom = false;
 	collidedLeft = false;
 	collidedRight = false;
+
+	sprite_in_use = SPRITE;
 }
 
 Entity::~Entity() {}
@@ -84,7 +86,16 @@ void Entity::FixedUpdate() {
 
 void Entity::Render(float elapsed) {
 	BuildMatrix();
-	sprite.Draw(width, height, matrix, elapsed);
+	if (sprite_in_use == SPRITE)
+		sprite.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == SPRITE_FACE_RIGHT)
+		sprite_face_right.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == SPRITE_FACE_LEFT)
+		sprite_face_left.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == ANIMATION_WALK_RIGHT)
+		animation_walk_right.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == ANIMATION_WALK_LEFT)
+		animation_walk_left.Draw(width, height, matrix, elapsed);
 }
 
 bool Entity::collidesWith(Entity* entity) {
