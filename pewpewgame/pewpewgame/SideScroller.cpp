@@ -179,9 +179,13 @@ void SideScroller::FixedUpdate() {
 						bullets[k].visible = false;
 						enemies[i].y = 0.85f;
 						enemies[i].x = -10.0f;
+						enemies[i].hp = 2.0f;
 					}
-					else
+					else {
+						bullets[k].visible = false;
 						enemies[i].hp--;
+					}
+						
 				}
 			}
 
@@ -524,23 +528,11 @@ void SideScroller::shootBullet() {
 
 bool SideScroller::isSolid(unsigned char tile) {
 	switch (tile) {
-	case 170:
-		return true;
-		break;
-	case 86:
-		return true;
-		break;
-	case 73:
-		return true;
-		break;
-	case 72:
-		return true;
-		break;
-	case 58:
-		return true;
+	case 0:
+		return false;
 		break;
 	default:
-		return false;
+		return true;
 		break;
 	}
 }
