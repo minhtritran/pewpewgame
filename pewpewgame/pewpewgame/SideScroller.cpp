@@ -198,6 +198,10 @@ void SideScroller::Render() {
 		else if (translateX < (float)(-1.0f * mapWidth * TILE_SIZE / 2.0f) + 2.66f)
 			translateX = (float)(-1.0f * mapWidth * TILE_SIZE / 2.0f) + 2.66f;
 
+		//check if player reached the end
+		if (player->x >= 19.1)
+			state = STATE_GAMEOVER;
+
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		tempMatrix.identity();
