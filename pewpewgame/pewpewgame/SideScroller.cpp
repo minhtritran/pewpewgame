@@ -213,7 +213,10 @@ void SideScroller::Render() {
 	}
 	else if (state == STATE_GAME)
 	{
-		DrawText(fontTexture, "HPHPHPHPHPHPHHP", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glTranslatef(-2.4f, 1.85f, 0.0f);
+		DrawText(fontTexture, "HP: " + to_string(player->hp) + "/5", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		float translateX = -player->x;
 		float translateY = -player->y;
 
@@ -238,8 +241,13 @@ void SideScroller::Render() {
 	}
 	else if (state = STATE_GAMEOVER)
 	{
+		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		DrawText(fontTexture, "Game Over!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		glTranslatef(-0.8f, 0.0f, 0.0f);
+		if (player->hp <= 0)
+			DrawText(fontTexture, "Game Over! You Died!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		else
+			DrawText(fontTexture, "Game Over! You Won!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	SDL_GL_SwapWindow(displayWindow);
