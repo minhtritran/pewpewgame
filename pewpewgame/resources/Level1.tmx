@@ -5,10 +5,10 @@
  </tileset>
  <layer name="Tile Layer 1" width="192" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmdFtwzAMRD1D1mkXSBfodJkgSzZFGyQQrEQmeTqbvAfcl23KPB8sQVoWIYQQlTjf9MF+CSFIXP8lREWUf1EZ5V9URvkXlTktyr/Ii/Z3RGW0vqnBhf0CZH7/898ruud/7dqzhDgyV6eEODLKf26+lvV5+5P5UiTuXjz3rvyLyij/ojLe/Guf9EFvL2GrvH5qb+KPtfVOizf/mgceRHnp9VPfZJw9fK8ssPPf27sWfZR/O+38ys5/9W8zst5pUf7jYOW//e+3Qs4DI3V793iejUL5j4OVf+Y3Gqnbu8fzbBRHzH/vTKenqLOed/NrZP639IeouWXskXt6fkXU9+yXHTH/eyUy/9mE9ssKa/x367rZ+xYR47Eztmeh/bISNX70vLl23Xsu9Op86tX7jI7LztiehfbLCtuXWX16e0XXzy60X1bYvszq09srun52of2ywvZlVp/eXtH1swvtlxW2L7P69PaKrp9daL+ssH2Z1ae3V3T97EL7ZYXty6w+vb2i62cX2i8r3nFPATVm9OntFV0/u9B+WfGO+wNFssr0
+   eJztmettw0AMgz1D1mkXSBfodJkgSzZFGyQwfMlZEsWzjh/AX3F0Jk34uSxCzMf5pg/2TghB4vovIWZE/Rczc1rUfzEvOv+Lyuj5dg4u7B0YFJ3fxQz8nue/N3Tv/9ZvzxLiyFydEmPztWyftz6ZO0XinsWzd/VfzIz6L2bG23+9J3rQepbaK2+eejb7Y+t+Z423/7oOPIjK0punjkk/IxyvKrD733p3J9qo/3bW11d2/2c/Nj33O2vU/zhY/V+f99dCXgd65ra28fw3CvU/Dlb/mceoZ25rG89/ozhi/1vfdFqK+tbz7voa2f89/hAz96zds00rr4j5nvdlR+z/qET2v5rQeVlhrf/uvi77vUXEeuyOjSx0Xlai1o++bm797v0u9Or71Kv96V2X3bGRhc7LCjuXLJ9er+j51YXOywo7lyyfXq/o+dWFzssKO5csn16v6PnVhc7LCjuXLJ9er+j51YXOywo7lyyfXq/o+dWFzssKO5csn16v6PnVhc7LinfdU8CMDJ9er+j51YXOywo7lyyfXq/o+dWFzssKO5csn16v6PnVhc7LCjuXLJ9er+j51YXOy4p33R9kTumS
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object name="Player" type="Player" gid="58" x="222" y="1490"/>
+  <object name="Player" type="Player" gid="58" x="222" y="1298"/>
  </objectgroup>
 </map>
