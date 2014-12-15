@@ -98,7 +98,7 @@ void SideScroller::Update(float elapsed) {
 	else if (state == STATE_GAME)
 	{
 		if (enemySpawnTimer > 0.01f && enemies.size() < 20) {
-			Enemy* tempEnemy = new PewRunner();
+			Enemy* tempEnemy = new PewShooter();
 			tempEnemy->sprite = enemy_sprite;
 			tempEnemy->y = 0.85f;
 			tempEnemy->x = -10.0f;
@@ -118,6 +118,11 @@ void SideScroller::Update(float elapsed) {
 			//walk left animation
 			tempEnemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 			tempEnemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
+
+			WepRaygun* enemyWeapon = new WepRaygun();
+			enemyWeapon->sprite = weapon_raygun_sprite;
+			tempEnemy->weapon = enemyWeapon;
+			entities.push_back(enemyWeapon);
 
 			enemies.push_back(tempEnemy);
 			entities.push_back(tempEnemy);
@@ -145,10 +150,10 @@ void SideScroller::FixedUpdate() {
 	else if (state == STATE_GAME)
 	{
 		for (size_t i = 0; i < entities.size(); i++) {
-			if (!entities[i]->isStatic) {
-				entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
-				entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
-			}
+		
+			entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
+			entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
+			
 			entities[i]->FixedUpdate();
 
 			entities[i]->y += entities[i]->velocity_y * FIXED_TIMESTEP;
@@ -257,29 +262,29 @@ void SideScroller::FixedUpdate() {
 			//enemy gets hit
 			for each (auto projectile in projectiles) {
 				if (checkPointForGridCollisionX(projectile->x, projectile->y) != 0)
-					projectile->visible = false;
-				if (enemy->collidesWith(projectile) && projectile->visible) {
-					projectile->visible = false;
+					projectile->should_remove = true;
+				if (enemy->collidesWith(projectile) && !projectile->should_remove) {
+					projectile->should_remove = true;
 					enemy->hp -= projectile->damage;
 				}
 			}
 		}
 
-		//clean up memory caused by enemies
-		for each (auto enemy in enemies) {
-			if (enemy->hp <= 0) {
-				entities.erase(std::remove(entities.begin(), entities.end(), enemy), entities.end());
-				enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
-				delete enemy;
+
+		//clean up memory caused by entities
+		for each (auto entity in entities) {
+			if (entity->should_remove) {
+				entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end());
+				enemies.erase(std::remove(enemies.begin(), enemies.end(), entity), enemies.end());
+				delete entity;
 				break;
-				
 			}
-			
+
 		}
 
 		//clean up memory caused by projectiles
 		for each (auto projectile in projectiles) {
-			if (!projectile->visible) {
+			if (projectile->should_remove) {
 				projectiles.erase(std::remove(projectiles.begin(), projectiles.end(), projectile), projectiles.end());
 				delete projectile;
 				break;
@@ -452,7 +457,7 @@ bool SideScroller::UpdateAndRender() {
 
 void SideScroller::resetGame()
 {
-	//clean up memory caused by enemies
+	//clean up memory caused by entities
 	for each (auto entity in entities) {
 		delete entity;
 	}

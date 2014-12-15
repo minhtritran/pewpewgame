@@ -6,6 +6,7 @@ Weapon::Weapon() {
 
 	shootTimer = 0.0f;
 	rateOfFire = 1.0f;
+
 }
 
 void Weapon::Update(float elapsed) {
@@ -18,4 +19,6 @@ void Weapon::FixedUpdate() {
 void Weapon::Render(float elapsed) {
 	Entity::Render(elapsed);
 }
+
+
 

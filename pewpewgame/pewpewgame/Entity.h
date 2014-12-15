@@ -52,6 +52,8 @@ public:
 	bool collidedBottom;
 	bool collidedLeft;
 	bool collidedRight;
+
+	bool should_remove;
 };
 
 float lerp(float v0, float v1, float t);

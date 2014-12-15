@@ -18,7 +18,7 @@ void Projectile::Update(float elapsed) {
 }
 
 void Projectile::Render(float elapsed) {
-	if (visible) {
+	if (!should_remove) {
 		Entity::Render(elapsed);
 	}
 }

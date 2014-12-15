@@ -28,11 +28,6 @@ void Character::FixedUpdate() {
 		isJumping = false;
 	}
 
-	//falls to death
-	if (y < -2.5f) {
-		hp -= 10;
-	}
-
 	Entity::FixedUpdate();
 }
 
@@ -112,7 +107,6 @@ void Character::setIdle() {
 
 bool Character::shoot(Projectile* projectile) {
 	if (weapon->shootTimer > (0.2f / weapon->rateOfFire)) {
-		projectile->visible = true;
 		projectile->x = weapon->x;
 		projectile->y = weapon->y;
 		projectile->rotation = 0.0f;

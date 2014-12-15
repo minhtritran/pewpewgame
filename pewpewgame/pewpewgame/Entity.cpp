@@ -23,6 +23,8 @@ Entity::Entity() {
 	collidedLeft = false;
 	collidedRight = false;
 
+	should_remove = false;
+
 	sprite_in_use = SPRITE;
 }
 
@@ -62,6 +64,12 @@ void Entity::Update(float elapsed) {
 }
 
 void Entity::FixedUpdate() {
+
+	//falls to death
+	if (y < -2.3f) {
+		should_remove = true;
+	}
+
 	if (!isStatic) {
 		if (collidedBottom) {
 			velocity_y = 0.0f;
@@ -84,6 +92,8 @@ void Entity::FixedUpdate() {
 
 	velocity_x += acceleration_x * FIXED_TIMESTEP;
 	velocity_y += acceleration_y * FIXED_TIMESTEP;
+
+
 }
 
 void Entity::Render(float elapsed) {
