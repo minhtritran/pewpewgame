@@ -88,14 +88,6 @@ void Entity::Render(float elapsed) {
 	BuildMatrix();
 	if (sprite_in_use == SPRITE)
 		sprite.Draw(width, height, matrix, elapsed);
-	else if (sprite_in_use == SPRITE_FACE_RIGHT)
-		sprite_face_right.Draw(width, height, matrix, elapsed);
-	else if (sprite_in_use == SPRITE_FACE_LEFT)
-		sprite_face_left.Draw(width, height, matrix, elapsed);
-	else if (sprite_in_use == ANIMATION_WALK_RIGHT)
-		animation_walk_right.Draw(width, height, matrix, elapsed);
-	else if (sprite_in_use == ANIMATION_WALK_LEFT)
-		animation_walk_left.Draw(width, height, matrix, elapsed);
 }
 
 bool Entity::collidesWith(Entity* entity) {

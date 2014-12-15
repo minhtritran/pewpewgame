@@ -11,6 +11,7 @@ using namespace std;
 class SheetSprite{
 public:
 	SheetSprite();
+	SheetSprite(unsigned int textureID);
 	SheetSprite(unsigned int textureID, float u, float v, float spriteWidth, float spriteHeight);
 	SheetSprite(GLuint textureID, unsigned int spriteCountX, unsigned int spriteCountY, unsigned int index);
 

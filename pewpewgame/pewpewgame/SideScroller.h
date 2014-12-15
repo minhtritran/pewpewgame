@@ -59,9 +59,24 @@ private:
 	SDL_Window* displayWindow;
 
 	GLuint characterSpriteSheetTexture;
+	GLuint characterAnimationSpriteSheetTexture;
 	GLuint brickSpriteSheetTexture;
 	GLuint fontTexture;
-	SheetSprite bulletSprite;
+	SheetSprite bullet_sprite;
+
+	SheetSprite player_sprite;
+	SheetSprite player_sprite_face_right;
+	SheetSprite player_sprite_face_left;
+	SheetSprite player_sprite_jump_right;
+	SheetSprite player_sprite_jump_left;
+	vector<vector<float>> player_frames_walk_right;
+	vector<vector<float>> player_frames_walk_left;
+
+	SheetSprite enemy_sprite;
+	SheetSprite enemy_sprite_face_right;
+	SheetSprite enemy_sprite_face_left;
+	vector<vector<float>> enemy_frames_walk_right;
+	vector<vector<float>> enemy_frames_walk_left;
 
 	float gravity_x;
 	float gravity_y;

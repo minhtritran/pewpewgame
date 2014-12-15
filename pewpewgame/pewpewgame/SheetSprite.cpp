@@ -4,6 +4,10 @@ SheetSprite::SheetSprite() {
 	animated = 0;
 }
 
+SheetSprite::SheetSprite(unsigned int textureID)
+	: textureID(textureID)
+{}
+
 SheetSprite::SheetSprite(unsigned int textureID, float u, float v, float spriteWidth, float spriteHeight)
 	: textureID(textureID), u(u), v(v), spriteWidth(spriteWidth), spriteHeight(spriteHeight)
 {

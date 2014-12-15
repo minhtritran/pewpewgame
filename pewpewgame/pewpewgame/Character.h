@@ -17,6 +17,14 @@ public:
 
 	void shoot(Projectile* projectile);
 
+
+	SheetSprite sprite_face_right;
+	SheetSprite sprite_face_left;
+	SheetSprite sprite_jump_right;
+	SheetSprite sprite_jump_left;
+	SheetSprite animation_walk_right;
+	SheetSprite animation_walk_left;
+
 	int hp;
 	bool face_left;
 	bool isJumping;

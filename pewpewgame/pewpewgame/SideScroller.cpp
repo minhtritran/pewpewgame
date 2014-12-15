@@ -13,13 +13,43 @@ SideScroller::SideScroller() {
 	gravity_x = 0.0f;
 	gravity_y = -9.8f;
 
-	//projectileIndex = 0;
 	shootTimer = 0.1f;
 
 	brickSpriteSheetTexture = LoadTexture("resources/spriteTiles.png");
 	characterSpriteSheetTexture = LoadTexture("resources/Sprites_Characters.png");
+	characterAnimationSpriteSheetTexture = LoadTexture("resources/character_animations.png");
 	fontTexture = LoadTexture("resources/pixel_font.png");
-	bulletSprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 3);
+
+	bullet_sprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 3);
+	
+	//Player static sprites
+	player_sprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
+	player_sprite_face_right = SheetSprite(characterSpriteSheetTexture, 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
+	player_sprite_face_left = SheetSprite(characterSpriteSheetTexture, 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
+	player_sprite_jump_right = SheetSprite(characterAnimationSpriteSheetTexture, 840.0f / 1320.0f, 1137.0f / 1320.0f, 120.0f / 1320.0f, 165.0f / 1320.0f);
+	player_sprite_jump_left = SheetSprite(characterAnimationSpriteSheetTexture, 243.0f / 1320.0f, 165.0f / 1320.0f, 120.0f / 1320.0f, 165.0f / 1320.0f);
+
+	//Player animated sprites
+	player_frames_walk_right.push_back({ 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+	player_frames_walk_right.push_back({ 918.0f / 2048.0f, 662.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+	player_frames_walk_right.push_back({ 917.0f / 2048.0f, 495.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+	player_frames_walk_left.push_back({ 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+	player_frames_walk_left.push_back({ 1038.0f / 2048.0f, 996.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+	player_frames_walk_left.push_back({ 1038.0f / 2048.0f, 829.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
+	
+	//Enemy static sprites
+	enemy_sprite = SheetSprite(characterSpriteSheetTexture, 405.0f / 2048.0f, 167.0f / 2048.0f, 132.0f / 2048.0f, 161.0f / 2048.0f);
+	enemy_sprite_face_right = SheetSprite(characterSpriteSheetTexture, 1160.0f / 2048.0f, 827.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f);
+	enemy_sprite_face_left = SheetSprite(characterSpriteSheetTexture, 916.0f / 2048.0f, 995.0f / 2048.0f, 120.0f / 2048.0f, 161.0f / 2048.0f);
+
+	//Enemy animated sprites
+	enemy_frames_walk_right.push_back({ 1160.0f / 2048.0f, 827.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
+	enemy_frames_walk_right.push_back({ 1158.0f / 2048.0f, 0.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
+	enemy_frames_walk_right.push_back({ 795.0f / 2048.0f, 1820.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
+	enemy_frames_walk_left.push_back({ 916.0f / 2048.0f, 995.0f / 2048.0f, 120.0f / 2048.0f, 161.0f / 2048.0f });
+	enemy_frames_walk_left.push_back({ 1040.0f / 2048.0f, 1163.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
+	enemy_frames_walk_left.push_back({ 796.0f / 2048.0f, 831.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
+
 	buildLevel();
 	 
 	gunshot = Mix_LoadWAV("resources/gunshot.wav");
@@ -39,12 +69,12 @@ SideScroller::~SideScroller() {
 
 void SideScroller::Init() {
 	SDL_Init(SDL_INIT_VIDEO);
-	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
+	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1064, 800, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, 1064, 800);
 	glMatrixMode(GL_PROJECTION);
 	glOrtho(-2.66, 2.66, -2.0, 2.0, -2.0, 2.0);
 }
@@ -56,10 +86,9 @@ void SideScroller::Update(float elapsed) {
 	}
 	else if (state == STATE_GAME)
 	{
-		if (enemySpawnTimer > 0.1f && enemies.size() < 15) {
+		if (enemySpawnTimer > 0.01f && enemies.size() < 20) {
 			Enemy* tempEnemy = new Enemy();
-			SheetSprite enemySprite = SheetSprite(characterSpriteSheetTexture, 405.0f / 2048.0f, 167.0f / 2048.0f, 132.0f / 2048.0f, 161.0f / 2048.0f);
-			tempEnemy->sprite = enemySprite;
+			tempEnemy->sprite = enemy_sprite;
 			tempEnemy->y = 0.85f;
 			tempEnemy->x = -10.0f;
 			tempEnemy->setScale(2.5f);
@@ -67,6 +96,17 @@ void SideScroller::Update(float elapsed) {
 			tempEnemy->hp = 2;
 			tempEnemy->setWalkLeft(0.8f);
 			
+			tempEnemy->sprite_face_left = enemy_sprite_face_left;
+			tempEnemy->sprite_face_right = enemy_sprite_face_right;
+
+			//walk right animation
+			tempEnemy->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
+			tempEnemy->animation_walk_right.setAnimated(true, 8.0f, enemy_frames_walk_right);
+
+			//walk left animation
+			tempEnemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
+			tempEnemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
+
 			enemies.push_back(tempEnemy);
 			entities.push_back(tempEnemy);
 			
@@ -140,7 +180,6 @@ void SideScroller::FixedUpdate() {
 			}
 			doLevelCollisionX(entities[i]);
 		}
-
 
 		for each (auto enemy in enemies) {
 			//enemy gets hit
@@ -294,18 +333,12 @@ bool SideScroller::UpdateAndRender() {
 
 		}
 		if (keys[SDL_SCANCODE_RIGHT]) {
-			player->sprite_in_use = ANIMATION_WALK_RIGHT;
 			player->setWalkRight(1.0f);
 		}
 		else if (keys[SDL_SCANCODE_LEFT]) {
-			player->sprite_in_use = ANIMATION_WALK_LEFT;
 			player->setWalkLeft(1.0f);
 		}
 		else {
-			if (player->face_left)
-				player->sprite_in_use = SPRITE_FACE_LEFT;
-			else
-				player->sprite_in_use = SPRITE_FACE_RIGHT;
 			player->setIdle();
 		}
 		if (keys[SDL_SCANCODE_SPACE]) {
@@ -313,14 +346,10 @@ bool SideScroller::UpdateAndRender() {
 
 				Mix_PlayChannel(-1, gunshot, 0);
 				Projectile* tempProjectile = new Projectile();
-				tempProjectile->sprite = bulletSprite;
+				tempProjectile->sprite = bullet_sprite;
 				projectiles.push_back(tempProjectile);
 				player->shoot(tempProjectile);
 				
-				//projectileIndex++;
-				//if (projectileIndex > MAX_PROJECTILES - 1) {
-				//	projectileIndex = 0;
-				//}
 				shootTimer = 0.0f;
 				
 
@@ -453,31 +482,26 @@ bool SideScroller::readEntityData(ifstream& stream) {
 void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 	if (type == "Player") {
 		player = new Player();
-		player->sprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
+		player->sprite = player_sprite;
 		player->x = placeX;
 		player->y = placeY;
 		player->setScale(3.0f);
 		player->friction_x = 3.0f;
 		player->hp = 5;
 
-		player->sprite_face_right = SheetSprite(characterSpriteSheetTexture, 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
-		player->sprite_face_left = SheetSprite(characterSpriteSheetTexture, 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
-		
+		player->sprite_face_right = player_sprite_face_right;
+		player->sprite_face_left = player_sprite_face_left;
+		player->sprite_jump_right = player_sprite_jump_right;
+		player->sprite_jump_left = player_sprite_jump_left;
+
 		//walk right animation
-		vector<vector<float>> frames;
-		frames.push_back({ 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-		frames.push_back({ 918.0f / 2048.0f, 662.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-		frames.push_back({ 917.0f / 2048.0f, 495.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-		player->animation_walk_right = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
-		player->animation_walk_right.setAnimated(true, 8.0f, frames);
+		player->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
+		player->animation_walk_right.setAnimated(true, 8.0f, player_frames_walk_right);
+		
 
 		//walk left animation
-		frames.clear();
-		frames.push_back({ 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-		frames.push_back({ 1038.0f / 2048.0f, 996.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-		frames.push_back({ 1038.0f / 2048.0f, 829.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-		player->animation_walk_left = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
-		player->animation_walk_left.setAnimated(true, 8.0f, frames);
+		player->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
+		player->animation_walk_left.setAnimated(true, 8.0f, player_frames_walk_left);
 
 		entities.push_back(player);
 	}

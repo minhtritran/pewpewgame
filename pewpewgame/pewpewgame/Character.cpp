@@ -26,15 +26,38 @@ void Character::FixedUpdate() {
 
 void Character::Render(float elapsed) {
 	Entity::Render(elapsed);
+	if (sprite_in_use == SPRITE_FACE_RIGHT)
+		sprite_face_right.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == SPRITE_FACE_LEFT)
+		sprite_face_left.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == SPRITE_JUMP_RIGHT)
+		sprite_jump_right.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == SPRITE_JUMP_LEFT)
+		sprite_jump_left.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == ANIMATION_WALK_RIGHT)
+		animation_walk_right.Draw(width, height, matrix, elapsed);
+	else if (sprite_in_use == ANIMATION_WALK_LEFT)
+		animation_walk_left.Draw(width, height, matrix, elapsed); 
+	
 }
 
 void Character::jump() {
+	if (face_left)
+		sprite_in_use = SPRITE_JUMP_LEFT;
+	else
+		sprite_in_use = SPRITE_JUMP_RIGHT;
+
 	collidedBottom = false;
 	isJumping = true;
 	velocity_y = 3.5f;
 }
 
 void Character::setWalkRight(float multiple) {
+	
+	if (isJumping)
+		sprite_in_use = SPRITE_JUMP_RIGHT;
+	else
+		sprite_in_use = ANIMATION_WALK_RIGHT;
 	face_left = false;
 	if (velocity_x < 0.0f)
 		velocity_x = 0.0f;
@@ -42,6 +65,10 @@ void Character::setWalkRight(float multiple) {
 		acceleration_x = 9.0f * multiple;
 }
 void Character::setWalkLeft(float multiple) {
+	if (isJumping)
+		sprite_in_use = SPRITE_JUMP_LEFT;
+	else
+		sprite_in_use = ANIMATION_WALK_LEFT;	
 	face_left = true;
 	if (velocity_x > 0.0f)
 		velocity_x = 0.0f;
@@ -49,6 +76,11 @@ void Character::setWalkLeft(float multiple) {
 		acceleration_x = -9.0f * multiple;
 }
 void Character::setIdle() {
+	if (face_left)
+		sprite_in_use = SPRITE_FACE_LEFT;
+	else
+		sprite_in_use = SPRITE_FACE_RIGHT;
+
 	velocity_x = 0.0f;
 	acceleration_x = 0.0f;
 	sprite.animated = false;
