@@ -19,6 +19,7 @@
 #include "Enemy.h"
 #include "PewRunner.h"
 #include "PewShooter.h"
+#include "Weapon.h"
 
 #define MAX_TIMESTEPS 6
 #define MAX_BRICKS 200
@@ -65,7 +66,11 @@ private:
 	GLuint characterAnimationSpriteSheetTexture;
 	GLuint brickSpriteSheetTexture;
 	GLuint fontTexture;
+	GLuint weaponSpriteSheetTexture;
+
 	SheetSprite bullet_sprite;
+	 
+	SheetSprite weapon_raygun_sprite;
 
 	SheetSprite player_sprite;
 	SheetSprite player_sprite_face_right;
@@ -86,21 +91,23 @@ private:
 	float gravity_x;
 	float gravity_y;
 
+	vector<Entity*> entities;
 	vector<Projectile*> projectiles;
+	vector<Enemy*> enemies;
+	Player* player;
 
 	int brickIndex;
 	Entity bricks[MAX_BRICKS];
 
-	vector<Enemy*> enemies;
+	
 
 	unsigned int mapWidth;
 	unsigned int mapHeight;
 
 	unsigned char** levelData;
 
-	Player* player;
-	int hp;
-	vector<Entity*> entities;
+	
+	
 
 	float shootTimer;
 	float enemySpawnTimer;

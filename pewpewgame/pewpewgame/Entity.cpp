@@ -3,6 +3,7 @@
 Entity::Entity() {
 	x = 0.0f;
 	y = 0.0f;
+	z = 0.0f;
 	width = 0.2f;
 	height = 0.2f;
 	rotation = 0.0f;
@@ -36,6 +37,7 @@ void Entity::BuildMatrix()
 	translateMatrix.identity();
 	translateMatrix.m[3][0] = x;
 	translateMatrix.m[3][1] = y;
+	translateMatrix.m[3][2] = z;
 
 	rotateMatrix.identity();
 	rotateMatrix.m[0][0] = cos(rotation);

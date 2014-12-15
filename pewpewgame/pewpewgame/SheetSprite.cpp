@@ -2,16 +2,21 @@
 
 SheetSprite::SheetSprite() {
 	animated = 0;
+	invert = false;
 }
 
 SheetSprite::SheetSprite(unsigned int textureID)
 	: textureID(textureID)
-{}
+{
+	animated = 0;
+	invert = false;
+}
 
 SheetSprite::SheetSprite(unsigned int textureID, float u, float v, float spriteWidth, float spriteHeight)
 	: textureID(textureID), u(u), v(v), spriteWidth(spriteWidth), spriteHeight(spriteHeight)
 {
 	animated = 0;
+	invert = false;
 }
 
 SheetSprite::SheetSprite(GLuint textureID, unsigned int spriteCountX, unsigned int spriteCountY, unsigned int index)
@@ -28,6 +33,7 @@ SheetSprite::SheetSprite(GLuint textureID, unsigned int spriteCountX, unsigned i
 	spriteHeight = 1.0f / (float)spriteCountY;
 
 	animated = 0;
+	invert = false;
 }
 
 void SheetSprite::setAnimated(bool val, float fps, vector<vector<float>> frames)
@@ -40,7 +46,6 @@ void SheetSprite::setAnimated(bool val, float fps, vector<vector<float>> frames)
 }
 
 void SheetSprite::Draw(float width, float height, Matrix m1, float elapsed) {
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
@@ -73,18 +78,29 @@ void SheetSprite::Draw(float width, float height, Matrix m1, float elapsed) {
 	}
 
 		
-
-	GLfloat quadUVs[] = { u, v, u, v + spriteHeight, u + spriteWidth, v + spriteHeight, u + spriteWidth, v };
-	glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
+	if (!invert) {
+		GLfloat quadUVs[] = { u, v, u, v + spriteHeight, u + spriteWidth, v + spriteHeight, u + spriteWidth, v };
+		glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
+	}
+	else {
+		GLfloat quadUVs[] = { u + spriteWidth, v, u + spriteWidth, v + spriteHeight, u, v + spriteHeight, u, v };
+		glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
+	}
+		
 
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	glAlphaFunc(GL_GREATER, 0.1);
+	glEnable(GL_ALPHA_TEST);
+
 	glDrawArrays(GL_QUADS, 0, 4);
 	glDisable(GL_TEXTURE_2D);
+
 	glPopMatrix();
+	
 }
 
 GLuint LoadTexture(const char *image_path) {

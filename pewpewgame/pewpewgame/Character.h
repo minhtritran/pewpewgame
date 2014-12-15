@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "Weapon.h"
 
 class Projectile;
 
@@ -29,4 +30,5 @@ public:
 	bool face_left;
 	bool isJumping;
 	float jumpTimer;
+	Weapon* weapon;
 };

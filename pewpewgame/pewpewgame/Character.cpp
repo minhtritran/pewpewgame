@@ -5,11 +5,21 @@ Character::Character() {
 	hp = 1;
 	face_left = false;
 	isJumping = false;
+	weapon = NULL;
 }
 
 void Character::Update(float elapsed) {
+	if (weapon) {
+		if (face_left)
+			weapon->x = x - 0.05f;
+		else
+			weapon->x = x + 0.05f;
+		weapon->y = y - 0.05f;
+	}
+	
 	Entity::Update(elapsed);
 	jumpTimer += elapsed;
+	
 }
 
 void Character::FixedUpdate() {
@@ -70,6 +80,9 @@ void Character::setWalkRight(float multiple) {
 		velocity_x = 0.0f;
 	if (velocity_x < 2.0f)
 		acceleration_x = 9.0f * multiple;
+
+	if (weapon)
+		weapon->sprite.invert = false;
 }
 void Character::setWalkLeft(float multiple) {
 	if (isJumping)
@@ -81,6 +94,9 @@ void Character::setWalkLeft(float multiple) {
 		velocity_x = 0.0f;
 	if (velocity_x > -2.0f)
 		acceleration_x = -9.0f * multiple;
+
+	if (weapon)
+		weapon->sprite.invert = true;
 }
 void Character::setIdle() {
 	if (face_left)
@@ -95,8 +111,8 @@ void Character::setIdle() {
 
 void Character::shoot(Projectile* projectile) {
 	projectile->visible = true;
-	projectile->x = x;
-	projectile->y = y;
+	projectile->x = weapon->x;
+	projectile->y = weapon->y;
 	projectile->rotation = 0.0f;
 	projectile->velocity_x = 3.5f;
 	if (face_left)

@@ -30,6 +30,7 @@ public:
 	int animationIndex;
 	float animationElapsed;
 
+	bool invert;
 };
 
 GLuint LoadTexture(const char *image_path);

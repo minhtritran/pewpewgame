@@ -19,8 +19,12 @@ SideScroller::SideScroller() {
 	characterSpriteSheetTexture = LoadTexture("resources/Sprites_Characters.png");
 	characterAnimationSpriteSheetTexture = LoadTexture("resources/character_animations.png");
 	fontTexture = LoadTexture("resources/pixel_font.png");
+	weaponSpriteSheetTexture = LoadTexture("resources/sheet.png");
 
-	bullet_sprite = SheetSprite(characterSpriteSheetTexture, 12, 8, 3);
+	bullet_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 7);
+
+	//Weapon sprites
+	weapon_raygun_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 2);
 	
 	//Player static sprites
 	player_sprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
@@ -64,12 +68,14 @@ SideScroller::SideScroller() {
 }
 
 SideScroller::~SideScroller() {
-
+	glDisable(GL_DEPTH_TEST);
+	glDepthMask(GL_FALSE);
 
 	SDL_Quit();
 }
 
 void SideScroller::Init() {
+
 	SDL_Init(SDL_INIT_VIDEO);
 	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
@@ -79,6 +85,11 @@ void SideScroller::Init() {
 	glViewport(0, 0, 800, 600);
 	glMatrixMode(GL_PROJECTION);
 	glOrtho(-2.66, 2.66, -2.0, 2.0, -2.0, 2.0);
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glDepthMask(GL_TRUE);
+
 }
 
 void SideScroller::Update(float elapsed) {
@@ -147,7 +158,7 @@ void SideScroller::FixedUpdate() {
 			//do Y collisions
 			if (!entities[i]->isStatic) {
 				for (size_t j = 0; j < entities.size(); j++) {
-					if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j]) {
+					if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j] && !entities[j]->isStatic) {
 						float yPenetration = fabs(fabs(entities[j]->y - entities[i]->y) - entities[i]->height / 2.0f - entities[j]->height / 2.0f);
 						if (entities[i]->y > entities[j]->y) {
 							entities[i]->y += yPenetration + 0.001f;
@@ -167,7 +178,7 @@ void SideScroller::FixedUpdate() {
 			//do X collisions
 			if (!entities[i]->isStatic) {
 				for (size_t j = 0; j < entities.size(); j++) {
-					if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j]) {
+					if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j] && !entities[j]->isStatic) {
 						float xPenetration = fabs(fabs(entities[j]->x - entities[i]->x) - entities[i]->width / 2.0f - entities[j]->width / 2.0f);
 						if (entities[i]->x > entities[j]->x) {
 							entities[i]->x += xPenetration + 0.001f;
@@ -286,7 +297,8 @@ void SideScroller::FixedUpdate() {
 }
 
 void SideScroller::Render(float elapsed) {
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClearColor(173.0f/256.0f, 216.0f/256.0f, 230.0f/256.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	
 	if (state == STATE_TITLE)
 	{
@@ -418,6 +430,8 @@ bool SideScroller::UpdateAndRender() {
 				Mix_PlayChannel(-1, gunshot, 0);
 				Projectile* tempProjectile = new Projectile();
 				tempProjectile->sprite = bullet_sprite;
+				tempProjectile->scale_x = 7.5f;
+				tempProjectile->scale_y = 7.5f;
 				projectiles.push_back(tempProjectile);
 				player->shoot(tempProjectile);
 				
@@ -592,6 +606,16 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		//walk left animation
 		player->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 		player->animation_walk_left.setAnimated(true, 8.0f, player_frames_walk_left);
+
+		Weapon* weapon = new Weapon();
+		weapon->sprite = weapon_raygun_sprite;
+		weapon->scale_x = 1.5f;
+		weapon->scale_y = 1.5f;
+		entities.push_back(weapon);
+		player->weapon = weapon;
+		player->weapon->x = player->x;
+		player->weapon->y = player->y;
+		player->weapon->z = 1.0f;
 
 		entities.push_back(player);
 	}
