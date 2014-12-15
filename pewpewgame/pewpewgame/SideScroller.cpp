@@ -296,6 +296,11 @@ void SideScroller::Render(float elapsed) {
 			DrawText(fontTexture, "Game Over! You Died!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		else
 			DrawText(fontTexture, "Game Over! You Won!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		tempMatrix.identity();
+		tempMatrix.m[3][0] = -0.8f;
+		tempMatrix.m[3][1] = -0.8f;
+		glMultMatrixf(tempMatrix.ml);
+		DrawText(fontTexture, "Press SPACE to return to main menu", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	SDL_GL_SwapWindow(displayWindow);
@@ -315,6 +320,11 @@ bool SideScroller::UpdateAndRender() {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
 				if (state == STATE_TITLE)
 					state = STATE_GAME;
+				else if (state == STATE_GAMEOVER)
+				{
+					state = STATE_TITLE;
+					resetGame();
+				}
 			}
 		}
 	}
@@ -370,6 +380,25 @@ bool SideScroller::UpdateAndRender() {
 	Update(elapsed);
 	Render(elapsed);
 	return done;
+}
+
+void SideScroller::resetGame()
+{
+	//clean up memory caused by enemies
+	for each (auto entity in entities) {
+		delete entity;
+	}
+
+	//clean up memory caused by projectiles
+	for each (auto projectile in projectiles) {
+		delete projectile;
+	}
+
+	entities.clear();
+	enemies.clear();
+	projectiles.clear();
+
+	buildLevel();
 }
 
 void SideScroller::buildLevel() {

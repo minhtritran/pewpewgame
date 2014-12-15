@@ -38,6 +38,7 @@ public:
 	void Render(float elapsed);
 	bool UpdateAndRender();
 
+	void resetGame();
 	void buildLevel();
 	bool readHeader(ifstream& stream);
 	bool readLayerData(ifstream& stream);
