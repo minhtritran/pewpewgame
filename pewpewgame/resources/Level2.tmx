@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="192" height="32" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="spriteTiles" tilewidth="64" tileheight="64" spacing="2">
+  <image source="spriteTiles.png" width="924" height="924"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="192" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztm1GOwyAMRDlJe4H0AnvInLm7Uit1UQBjj+0mzJPmZwOxgbGbptpSCCGErMT2q1t2EoQksb9EyIrQ/2Rl6H+yMvQ/IYSQLH5K7juo7ZVDS165veNq7j/K+Sh36Zwofeb2cF7LfbCHmWQ/g+0Cece1zJXmblnnTDxNbrP5aWO05mbwrr0z+B/9GbBV9x993tT9zsP/EWi8eVX/e3tMQu3DKH8gzszT/5neQPlfc98Iej0smhkfoepTUnOWPNH+jzgbSfyr+D/CYxJmej9yn9Bnh/K/1IOf4/6+t94Hc3r3rP8+ij+Tm3bdXkifXaPQeMlan9KaQ+Rq9X9vTgur/zXjz+L/KI9J0PR+xF5pY0T5v7dGzRitn1tzpHFaYzL8b3ln4YXFT636HL3Pt3zXXs3/rXnS8a0xGX5DegyBpfdLz350/dv9L/GuNE8J0vhH46X36snj/wA0fT+iJq3eP6rPuqZG11Frjdo/7xiz6/DuFQjQHkOA6P1He6W5fgX/z8ZpzUXsD/pMtVj7vlcNIL2/l/HvsdrfazXn1Ds/1L0z/S+J8y3+R581ogbQ3s9WDdL/K8uCV6/by/9eqlH2vkafV3ZeZ5WF7NxXFM8iZj97XL3HUutIQ3bOFIUSn60piqIoiqIoiqIoiqKuqSeClrLh
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object name="Player" type="Player" gid="28" x="252" y="1588"/>
+ </objectgroup>
+</map>
