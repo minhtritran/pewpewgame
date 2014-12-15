@@ -43,7 +43,7 @@ public:
 	bool UpdateAndRender();
 
 	void resetGame();
-	void buildLevel();
+	void buildLevel(string filename);
 	bool readHeader(ifstream& stream);
 	bool readLayerData(ifstream& stream);
 	bool readEntityData(ifstream& stream);

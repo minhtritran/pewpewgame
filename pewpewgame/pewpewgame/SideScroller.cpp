@@ -53,8 +53,6 @@ SideScroller::SideScroller() {
 	enemy_frames_walk_left.push_back({ 916.0f / 2048.0f, 995.0f / 2048.0f, 120.0f / 2048.0f, 161.0f / 2048.0f });
 	enemy_frames_walk_left.push_back({ 1040.0f / 2048.0f, 1163.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
 	enemy_frames_walk_left.push_back({ 796.0f / 2048.0f, 831.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
-
-	buildLevel();
 	 
 	gunshot = Mix_LoadWAV("resources/gunshot.wav");
 	jump = Mix_LoadWAV("resources/jump.wav");
@@ -308,9 +306,22 @@ void SideScroller::Render(float elapsed) {
 		glLoadIdentity();
 		Matrix tempMatrix;
 		tempMatrix.identity();
-		tempMatrix.m[3][0] = -0.9f;
+		tempMatrix.m[3][0] = -1.2f;
+		tempMatrix.m[3][1] = -0.2f;
 		glMultMatrixf(tempMatrix.ml);
-		DrawText(fontTexture, "Press SPACE to start", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(fontTexture, "Press 1 for Level Green", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		tempMatrix.identity();
+		tempMatrix.m[3][1] = -0.2f;
+		glMultMatrixf(tempMatrix.ml);
+		DrawText(fontTexture, "Press 2 for Level Blue", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		tempMatrix.identity();
+		tempMatrix.m[3][1] = -0.2f;
+		glMultMatrixf(tempMatrix.ml);
+		DrawText(fontTexture, "Press 3 for Level Pink", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		tempMatrix.identity();
+		tempMatrix.m[3][1] = -0.2f;
+		glMultMatrixf(tempMatrix.ml);
+		DrawText(fontTexture, "Press Q to quit", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 	else if (state == STATE_GAME)
 	{
@@ -365,16 +376,26 @@ void SideScroller::Render(float elapsed) {
 		glLoadIdentity();
 		Matrix tempMatrix;
 		tempMatrix.identity();
-		tempMatrix.m[3][0] = -0.8f;
-		glMultMatrixf(tempMatrix.ml);
 		if (player->hp <= 0)
+		{
+			tempMatrix.m[3][0] = -0.8f;
+			glMultMatrixf(tempMatrix.ml);
 			DrawText(fontTexture, "Game Over! You Died!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+			tempMatrix.identity();
+			tempMatrix.m[3][0] = -0.8f;
+			tempMatrix.m[3][1] = -0.8f;
+			glMultMatrixf(tempMatrix.ml);
+		}
 		else
-			DrawText(fontTexture, "Game Over! You Won!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
-		tempMatrix.identity();
-		tempMatrix.m[3][0] = -0.8f;
-		tempMatrix.m[3][1] = -0.8f;
-		glMultMatrixf(tempMatrix.ml);
+		{
+			tempMatrix.m[3][0] = -0.5f;
+			glMultMatrixf(tempMatrix.ml);
+			DrawText(fontTexture, "You Won!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+			tempMatrix.identity();
+			tempMatrix.m[3][0] = -1.1f;
+			tempMatrix.m[3][1] = -0.8f;
+			glMultMatrixf(tempMatrix.ml);
+		}
 		DrawText(fontTexture, "Press SPACE to return to main menu", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
@@ -393,13 +414,25 @@ bool SideScroller::UpdateAndRender() {
 		}
 		else if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
-				if (state == STATE_TITLE)
-					state = STATE_GAME;
-				else if (state == STATE_GAMEOVER)
+				if (state == STATE_GAMEOVER)
 				{
 					state = STATE_TITLE;
 					resetGame();
 				}
+			}
+			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_1)
+			{
+				buildLevel("resources/Level1.txt");
+				state = STATE_GAME;
+			}
+			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_2)
+			{
+				buildLevel("resources/Level2.txt");
+				state = STATE_GAME;
+			}
+			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_Q)
+			{
+				done = true;
 			}
 		}
 	}
@@ -471,11 +504,10 @@ void SideScroller::resetGame()
 	enemies.clear();
 	projectiles.clear();
 
-	buildLevel();
 }
 
-void SideScroller::buildLevel() {
-	ifstream infile("resources/Level1.txt");
+void SideScroller::buildLevel(string filename) {
+	ifstream infile(filename);
 	string line;
 	while (getline(infile, line)) {
 		if (line == "[header]") {
