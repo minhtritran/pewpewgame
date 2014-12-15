@@ -75,6 +75,8 @@ private:
 	SheetSprite enemy_sprite;
 	SheetSprite enemy_sprite_face_right;
 	SheetSprite enemy_sprite_face_left;
+	SheetSprite enemy_sprite_jump_right;
+	SheetSprite enemy_sprite_jump_left;
 	vector<vector<float>> enemy_frames_walk_right;
 	vector<vector<float>> enemy_frames_walk_left;
 
@@ -99,7 +101,6 @@ private:
 
 	float shootTimer;
 	float enemySpawnTimer;
-	float jumpTimer;
 
 	Mix_Chunk* gunshot;
 	Mix_Chunk* jump;

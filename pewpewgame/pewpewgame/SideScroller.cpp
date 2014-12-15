@@ -41,6 +41,8 @@ SideScroller::SideScroller() {
 	enemy_sprite = SheetSprite(characterSpriteSheetTexture, 405.0f / 2048.0f, 167.0f / 2048.0f, 132.0f / 2048.0f, 161.0f / 2048.0f);
 	enemy_sprite_face_right = SheetSprite(characterSpriteSheetTexture, 1160.0f / 2048.0f, 827.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f);
 	enemy_sprite_face_left = SheetSprite(characterSpriteSheetTexture, 916.0f / 2048.0f, 995.0f / 2048.0f, 120.0f / 2048.0f, 161.0f / 2048.0f);
+	enemy_sprite_jump_right = SheetSprite(characterAnimationSpriteSheetTexture, 122.0f / 1320.0f, 476.0f / 1320.0f, 120.0f / 1320.0f, 161.0f / 1320.0f);
+	enemy_sprite_jump_left = SheetSprite(characterAnimationSpriteSheetTexture, 721.0f / 1320.0f, 483.0f / 1320.0f, 120.0f / 1320.0f, 161.0f / 1320.0f);
 
 	//Enemy animated sprites
 	enemy_frames_walk_right.push_back({ 1160.0f / 2048.0f, 827.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
@@ -95,9 +97,12 @@ void SideScroller::Update(float elapsed) {
 			tempEnemy->friction_x = 3.0f;
 			tempEnemy->hp = 2;
 			tempEnemy->setWalkLeft(0.8f);
-			
-			tempEnemy->sprite_face_left = enemy_sprite_face_left;
+
 			tempEnemy->sprite_face_right = enemy_sprite_face_right;
+			tempEnemy->sprite_face_left = enemy_sprite_face_left;
+			
+			tempEnemy->sprite_jump_right = enemy_sprite_jump_right;
+			tempEnemy->sprite_jump_left = enemy_sprite_jump_left;
 
 			//walk right animation
 			tempEnemy->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
@@ -123,7 +128,6 @@ void SideScroller::Update(float elapsed) {
 
 		shootTimer += elapsed;
 		enemySpawnTimer += elapsed;
-		jumpTimer += elapsed;
 	}
 }
 
@@ -182,6 +186,7 @@ void SideScroller::FixedUpdate() {
 		}
 
 		for each (auto enemy in enemies) {
+			enemy->jump();
 			//enemy gets hit
 			for each (auto projectile in projectiles) {
 				if (checkPointForGridCollisionX(projectile->x, projectile->y) != 0)
@@ -325,12 +330,9 @@ bool SideScroller::UpdateAndRender() {
 	else if (state == STATE_GAME)
 	{
 		if (keys[SDL_SCANCODE_UP]) {
-			if (!player->isJumping && jumpTimer > 0.25f) {
+			if (player->jump()) {
 				Mix_PlayChannel(-1, jump, 0);
-				player->jump();
-				jumpTimer = 0.0f;
 			}
-
 		}
 		if (keys[SDL_SCANCODE_RIGHT]) {
 			player->setWalkRight(1.0f);

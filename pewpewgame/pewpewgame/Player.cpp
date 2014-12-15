@@ -13,3 +13,4 @@ void Player::FixedUpdate() {
 void Player::Render(float elapsed) {
 	Character::Render(elapsed);
 }
+

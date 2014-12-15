@@ -10,7 +10,7 @@ public:
 	virtual void Update(float elapsed);
 	virtual void FixedUpdate();
 	virtual void Render(float elapsed = 0.0f);
-	void jump();
+	bool jump();
 	void setWalkRight(float multiple);
 	void setWalkLeft(float multiple);
 	void setIdle();
@@ -28,4 +28,5 @@ public:
 	int hp;
 	bool face_left;
 	bool isJumping;
+	float jumpTimer;
 };

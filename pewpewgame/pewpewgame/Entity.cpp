@@ -56,7 +56,7 @@ void Entity::setScale(float scale) {
 }
 
 void Entity::Update(float elapsed) {
-		
+
 }
 
 void Entity::FixedUpdate() {

@@ -9,6 +9,7 @@ Character::Character() {
 
 void Character::Update(float elapsed) {
 	Entity::Update(elapsed);
+	jumpTimer += elapsed;
 }
 
 void Character::FixedUpdate() {
@@ -41,15 +42,21 @@ void Character::Render(float elapsed) {
 	
 }
 
-void Character::jump() {
-	if (face_left)
-		sprite_in_use = SPRITE_JUMP_LEFT;
-	else
-		sprite_in_use = SPRITE_JUMP_RIGHT;
+bool Character::jump() {
+	if (!isJumping && jumpTimer > 0.25f) {
+		if (face_left)
+			sprite_in_use = SPRITE_JUMP_LEFT;
+		else
+			sprite_in_use = SPRITE_JUMP_RIGHT;
 
-	collidedBottom = false;
-	isJumping = true;
-	velocity_y = 3.5f;
+		collidedBottom = false;
+		isJumping = true;
+		velocity_y = 3.5f;
+		jumpTimer = 0.0f;
+		return true;
+	}
+	else
+		return false;
 }
 
 void Character::setWalkRight(float multiple) {
