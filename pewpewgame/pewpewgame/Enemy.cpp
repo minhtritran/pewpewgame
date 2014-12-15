@@ -1,17 +1,19 @@
 #include "Enemy.h"
 
-Enemy::Enemy() {}
+Enemy::Enemy() {
+	is_jumper = false;
+}
 
 void Enemy::Update(float elapsed) {
 	Character::Update(elapsed);
 }
 
 void Enemy::FixedUpdate() {
-	if (collidedRight) {
+	if (collidedRight && !isJumping) {
 		setWalkLeft(0.8f);
 	}
 
-	if (collidedLeft) {
+	if (collidedLeft && !isJumping) {
 		setWalkRight(0.8f);
 	}
 

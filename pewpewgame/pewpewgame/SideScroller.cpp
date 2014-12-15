@@ -89,7 +89,7 @@ void SideScroller::Update(float elapsed) {
 	else if (state == STATE_GAME)
 	{
 		if (enemySpawnTimer > 0.01f && enemies.size() < 20) {
-			Enemy* tempEnemy = new PewRunner();
+			Enemy* tempEnemy = new PewShooter();
 			tempEnemy->sprite = enemy_sprite;
 			tempEnemy->y = 0.85f;
 			tempEnemy->x = -10.0f;
@@ -186,38 +186,65 @@ void SideScroller::FixedUpdate() {
 		for each (auto enemy in enemies) {
 
 			//jump ai
-			float point_top_front_x = 0.0f;
-			float point_top_front_y = 0.0f;
-			if (enemy->face_left)
-				point_top_front_x = enemy->x - 0.6f;
-			else
-				point_top_front_x = enemy->x + 0.6f;
-			point_top_front_y = enemy->y + 0.5f;
+			float point_1F_x = 0.0f;
+			float point_1F_y = 0.0f;
+			float point_1B_x = 0.0f;
+			float point_1B_y = 0.0f;
+			float point_1F2T_x = 0.0f;
+			float point_1F2T_y = 0.0f;
+			float point_3F2T_x = 0.0f;
+			float point_3F2T_y = 0.0f;
+			float point_1F1B_x = 0.0f;
+			float point_1F1B_y = 0.0f;
+
+			if (enemy->face_left) {
+				point_1F_x = enemy->x - 0.2f;
+				point_1B_x = enemy->x;
+				point_1F2T_x = enemy->x - 0.2f;
+				point_3F2T_x = enemy->x - 0.6f;
+				point_1F1B_x = enemy->x - 0.2f;
+			}
+				
+			else {
+				point_1F_x = enemy->x + 0.2f;
+				point_1B_x = enemy->x;
+				point_1F2T_x = enemy->x + 0.2f;
+				point_3F2T_x = enemy->x + 0.6f;
+				point_1F1B_x = enemy->x + 0.2f;
+			}
 			
-			if (checkPointForGridCollisionX(point_top_front_x, point_top_front_y) != 0) {
-				enemy->jump();
+			point_1F_y = enemy->y;
+			point_1B_y = enemy->y - 0.2f;
+			point_1F2T_y = enemy->y + 0.4f;
+			point_3F2T_y = enemy->y + 0.4f;
+			point_1F1B_y = enemy->y - 0.2f;
+
+			
+			if (enemy->is_jumper) {
+				//jump up to another platform
+				if (checkPointForGridCollisionX(point_3F2T_x, point_3F2T_y) != 0) {
+					if (checkPointForGridCollisionX(point_1F2T_x, point_1F2T_y) == 0)
+						enemy->jump();
+				}
+
+				//jump pass obstacle
+				if (checkPointForGridCollisionX(point_1F_x, point_1F_y) != 0) {
+					if (checkPointForGridCollisionX(point_1F2T_x, point_1F2T_y) == 0)
+						enemy->jump();
+				}
 			}
-
-			float point_mid_front_near_x = 0.0f;
-			float point_mid_front_near_y = 0.0f;
-			if (enemy->face_left)
-				point_mid_front_near_x = enemy->x - 0.2f;
-			else
-				point_mid_front_near_x = enemy->x + 0.2f;
-			point_mid_front_near_y = enemy->y;
-
-			float point_top_front_near_x = 0.0f;
-			float point_top_front_near_y = 0.0f;
-			if (enemy->face_left)
-				point_top_front_near_x = enemy->x - 0.2f;
-			else
-				point_top_front_near_x = enemy->x + 0.2f;
-			point_top_front_near_y = enemy->y + 0.3f;
-
-			if (checkPointForGridCollisionX(point_mid_front_near_x, point_mid_front_near_y) != 0) {
-				if (checkPointForGridCollisionX(point_top_front_near_x, point_top_front_near_y) == 0)
-					enemy->jump();
+		
+			//go backwards near dead-end cliff
+			if (!enemy->is_jumper) {
+				if (checkPointForGridCollisionX(point_1F1B_x, point_1F1B_y) == 0) {
+					if (checkPointForGridCollisionX(point_1B_x, point_1B_y) != 0)
+						if (enemy->face_left)
+							enemy->setWalkRight(1.0f);
+						else
+							enemy->setWalkLeft(1.0f);
+				}
 			}
+			
 
 			//enemy gets hit
 			for each (auto projectile in projectiles) {

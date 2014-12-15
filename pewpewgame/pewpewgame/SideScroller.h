@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <typeinfo>
 #include "Entity.h"
 #include "Projectile.h"
 #include "Character.h"

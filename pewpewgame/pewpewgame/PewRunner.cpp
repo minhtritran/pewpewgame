@@ -3,4 +3,5 @@
 PewRunner::PewRunner() {
 	hp = 2;
 	friction_x = 3.0f;
+	is_jumper = true;
 }

@@ -8,4 +8,6 @@ public:
 	void Update(float elapsed);
 	void FixedUpdate();
 	void Render();
+
+	bool is_jumper;
 };
