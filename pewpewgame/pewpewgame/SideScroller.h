@@ -16,7 +16,8 @@
 #include "Character.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "MobRunner.h"
+#include "PewRunner.h"
+#include "PewShooter.h"
 
 #define MAX_TIMESTEPS 6
 #define MAX_BRICKS 200

@@ -78,6 +78,8 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="PewRunner.cpp" />
+    <ClCompile Include="PewShooter.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
@@ -85,17 +87,21 @@
     <ClCompile Include="SheetSprite.cpp" />
     <ClCompile Include="SideScroller.cpp" />
     <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="PewRunner.h" />
+    <ClInclude Include="PewShooter.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SheetSprite.h" />
     <ClInclude Include="SideScroller.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

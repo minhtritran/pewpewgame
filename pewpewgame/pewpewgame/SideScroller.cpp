@@ -71,12 +71,12 @@ SideScroller::~SideScroller() {
 
 void SideScroller::Init() {
 	SDL_Init(SDL_INIT_VIDEO);
-	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1064, 800, SDL_WINDOW_OPENGL);
+	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
-	glViewport(0, 0, 1064, 800);
+	glViewport(0, 0, 800, 600);
 	glMatrixMode(GL_PROJECTION);
 	glOrtho(-2.66, 2.66, -2.0, 2.0, -2.0, 2.0);
 }
@@ -89,13 +89,11 @@ void SideScroller::Update(float elapsed) {
 	else if (state == STATE_GAME)
 	{
 		if (enemySpawnTimer > 0.01f && enemies.size() < 20) {
-			Enemy* tempEnemy = new Enemy();
+			Enemy* tempEnemy = new PewRunner();
 			tempEnemy->sprite = enemy_sprite;
 			tempEnemy->y = 0.85f;
 			tempEnemy->x = -10.0f;
 			tempEnemy->setScale(2.5f);
-			tempEnemy->friction_x = 3.0f;
-			tempEnemy->hp = 2;
 			tempEnemy->setWalkLeft(0.8f);
 
 			tempEnemy->sprite_face_right = enemy_sprite_face_right;
