@@ -6,7 +6,8 @@ Weapon::Weapon() {
 
 	shootTimer = 0.0f;
 	rateOfFire = 1.0f;
-
+	ammo = 100;
+	max_ammo = 100;
 }
 
 void Weapon::Update(float elapsed) {

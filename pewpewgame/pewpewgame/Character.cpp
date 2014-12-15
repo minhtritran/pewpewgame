@@ -106,13 +106,15 @@ void Character::setIdle() {
 }
 
 bool Character::shoot(Projectile* projectile) {
-	if (weapon->shootTimer > (0.2f / weapon->rateOfFire)) {
+	if (weapon->shootTimer > (0.2f / weapon->rateOfFire) && weapon->ammo > 0) {
 		projectile->x = weapon->x;
 		projectile->y = weapon->y;
 		projectile->rotation = 0.0f;
 		projectile->velocity_x = 3.5f;
 		if (face_left)
 			projectile->velocity_x *= -1;
+		
+		weapon->ammo--;
 		weapon->shootTimer = 0.0f;
 		
 		return true;

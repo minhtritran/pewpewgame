@@ -12,4 +12,6 @@ public:
 	float shootTimer;
 
 	float rateOfFire;
+	int ammo;
+	int max_ammo;
 };

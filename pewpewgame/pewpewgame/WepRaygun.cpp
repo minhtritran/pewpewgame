@@ -5,4 +5,6 @@ WepRaygun::WepRaygun() {
 	scale_y = 1.5f;
 
 	rateOfFire = 1.0f;
+	ammo = 150;
+	max_ammo = 350;
 }

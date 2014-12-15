@@ -335,6 +335,13 @@ void SideScroller::Render(float elapsed) {
 		tempMatrix.m[3][1] = 1.85f;
 		glMultMatrixf(tempMatrix.ml);
 		DrawText(fontTexture, "HP: " + to_string(player->hp) + "/5", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		
+		if (player->weapon) {
+			tempMatrix.identity();
+			tempMatrix.m[3][0] = 1.4f;
+			glMultMatrixf(tempMatrix.ml);
+			DrawText(fontTexture, "AMMO: " + to_string(player->weapon->ammo) + "/" + to_string(player->weapon->max_ammo), 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		}
 		glPopMatrix();
 
 		float translateX = -player->x;
