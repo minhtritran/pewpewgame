@@ -20,6 +20,8 @@
 #include "PewRunner.h"
 #include "PewShooter.h"
 #include "Weapon.h"
+#include "WepRaygun.h"
+#include "ProjRaygunBullet.h"
 
 #define MAX_TIMESTEPS 6
 #define MAX_BRICKS 200
@@ -68,7 +70,7 @@ private:
 	GLuint fontTexture;
 	GLuint weaponSpriteSheetTexture;
 
-	SheetSprite bullet_sprite;
+	SheetSprite projectile_raygun_bullet_sprite;
 	 
 	SheetSprite weapon_raygun_sprite;
 
@@ -120,3 +122,4 @@ private:
 
 float lerp(float v0, float v1, float t);
 void DrawText(int textureID, string text, float size, float spacing, float r, float g, float b, float a);
+GLuint LoadTexture(const char *image_path);

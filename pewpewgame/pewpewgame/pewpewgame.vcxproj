@@ -84,10 +84,12 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ProjRaygunBullet.cpp" />
     <ClCompile Include="SheetSprite.cpp" />
     <ClCompile Include="SideScroller.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WepRaygun.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -98,6 +100,8 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ProjRaygunBullet.h" />
+    <ClInclude Include="WepRaygun.h" />
     <ClInclude Include="SheetSprite.h" />
     <ClInclude Include="SideScroller.h" />
     <ClInclude Include="Vector.h" />

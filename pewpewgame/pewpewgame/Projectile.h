@@ -10,4 +10,6 @@ public:
 	void Render(float elapsed = 0.0f);
 
 	bool visible;
+
+	int damage;
 };

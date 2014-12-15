@@ -9,6 +9,8 @@ Projectile::Projectile() {
 	height = 0.05f;
 
 	velocity_x = 3.0f;
+
+	damage = 1;
 }
 
 void Projectile::Update(float elapsed) {

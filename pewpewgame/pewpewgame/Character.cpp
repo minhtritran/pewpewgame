@@ -5,6 +5,7 @@ Character::Character() {
 	hp = 1;
 	face_left = false;
 	isJumping = false;
+	jumpTimer = 0.0f;
 	weapon = NULL;
 }
 
@@ -109,12 +110,18 @@ void Character::setIdle() {
 	sprite.animated = false;
 }
 
-void Character::shoot(Projectile* projectile) {
-	projectile->visible = true;
-	projectile->x = weapon->x;
-	projectile->y = weapon->y;
-	projectile->rotation = 0.0f;
-	projectile->velocity_x = 3.5f;
-	if (face_left)
-		projectile->velocity_x *= -1;
+bool Character::shoot(Projectile* projectile) {
+	if (weapon->shootTimer > (0.2f / weapon->rateOfFire)) {
+		projectile->visible = true;
+		projectile->x = weapon->x;
+		projectile->y = weapon->y;
+		projectile->rotation = 0.0f;
+		projectile->velocity_x = 3.5f;
+		if (face_left)
+			projectile->velocity_x *= -1;
+		weapon->shootTimer = 0.0f;
+		
+		return true;
+	}
+	return false;
 }

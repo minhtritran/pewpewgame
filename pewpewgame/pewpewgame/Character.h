@@ -16,7 +16,7 @@ public:
 	void setWalkLeft(float multiple);
 	void setIdle();
 
-	void shoot(Projectile* projectile);
+	bool shoot(Projectile* projectile);
 
 
 	SheetSprite sprite_face_right;

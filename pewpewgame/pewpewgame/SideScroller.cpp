@@ -13,15 +13,13 @@ SideScroller::SideScroller() {
 	gravity_x = 0.0f;
 	gravity_y = -9.8f;
 
-	shootTimer = 0.1f;
-
 	brickSpriteSheetTexture = LoadTexture("resources/spriteTiles.png");
 	characterSpriteSheetTexture = LoadTexture("resources/Sprites_Characters.png");
 	characterAnimationSpriteSheetTexture = LoadTexture("resources/character_animations.png");
 	fontTexture = LoadTexture("resources/pixel_font.png");
 	weaponSpriteSheetTexture = LoadTexture("resources/sheet.png");
 
-	bullet_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 7);
+	projectile_raygun_bullet_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 7);
 
 	//Weapon sprites
 	weapon_raygun_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 2);
@@ -100,7 +98,7 @@ void SideScroller::Update(float elapsed) {
 	else if (state == STATE_GAME)
 	{
 		if (enemySpawnTimer > 0.01f && enemies.size() < 20) {
-			Enemy* tempEnemy = new PewShooter();
+			Enemy* tempEnemy = new PewRunner();
 			tempEnemy->sprite = enemy_sprite;
 			tempEnemy->y = 0.85f;
 			tempEnemy->x = -10.0f;
@@ -135,7 +133,6 @@ void SideScroller::Update(float elapsed) {
 			projectiles[i]->Update(elapsed);
 		}
 
-		shootTimer += elapsed;
 		enemySpawnTimer += elapsed;
 	}
 }
@@ -263,7 +260,7 @@ void SideScroller::FixedUpdate() {
 					projectile->visible = false;
 				if (enemy->collidesWith(projectile) && projectile->visible) {
 					projectile->visible = false;
-					enemy->hp--;
+					enemy->hp -= projectile->damage;
 				}
 			}
 		}
@@ -425,20 +422,16 @@ bool SideScroller::UpdateAndRender() {
 			player->setIdle();
 		}
 		if (keys[SDL_SCANCODE_SPACE]) {
-			if (shootTimer > 0.15f) {
 
+
+			ProjRaygunBullet* tempProjectile = new ProjRaygunBullet();
+			tempProjectile->sprite = projectile_raygun_bullet_sprite;
+			projectiles.push_back(tempProjectile);
+			if (player->shoot(tempProjectile)) {
 				Mix_PlayChannel(-1, gunshot, 0);
-				Projectile* tempProjectile = new Projectile();
-				tempProjectile->sprite = bullet_sprite;
-				tempProjectile->scale_x = 7.5f;
-				tempProjectile->scale_y = 7.5f;
-				projectiles.push_back(tempProjectile);
-				player->shoot(tempProjectile);
-				
-				shootTimer = 0.0f;
+			}
 				
 
-			}
 		}
 	}
 
@@ -607,15 +600,10 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 		player->animation_walk_left.setAnimated(true, 8.0f, player_frames_walk_left);
 
-		Weapon* weapon = new Weapon();
+		WepRaygun* weapon = new WepRaygun();
 		weapon->sprite = weapon_raygun_sprite;
-		weapon->scale_x = 1.5f;
-		weapon->scale_y = 1.5f;
 		entities.push_back(weapon);
 		player->weapon = weapon;
-		player->weapon->x = player->x;
-		player->weapon->y = player->y;
-		player->weapon->z = 1.0f;
 
 		entities.push_back(player);
 	}
@@ -806,4 +794,24 @@ void DrawText(int textureID, string text, float size, float spacing, float r, fl
 
 	glDrawArrays(GL_QUADS, 0, text.size() * 4);
 	glDisableClientState(GL_COLOR_ARRAY);
+}
+
+GLuint LoadTexture(const char *image_path) {
+	SDL_Surface *surface = IMG_Load(image_path);
+
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, 4, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	SDL_FreeSurface(surface);
+
+	return textureID;
 }

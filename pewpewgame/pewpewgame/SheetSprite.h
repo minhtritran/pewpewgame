@@ -1,8 +1,5 @@
 #pragma once
 
-#include <SDL.h>
-#include <SDL_opengl.h>
-#include <SDL_image.h>
 #include <vector>
 #include "Matrix.h"
 
@@ -32,5 +29,3 @@ public:
 
 	bool invert;
 };
-
-GLuint LoadTexture(const char *image_path);
