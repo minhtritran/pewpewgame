@@ -117,8 +117,9 @@ void SideScroller::Update(float elapsed) {
 			tempEnemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 			tempEnemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
 
-			WepRaygun* enemyWeapon = new WepRaygun();
+			Weapon* enemyWeapon = new Weapon();
 			enemyWeapon->sprite = weapon_raygun_sprite;
+			enemyWeapon->changeWeapon(1.5f, 1.5f, 1.0f, 150, 350);
 			tempEnemy->weapon = enemyWeapon;
 			entities.push_back(enemyWeapon);
 
@@ -469,8 +470,9 @@ bool SideScroller::UpdateAndRender() {
 		if (keys[SDL_SCANCODE_SPACE]) {
 
 
-			ProjRaygunBullet* tempProjectile = new ProjRaygunBullet();
+			Projectile* tempProjectile = new Projectile();
 			tempProjectile->sprite = projectile_raygun_bullet_sprite;
+			tempProjectile->changeProjectile(7.5f, 7.5f, 2);
 			projectiles.push_back(tempProjectile);
 			if (player->shoot(tempProjectile)) {
 				Mix_PlayChannel(-1, gunshot, 0);
@@ -644,8 +646,9 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 		player->animation_walk_left.setAnimated(true, 8.0f, player_frames_walk_left);
 
-		WepRaygun* weapon = new WepRaygun();
+		Weapon* weapon = new Weapon();
 		weapon->sprite = weapon_raygun_sprite;
+		weapon->changeWeapon(1.5f, 1.5f, 1.0f, 150, 350);
 		entities.push_back(weapon);
 		player->weapon = weapon;
 

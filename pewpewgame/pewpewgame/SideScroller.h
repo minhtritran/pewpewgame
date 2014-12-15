@@ -20,8 +20,6 @@
 #include "PewRunner.h"
 #include "PewShooter.h"
 #include "Weapon.h"
-#include "WepRaygun.h"
-#include "ProjRaygunBullet.h"
 
 #define MAX_TIMESTEPS 6
 #define MAX_BRICKS 200

@@ -13,6 +13,13 @@ Projectile::Projectile() {
 	damage = 1;
 }
 
+void Projectile::changeProjectile(float scale_x, float scale_y, int damage)
+{
+	this->scale_x = scale_x;
+	this->scale_y = scale_y;
+	this->damage = damage;
+}
+
 void Projectile::Update(float elapsed) {
 	x += velocity_x * elapsed;
 }
