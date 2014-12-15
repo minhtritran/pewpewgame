@@ -184,7 +184,41 @@ void SideScroller::FixedUpdate() {
 		}
 
 		for each (auto enemy in enemies) {
-			enemy->jump();
+
+			//jump ai
+			float point_top_front_x = 0.0f;
+			float point_top_front_y = 0.0f;
+			if (enemy->face_left)
+				point_top_front_x = enemy->x - 0.6f;
+			else
+				point_top_front_x = enemy->x + 0.6f;
+			point_top_front_y = enemy->y + 0.5f;
+			
+			if (checkPointForGridCollisionX(point_top_front_x, point_top_front_y) != 0) {
+				enemy->jump();
+			}
+
+			float point_mid_front_near_x = 0.0f;
+			float point_mid_front_near_y = 0.0f;
+			if (enemy->face_left)
+				point_mid_front_near_x = enemy->x - 0.2f;
+			else
+				point_mid_front_near_x = enemy->x + 0.2f;
+			point_mid_front_near_y = enemy->y;
+
+			float point_top_front_near_x = 0.0f;
+			float point_top_front_near_y = 0.0f;
+			if (enemy->face_left)
+				point_top_front_near_x = enemy->x - 0.2f;
+			else
+				point_top_front_near_x = enemy->x + 0.2f;
+			point_top_front_near_y = enemy->y + 0.3f;
+
+			if (checkPointForGridCollisionX(point_mid_front_near_x, point_mid_front_near_y) != 0) {
+				if (checkPointForGridCollisionX(point_top_front_near_x, point_top_front_near_y) == 0)
+					enemy->jump();
+			}
+
 			//enemy gets hit
 			for each (auto projectile in projectiles) {
 				if (checkPointForGridCollisionX(projectile->x, projectile->y) != 0)
