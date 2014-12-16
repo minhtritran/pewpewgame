@@ -797,9 +797,9 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		enemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
 		
 		Weapon* weapon = new Weapon();
-		weapon->sprite = weapon_sword_sprite;
+		weapon->sprite = weapon_raygun_sprite;
 		weapon->sprite.invert = true;
-		weapon->changeWeapon(SWORD);
+		weapon->changeWeapon(RAY_GUN);
 		enemy->equip(weapon);
 		entities.push_back(weapon);
 		
