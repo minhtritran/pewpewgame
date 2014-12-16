@@ -98,7 +98,6 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ProjRaygunBullet.h" />
     <ClInclude Include="WepRaygun.h" />
     <ClInclude Include="SheetSprite.h" />
     <ClInclude Include="SideScroller.h" />

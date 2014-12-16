@@ -13,4 +13,7 @@ public:
 	void Render(float elapsed = 0.0f);
 
 	int damage;
+
+	bool damages_player;
+	bool damages_enemy;;
 };

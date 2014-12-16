@@ -220,6 +220,7 @@ void SideScroller::FixedUpdate() {
 				Projectile* tempProjectile = new Projectile();
 				tempProjectile->sprite = projectile_raygun_bullet_sprite;
 				tempProjectile->changeProjectile(7.5f, 7.5f, 2);
+				tempProjectile->damages_player = true;
 				projectiles.push_back(tempProjectile);
 				enemy->shoot(tempProjectile);
 				enemy->aiShootTimer = 0.0f;
@@ -286,15 +287,26 @@ void SideScroller::FixedUpdate() {
 							enemy->setWalkLeft(1.0f);
 				}
 			}
-			
+		}
 
-			//enemy gets hit
-			for each (auto projectile in projectiles) {
+		//stuff gets hit
+		for each (auto projectile in projectiles) {
+			if (projectile->damages_enemy) {
+				for each (auto enemy in enemies) {
+					if (checkPointForGridCollisionX(projectile->x, projectile->y) != 0)
+						projectile->should_remove = true;
+					if (enemy->collidesWith(projectile) && !projectile->should_remove) {
+						projectile->should_remove = true;
+						enemy->hp -= projectile->damage;
+					}
+				}
+			}
+			if (projectile->damages_player) {
 				if (checkPointForGridCollisionX(projectile->x, projectile->y) != 0)
 					projectile->should_remove = true;
-				if (enemy->collidesWith(projectile) && !projectile->should_remove) {
+				if (player->collidesWith(projectile) && !projectile->should_remove) {
 					projectile->should_remove = true;
-					enemy->hp -= projectile->damage;
+					player->hp -= projectile->damage;
 				}
 			}
 		}
@@ -508,6 +520,7 @@ bool SideScroller::UpdateAndRender() {
 			Projectile* tempProjectile = new Projectile();
 			tempProjectile->sprite = projectile_raygun_bullet_sprite;
 			tempProjectile->changeProjectile(7.5f, 7.5f, 2);
+			tempProjectile->damages_enemy = true;
 			projectiles.push_back(tempProjectile);
 			if (player->shoot(tempProjectile)) {
 				Mix_PlayChannel(-1, gunshot, 0);

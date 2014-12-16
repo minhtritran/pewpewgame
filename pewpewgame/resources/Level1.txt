@@ -5,7 +5,7 @@ tilewidth=64
 tileheight=64
 
 [tilesets]
-tileset=GitHub/pewpewgame/pewpewgame/resources/spriteTiles.png,64,64,0,0
+tileset=spriteTiles.png,64,64,0,0
 
 [layer]
 type=Tile Layer 1
@@ -47,4 +47,104 @@ data=
 # Player
 type=Player
 location=222,1298,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=760,1298,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=1008,1290,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=1534,1322,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=1928,1116,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=2482,1108,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=3394,1296,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=3064,1292,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=3862,1090,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=4084,930,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=4906,734,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=5298,716,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=4542,718,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=6494,740,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=6844,544,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=7068,1084,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=7982,1100,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=8414,1088,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=8202,998,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=9472,1116,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=9840,1100,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=10478,918,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=10994,544,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=10782,714,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=11442,412,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=11680,284,0,0
 

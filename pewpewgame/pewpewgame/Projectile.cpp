@@ -11,6 +11,9 @@ Projectile::Projectile() {
 	velocity_x = 3.0f;
 
 	damage = 1;
+
+	damages_enemy = false;
+	damages_player = false;
 }
 
 void Projectile::changeProjectile(float scale_x, float scale_y, int damage)
