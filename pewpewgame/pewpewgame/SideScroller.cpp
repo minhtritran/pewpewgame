@@ -58,6 +58,7 @@ SideScroller::SideScroller() {
 	 
 	gunshot = Mix_LoadWAV("resources/gunshot.wav");
 	jump = Mix_LoadWAV("resources/jump.wav");
+	hurt = Mix_LoadWAV("resources/hurt.wav");
 	//music = Mix_LoadMUS("resources/music.wav");
 	if (Mix_PlayMusic(music, -1) < 0) {
 		cout << "Error";
@@ -239,7 +240,10 @@ void SideScroller::FixedUpdate() {
 
 					}
 					else
+					{
+						Mix_PlayChannel(-1, hurt, 0);
 						player->hp -= damage;
+					}
 				}
 				enemy->aiMeleeTimer = 0.0f;
 			}
@@ -341,6 +345,7 @@ void SideScroller::FixedUpdate() {
 					projectile->should_remove = true;
 				if (player->collidesWith(projectile) && !projectile->should_remove) {
 					projectile->should_remove = true;
+					Mix_PlayChannel(-1, hurt, 0);
 					player->hp -= projectile->damage;
 					if (projectile->velocity_x > 0)
 						player->velocity_x += 2.5f;
@@ -485,7 +490,7 @@ void SideScroller::Render(float elapsed) {
 			tempMatrix.m[3][1] = -0.8f;
 			glMultMatrixf(tempMatrix.ml);
 		}
-		DrawText(fontTexture, "Press SPACE to return to main menu", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(fontTexture, "Press ENTER to return to main menu", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	SDL_GL_SwapWindow(displayWindow);
@@ -502,7 +507,7 @@ bool SideScroller::UpdateAndRender() {
 			done = true;
 		}
 		else if (event.type == SDL_KEYDOWN) {
-			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
+			if (event.key.keysym.scancode == SDL_SCANCODE_RETURN || event.key.keysym.scancode == SDL_SCANCODE_KP_ENTER) {
 				if (state == STATE_GAMEOVER)
 				{
 					state = STATE_TITLE;

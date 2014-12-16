@@ -116,6 +116,7 @@ private:
 
 	Mix_Chunk* gunshot;
 	Mix_Chunk* jump;
+	Mix_Chunk* hurt;
 	Mix_Music* music;
 
 };
