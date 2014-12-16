@@ -148,10 +148,12 @@ void SideScroller::FixedUpdate() {
 			
 			if (entities[i]->gravity_affected) {
 				entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
-				if (entities[i]->velocity_y > -7.0f)
 				entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
 			}
 			
+			if (entities[i]->velocity_y <= -5.5f) {
+				entities[i]->velocity_y = -5.5f;
+			}
 			
 			entities[i]->FixedUpdate();
 
@@ -804,6 +806,12 @@ void SideScroller::RenderLevel() {
 bool SideScroller::isSolid(unsigned char tile) {
 	switch (tile) {
 	case 0:
+		return false;
+		break;
+	case 189:
+		return false;
+		break;
+	case 187:
 		return false;
 		break;
 	default:
