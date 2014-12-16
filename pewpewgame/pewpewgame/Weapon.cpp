@@ -50,7 +50,7 @@ void Weapon::changeWeapon(int type)
 		melee_damage = 0;
 
 		droppable = true;
-		bullet_type = PLASMA_BALL;
+		bullet_type = LASER;
 		sprite = SheetSprite(tex->minigunTexture, 1, 1, 0);
 	}
 	if (type == MACHINE_GUN) {
@@ -63,7 +63,7 @@ void Weapon::changeWeapon(int type)
 		melee_damage = 0;
 
 		droppable = true;
-		bullet_type = PLASMA_BALL;
+		bullet_type = SMILEY_FACE;
 		sprite = SheetSprite(tex->gunsSpriteSheetTexture, 344.0f / 480.0f, 4.0f / 256.0f, 99.0f / 480.0f, 63.0f / 256.0f);
 	}
 }

@@ -17,6 +17,9 @@ SideScroller::SideScroller() {
 	tex = new Textures();
 	 
 	gunshot = Mix_LoadWAV("resources/gunshot.wav");
+	lasershot = Mix_LoadWAV("resources/lasershot.wav");
+	smileyshot = Mix_LoadWAV("resources/smileyshot.wav");
+	fruitshot = Mix_LoadWAV("resources/fruitshot.wav");
 	jump = Mix_LoadWAV("resources/jump.wav");
 	hurt = Mix_LoadWAV("resources/hurt.wav");
 	//music = Mix_LoadMUS("resources/music.wav");
@@ -328,7 +331,7 @@ void SideScroller::FixedUpdate() {
 }
 
 void SideScroller::Render(float elapsed) {
-	//glClearColor(173.0f/256.0f, 216.0f/256.0f, 230.0f/256.0f, 1.0f);
+	glClearColor(25.0f/256.0f, 72.0f/256.0f, 148.0f/256.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	
 	if (state == STATE_TITLE)
@@ -337,8 +340,13 @@ void SideScroller::Render(float elapsed) {
 		glLoadIdentity();
 		Matrix tempMatrix;
 		tempMatrix.identity();
-		tempMatrix.m[3][0] = -1.2f;
-		tempMatrix.m[3][1] = -0.2f;
+		tempMatrix.m[3][0] = -0.9f;
+		tempMatrix.m[3][1] = 0.9f;
+		glMultMatrixf(tempMatrix.ml);
+		DrawText(tex->fontTexture, "Pew Pew", 0.3f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		tempMatrix.identity();
+		tempMatrix.m[3][0] = -0.2f;
+		tempMatrix.m[3][1] = -1.3f;
 		glMultMatrixf(tempMatrix.ml);
 		DrawText(tex->fontTexture, "Press 1 for Level Green", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		tempMatrix.identity();
@@ -356,24 +364,7 @@ void SideScroller::Render(float elapsed) {
 	}
 	else if (state == STATE_GAME)
 	{
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		glPushMatrix();
 		Matrix tempMatrix;
-		tempMatrix.identity();
-		tempMatrix.m[3][0] = -2.4f;
-		tempMatrix.m[3][1] = 1.85f;
-		glMultMatrixf(tempMatrix.ml);
-		DrawText(tex->fontTexture, "HP: " + to_string(player->hp) + "/50", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
-		
-		if (player->weapon) {
-			tempMatrix.identity();
-			tempMatrix.m[3][0] = 1.4f;
-			glMultMatrixf(tempMatrix.ml);
-			DrawText(tex->fontTexture, "AMMO: " + to_string(player->weapon->ammo) + "/" + to_string(player->weapon->max_ammo), 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
-		}
-		glPopMatrix();
 
 		float translateX = -player->x;
 		float translateY = -player->y;
@@ -407,6 +398,23 @@ void SideScroller::Render(float elapsed) {
 			projectiles[i]->Render(elapsed);
 		}
 		RenderLevel();
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glPushMatrix();
+		tempMatrix.identity();
+		tempMatrix.m[3][0] = -2.4f;
+		tempMatrix.m[3][1] = 1.85f;
+		glMultMatrixf(tempMatrix.ml);
+		DrawText(tex->fontTexture, "HP: " + to_string(player->hp) + "/100", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+
+		if (player->weapon) {
+			tempMatrix.identity();
+			tempMatrix.m[3][0] = 1.4f;
+			glMultMatrixf(tempMatrix.ml);
+			DrawText(tex->fontTexture, "AMMO: " + to_string(player->weapon->ammo) + "/" + to_string(player->weapon->max_ammo), 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		}
+		glPopMatrix();
 	}
 	else if (state = STATE_GAMEOVER)
 	{
@@ -507,7 +515,14 @@ bool SideScroller::UpdateAndRender() {
 			if (tempProjectile != NULL)  {
 				tempProjectile->damages_enemy = true;
 				projectiles.push_back(tempProjectile);
-				Mix_PlayChannel(-1, gunshot, 0);
+				if (player->weapon->bullet_type == PLASMA_BALL)
+					Mix_PlayChannel(-1, gunshot, 0);
+				else if (player->weapon->bullet_type == LASER)
+					Mix_PlayChannel(-1, lasershot, 0);
+				else if (player->weapon->bullet_type == SMILEY_FACE)
+					Mix_PlayChannel(-1, smileyshot, 0);
+				else if (player->weapon->bullet_type == FRUIT)
+					Mix_PlayChannel(-1, fruitshot, 0);
 			}
 
 		}
@@ -660,12 +675,10 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->y = placeY;
 		player->setScale(3.0f);
 		player->friction_x = 3.0f;
-		player->hp = 50;
+		player->hp = 100;
 
 		Weapon* weapon = new Weapon(tex);
-		//weapon->sprite = weapon_raygun_sprite;
 		//weapon->changeWeapon(RAY_GUN);
-		//weapon->sprite = weapon_minigun_sprite;
 		//weapon->changeWeapon(MINI_GUN);
 		weapon->changeWeapon(MACHINE_GUN); 
 		player->equip(weapon);

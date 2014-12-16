@@ -100,6 +100,9 @@ private:
 	float enemySpawnTimer;
 
 	Mix_Chunk* gunshot;
+	Mix_Chunk* lasershot;
+	Mix_Chunk* smileyshot;
+	Mix_Chunk* fruitshot;
 	Mix_Chunk* jump;
 	Mix_Chunk* hurt;
 	Mix_Music* music;

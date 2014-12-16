@@ -8,6 +8,8 @@ Textures::Textures() {
 	weaponSpriteSheetTexture = LoadTexture("resources/sheet.png");
 	minigunTexture = LoadTexture("resources/minigun.png");
 	gunsSpriteSheetTexture = LoadTexture("resources/guns.png");
+	smileyTexture = LoadTexture("resources/smiley.png");
+	fruitSpriteSheetTexture = LoadTexture("resources/fruits.png");
 }
 
 GLuint LoadTexture(const char *image_path) {

@@ -15,6 +15,8 @@ public:
 	GLuint weaponSpriteSheetTexture;
 	GLuint minigunTexture;
 	GLuint gunsSpriteSheetTexture;
+	GLuint smileyTexture;
+	GLuint fruitSpriteSheetTexture;
 };
 
 GLuint LoadTexture(const char *image_path);

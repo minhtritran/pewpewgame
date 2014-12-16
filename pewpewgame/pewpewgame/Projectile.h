@@ -2,7 +2,7 @@
 
 #include "Entity.h"
 
-enum projectile_type {PLASMA_BALL};
+enum projectile_type {PLASMA_BALL, LASER, SMILEY_FACE, FRUIT};
 
 class Projectile : public Entity {
 public:
