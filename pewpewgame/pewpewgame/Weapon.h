@@ -16,4 +16,6 @@ public:
 	float rateOfFire;
 	int ammo;
 	int max_ammo;
+
+	bool dropped;
 };

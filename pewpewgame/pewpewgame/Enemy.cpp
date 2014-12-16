@@ -19,7 +19,7 @@ void Enemy::FixedUpdate() {
 
 	//check if enemy is dead
 	if (hp <= 0) {
-		should_remove = true;
+		die();
 	}
 
 	Character::FixedUpdate();

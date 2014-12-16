@@ -48,6 +48,7 @@ public:
 	float friction_y;
 	float mass;
 	bool isStatic;
+	bool gravity_affected;
 	bool collidedTop;
 	bool collidedBottom;
 	bool collidedLeft;

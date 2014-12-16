@@ -95,7 +95,7 @@ void SideScroller::Update(float elapsed) {
 	}
 	else if (state == STATE_GAME)
 	{
-		if (enemySpawnTimer > 0.01f && enemies.size() < 20) {
+		if (enemySpawnTimer > 0.01f && enemies.size() < 1000) {
 			Enemy* tempEnemy = new PewShooter();
 			tempEnemy->sprite = enemy_sprite;
 			tempEnemy->y = 0.85f;
@@ -120,7 +120,7 @@ void SideScroller::Update(float elapsed) {
 			Weapon* enemyWeapon = new Weapon();
 			enemyWeapon->sprite = weapon_raygun_sprite;
 			enemyWeapon->changeWeapon(1.5f, 1.5f, 1.0f, 150, 350);
-			tempEnemy->weapon = enemyWeapon;
+			tempEnemy->equip(enemyWeapon);
 			entities.push_back(enemyWeapon);
 
 			enemies.push_back(tempEnemy);
@@ -149,9 +149,12 @@ void SideScroller::FixedUpdate() {
 	else if (state == STATE_GAME)
 	{
 		for (size_t i = 0; i < entities.size(); i++) {
-		
-			entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
-			entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
+			
+			if (entities[i]->gravity_affected) {
+				entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
+				entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
+			}
+			
 			
 			entities[i]->FixedUpdate();
 
@@ -430,7 +433,7 @@ bool SideScroller::UpdateAndRender() {
 			}
 			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_1)
 			{
-				buildLevel("resources/Level1.txt");
+				buildLevel("resources/Level11.txt");
 				state = STATE_GAME;
 			}
 			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_2)
@@ -650,7 +653,7 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		weapon->sprite = weapon_raygun_sprite;
 		weapon->changeWeapon(1.5f, 1.5f, 1.0f, 150, 350);
 		entities.push_back(weapon);
-		player->weapon = weapon;
+		player->equip(weapon);
 
 		entities.push_back(player);
 	}

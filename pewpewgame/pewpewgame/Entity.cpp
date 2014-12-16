@@ -22,6 +22,7 @@ Entity::Entity() {
 	collidedBottom = false;
 	collidedLeft = false;
 	collidedRight = false;
+	gravity_affected = true;
 
 	should_remove = false;
 
@@ -65,8 +66,8 @@ void Entity::Update(float elapsed) {
 
 void Entity::FixedUpdate() {
 
-	//falls to death
-	if (y < -2.3f) {
+	//remove if fell
+	if (y < -2.8f) {
 		should_remove = true;
 	}
 

@@ -8,6 +8,8 @@ Weapon::Weapon() {
 	rateOfFire = 1.0f;
 	ammo = 100;
 	max_ammo = 100;
+
+	dropped = false;
 }
 
 void Weapon::changeWeapon(float scale_x, float scale_y, float rateOfFire, int ammo, int max_ammo)

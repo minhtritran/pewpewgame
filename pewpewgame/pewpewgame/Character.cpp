@@ -9,6 +9,9 @@ Character::Character() {
 	weapon = NULL;
 }
 
+Character::~Character() {
+}
+
 void Character::Update(float elapsed) {
 	if (weapon) {
 		if (face_left)
@@ -24,6 +27,11 @@ void Character::Update(float elapsed) {
 }
 
 void Character::FixedUpdate() {
+
+	if (y < -2.8f) {
+		die();
+	}
+
 	if (collidedBottom) {
 		isJumping = false;
 	}
@@ -106,7 +114,7 @@ void Character::setIdle() {
 }
 
 bool Character::shoot(Projectile* projectile) {
-	if (weapon->shootTimer > (0.2f / weapon->rateOfFire) && weapon->ammo > 0) {
+	if (weapon && weapon->shootTimer > (0.2f / weapon->rateOfFire) && weapon->ammo > 0) {
 		projectile->x = weapon->x;
 		projectile->y = weapon->y;
 		projectile->rotation = 0.0f;
@@ -120,4 +128,14 @@ bool Character::shoot(Projectile* projectile) {
 		return true;
 	}
 	return false;
+}
+
+void Character::equip(Weapon* weapon) {
+	this->weapon = weapon;
+	weapon->gravity_affected = false;
+}
+
+void Character::die() {
+	weapon->gravity_affected = true;
+	should_remove = true;
 }

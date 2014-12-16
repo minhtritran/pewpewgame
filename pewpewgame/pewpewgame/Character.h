@@ -8,6 +8,7 @@ class Projectile;
 class Character : public Entity {
 public:
 	Character();
+	~Character();
 	virtual void Update(float elapsed);
 	virtual void FixedUpdate();
 	virtual void Render(float elapsed = 0.0f);
@@ -17,7 +18,8 @@ public:
 	void setIdle();
 
 	bool shoot(Projectile* projectile);
-
+	void equip(Weapon* weapon);
+	void die();
 
 	SheetSprite sprite_face_right;
 	SheetSprite sprite_face_left;
