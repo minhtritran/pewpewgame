@@ -3,6 +3,5 @@
 
 class PewShooter : public Enemy {
 public:
-	PewShooter();
-	
+	PewShooter(Textures* tex);
 };

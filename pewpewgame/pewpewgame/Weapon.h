@@ -1,17 +1,20 @@
 #pragma once
 #include "Entity.h"
+#include "Projectile.h"
 
-enum type {RAY_GUN, SWORD, MINI_GUN, MACHINE_GUN};
+enum weapon_type {RAY_GUN, SWORD, MINI_GUN, MACHINE_GUN};
 
 class Weapon : public Entity {
 public:
-	Weapon();
+	Weapon(Textures* tex);
 
 	void changeWeapon(int type);
 
 	void Update(float elapsed);
 	void FixedUpdate();
 	void Render(float elapsed = 0.0f);
+
+	Projectile* fire();
 	
 	float shootTimer;
 
@@ -22,5 +25,7 @@ public:
 	bool droppable;
 	int type;
 	int melee_damage;
+
+	int bullet_type;
 
 };

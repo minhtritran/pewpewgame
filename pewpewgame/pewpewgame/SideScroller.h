@@ -13,6 +13,7 @@
 #include <sstream>
 #include <typeinfo>
 #include <time.h>
+#include "Textures.h"
 #include "Entity.h"
 #include "Projectile.h"
 #include "Character.h"
@@ -21,6 +22,7 @@
 #include "PewRunner.h"
 #include "PewShooter.h"
 #include "Weapon.h"
+
 
 #define MAX_TIMESTEPS 6
 #define MAX_BRICKS 200
@@ -63,28 +65,7 @@ private:
 	float timeLeftOver;
 	SDL_Window* displayWindow;
 
-	GLuint characterSpriteSheetTexture;
-	GLuint characterAnimationSpriteSheetTexture;
-	GLuint brickSpriteSheetTexture;
-	GLuint fontTexture;
-	GLuint weaponSpriteSheetTexture;
-	GLuint minigunTexture;
-	GLuint gunsSpriteSheetTexture;
-
-	SheetSprite projectile_raygun_bullet_sprite;
-	
-	SheetSprite weapon_raygun_sprite;
-	SheetSprite weapon_sword_sprite;
-	SheetSprite weapon_minigun_sprite;
-	SheetSprite weapon_machinegun_sprite;
-
-	SheetSprite player_sprite;
-	SheetSprite player_sprite_face_right;
-	SheetSprite player_sprite_face_left;
-	SheetSprite player_sprite_jump_right;
-	SheetSprite player_sprite_jump_left;
-	vector<vector<float>> player_frames_walk_right;
-	vector<vector<float>> player_frames_walk_left;
+	Textures* tex;
 
 	SheetSprite enemy_sprite;
 	SheetSprite enemy_sprite_face_right;
@@ -127,5 +108,4 @@ private:
 
 float lerp(float v0, float v1, float t);
 void DrawText(int textureID, string text, float size, float spacing, float r, float g, float b, float a);
-GLuint LoadTexture(const char *image_path);
 float genRandomNumber(float low, float high);

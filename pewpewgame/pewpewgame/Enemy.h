@@ -4,7 +4,7 @@
 
 class Enemy : public Character {
 public:
-	Enemy();
+	Enemy(Textures* tex);
 	void Update(float elapsed);
 	void FixedUpdate();
 	void Render(float elapsed = 0.0f);

@@ -3,5 +3,5 @@
 
 class PewRunner : public Enemy {
 public:
-	PewRunner();
+	PewRunner(Textures* tex);
 };

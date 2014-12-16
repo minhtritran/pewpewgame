@@ -1,7 +1,7 @@
 #include "Character.h"
 #include "Projectile.h"
 
-Character::Character() {
+Character::Character(Textures* tex) : Entity(tex) {
 	hp = 10;
 	face_left = false;
 	isJumping = false;
@@ -115,8 +115,9 @@ void Character::setIdle() {
 	sprite.animated = false;
 }
 
-bool Character::shoot(Projectile* projectile) {
+Projectile* Character::shoot() {
 	if (weapon && weapon->shootTimer > (0.2f / weapon->rateOfFire) && weapon->ammo > 0) {
+		Projectile* projectile = weapon->fire();
 		if (face_left)
 			projectile->x = weapon->x - 0.1f;
 		else
@@ -130,9 +131,9 @@ bool Character::shoot(Projectile* projectile) {
 		weapon->ammo--;
 		weapon->shootTimer = 0.0f;
 		
-		return true;
+		return projectile;
 	}
-	return false;
+	return NULL;
 }
 
 int Character::melee() {

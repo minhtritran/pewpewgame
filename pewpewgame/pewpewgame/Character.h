@@ -7,7 +7,7 @@ class Projectile;
 
 class Character : public Entity {
 public:
-	Character();
+	Character(Textures* tex);
 	~Character();
 	virtual void Update(float elapsed);
 	virtual void FixedUpdate();
@@ -17,7 +17,7 @@ public:
 	void setWalkLeft(float multiple);
 	void setIdle();
 
-	bool shoot(Projectile* projectile);
+	Projectile* shoot();
 	int melee();
 	void equip(Weapon* weapon);
 	void die();

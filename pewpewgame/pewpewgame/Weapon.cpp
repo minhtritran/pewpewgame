@@ -1,6 +1,6 @@
 #include "Weapon.h"
 
-Weapon::Weapon() {
+Weapon::Weapon(Textures* tex) : Entity(tex) {
 	isStatic = true;
 	z = 1.0f;
 
@@ -9,7 +9,6 @@ Weapon::Weapon() {
 	ammo = 100;
 	max_ammo = 100;
 	friction_x = 5.0f;
-
 }
 
 void Weapon::changeWeapon(int type)
@@ -25,6 +24,8 @@ void Weapon::changeWeapon(int type)
 		melee_damage = 0;
 
 		droppable = true;
+		bullet_type = PLASMA_BALL;
+		sprite = SheetSprite(tex->weaponSpriteSheetTexture, 14, 7, 2);
 	}
 	else if (type == SWORD) {
 		scale_x = 1.2f;
@@ -36,6 +37,8 @@ void Weapon::changeWeapon(int type)
 		melee_damage = 20;
 
 		droppable = false;
+		bullet_type = PLASMA_BALL;
+		sprite = SheetSprite(tex->characterAnimationSpriteSheetTexture, 481.0f / 1320.0f, 987.0f / 1320.0f, 111.0f / 1320.0f, 33.0f / 1320.0f);
 	}
 	if (type == MINI_GUN) {
 		scale_x = 1.5f;
@@ -47,9 +50,11 @@ void Weapon::changeWeapon(int type)
 		melee_damage = 0;
 
 		droppable = true;
+		bullet_type = PLASMA_BALL;
+		sprite = SheetSprite(tex->minigunTexture, 1, 1, 0);
 	}
 	if (type == MACHINE_GUN) {
-		scale_x = 1.0f;
+		scale_x = 1.5f;
 		scale_y = 1.0f;
 
 		rateOfFire = 1.5f;
@@ -58,6 +63,8 @@ void Weapon::changeWeapon(int type)
 		melee_damage = 0;
 
 		droppable = true;
+		bullet_type = PLASMA_BALL;
+		sprite = SheetSprite(tex->gunsSpriteSheetTexture, 344.0f / 480.0f, 4.0f / 256.0f, 99.0f / 480.0f, 63.0f / 256.0f);
 	}
 }
 
@@ -72,5 +79,10 @@ void Weapon::Render(float elapsed) {
 	Entity::Render(elapsed);
 }
 
+Projectile* Weapon::fire() {
+	Projectile* projectile = new Projectile(tex);
+	projectile->changeProjectile(bullet_type);
+	return projectile;
+}
 
 

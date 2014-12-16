@@ -1,6 +1,10 @@
 #include "Entity.h"
-
 Entity::Entity() {
+
+}
+Entity::Entity(Textures* tex) {
+	this->tex = tex;
+
 	x = 0.0f;
 	y = 0.0f;
 	z = 0.0f;

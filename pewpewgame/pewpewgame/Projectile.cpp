@@ -1,10 +1,6 @@
 #include "Projectile.h"
 
-Projectile::Projectile() {
-	//Make bullet start away from screen
-	x = -2.0f;
-	y = -2.0f;
-	
+Projectile::Projectile(Textures* tex) : Entity(tex) {
 	width = 0.05f;
 	height = 0.05f;
 
@@ -16,11 +12,16 @@ Projectile::Projectile() {
 	damages_player = false;
 }
 
-void Projectile::changeProjectile(float scale_x, float scale_y, int damage)
+void Projectile::changeProjectile(int type)
 {
-	this->scale_x = scale_x;
-	this->scale_y = scale_y;
-	this->damage = damage;
+	this->type = type;
+	if (type == PLASMA_BALL) {
+		scale_x = 7.5f;
+		scale_y = 7.5f;
+		damage = 20;
+		sprite = SheetSprite(tex->weaponSpriteSheetTexture, 14, 7, 7);
+	}
+	
 }
 
 void Projectile::Update(float elapsed) {

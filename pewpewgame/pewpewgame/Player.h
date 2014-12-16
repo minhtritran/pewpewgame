@@ -4,7 +4,7 @@
 
 class Player : public Character {
 public:
-	Player();
+	Player(Textures* tex);
 	void Update(float elapsed);
 	void FixedUpdate();
 	void Render(float elapsed = 0.0f);

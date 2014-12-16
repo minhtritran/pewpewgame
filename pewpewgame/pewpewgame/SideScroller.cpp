@@ -14,51 +14,7 @@ SideScroller::SideScroller() {
 	gravity_x = 0.0f;
 	gravity_y = -9.8f;
 
-	brickSpriteSheetTexture = LoadTexture("resources/spriteTiles.png");
-	characterSpriteSheetTexture = LoadTexture("resources/Sprites_Characters.png");
-	characterAnimationSpriteSheetTexture = LoadTexture("resources/character_animations.png");
-	fontTexture = LoadTexture("resources/pixel_font.png");
-	weaponSpriteSheetTexture = LoadTexture("resources/sheet.png");
-	minigunTexture = LoadTexture("resources/minigun.png");
-	gunsSpriteSheetTexture = LoadTexture("resources/guns.png");
-
-	projectile_raygun_bullet_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 7);
-
-	//Weapon sprites
-	weapon_raygun_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 2);
-	weapon_sword_sprite = SheetSprite(characterAnimationSpriteSheetTexture, 481.0f / 1320.0f, 987.0f / 1320.0f, 111.0f / 1320.0f, 33.0f / 1320.0f);
-	weapon_minigun_sprite = SheetSprite(minigunTexture, 1, 1, 0);
-	weapon_machinegun_sprite = SheetSprite(gunsSpriteSheetTexture, 344.0f/480.0f, 4.0f/256.0f, 99.0f/480.0f, 63.0f/256.0f);
-
-	//Player static sprites
-	player_sprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
-	player_sprite_face_right = SheetSprite(characterSpriteSheetTexture, 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
-	player_sprite_face_left = SheetSprite(characterSpriteSheetTexture, 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
-	player_sprite_jump_right = SheetSprite(characterAnimationSpriteSheetTexture, 840.0f / 1320.0f, 1137.0f / 1320.0f, 120.0f / 1320.0f, 165.0f / 1320.0f);
-	player_sprite_jump_left = SheetSprite(characterAnimationSpriteSheetTexture, 243.0f / 1320.0f, 165.0f / 1320.0f, 120.0f / 1320.0f, 165.0f / 1320.0f);
-
-	//Player animated sprites
-	player_frames_walk_right.push_back({ 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-	player_frames_walk_right.push_back({ 918.0f / 2048.0f, 662.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-	player_frames_walk_right.push_back({ 917.0f / 2048.0f, 495.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-	player_frames_walk_left.push_back({ 1039.0f / 2048.0f, 1490.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-	player_frames_walk_left.push_back({ 1038.0f / 2048.0f, 996.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-	player_frames_walk_left.push_back({ 1038.0f / 2048.0f, 829.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f });
-	
-	//Enemy static sprites
-	enemy_sprite = SheetSprite(characterSpriteSheetTexture, 405.0f / 2048.0f, 167.0f / 2048.0f, 132.0f / 2048.0f, 161.0f / 2048.0f);
-	enemy_sprite_face_right = SheetSprite(characterSpriteSheetTexture, 1160.0f / 2048.0f, 827.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f);
-	enemy_sprite_face_left = SheetSprite(characterSpriteSheetTexture, 916.0f / 2048.0f, 995.0f / 2048.0f, 120.0f / 2048.0f, 161.0f / 2048.0f);
-	enemy_sprite_jump_right = SheetSprite(characterAnimationSpriteSheetTexture, 122.0f / 1320.0f, 476.0f / 1320.0f, 120.0f / 1320.0f, 161.0f / 1320.0f);
-	enemy_sprite_jump_left = SheetSprite(characterAnimationSpriteSheetTexture, 721.0f / 1320.0f, 483.0f / 1320.0f, 120.0f / 1320.0f, 161.0f / 1320.0f);
-
-	//Enemy animated sprites
-	enemy_frames_walk_right.push_back({ 1160.0f / 2048.0f, 827.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
-	enemy_frames_walk_right.push_back({ 1158.0f / 2048.0f, 0.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
-	enemy_frames_walk_right.push_back({ 795.0f / 2048.0f, 1820.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
-	enemy_frames_walk_left.push_back({ 916.0f / 2048.0f, 995.0f / 2048.0f, 120.0f / 2048.0f, 161.0f / 2048.0f });
-	enemy_frames_walk_left.push_back({ 1040.0f / 2048.0f, 1163.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
-	enemy_frames_walk_left.push_back({ 796.0f / 2048.0f, 831.0f / 2048.0f, 120.0f / 2048.0f, 162.0f / 2048.0f });
+	tex = new Textures();
 	 
 	gunshot = Mix_LoadWAV("resources/gunshot.wav");
 	jump = Mix_LoadWAV("resources/jump.wav");
@@ -103,36 +59,21 @@ void SideScroller::Update(float elapsed) {
 	else if (state == STATE_GAME)
 	{
 		if (enemySpawnTimer > 0.55f && enemies.size() < 50) {
-			Enemy* tempEnemy = new PewRunner();
-			tempEnemy->sprite = enemy_sprite;
+			Enemy* tempEnemy = new PewRunner(tex);
 			tempEnemy->y = player->y + 4.0f;
 			tempEnemy->x = player->x + 10.0f;
 			tempEnemy->setScale(2.5f);
-			tempEnemy->setWalkLeft(0.8f);
 
-			tempEnemy->sprite_face_right = enemy_sprite_face_right;
-			tempEnemy->sprite_face_left = enemy_sprite_face_left;
-			
-			tempEnemy->sprite_jump_right = enemy_sprite_jump_right;
-			tempEnemy->sprite_jump_left = enemy_sprite_jump_left;
-
-			//walk right animation
-			tempEnemy->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
-			tempEnemy->animation_walk_right.setAnimated(true, 8.0f, enemy_frames_walk_right);
-
-			//walk left animation
-			tempEnemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
-			tempEnemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
-
-			if (genRandomNumber(0.0f, 1.0f) > 0.9f) {
+			if (genRandomNumber(0.0f, 1.0f) > 0.93f) {
 				//Grant him knighthood
-				Weapon* weapon = new Weapon();
-				weapon->sprite = weapon_sword_sprite;
-				weapon->sprite.invert = true;
+				Weapon* weapon = new Weapon(tex);
 				weapon->changeWeapon(SWORD);
 				tempEnemy->equip(weapon);
 				entities.push_back(weapon);
 			}
+
+			tempEnemy->setWalkLeft(0.8f);
+
 			enemies.push_back(tempEnemy);
 			entities.push_back(tempEnemy);
 			
@@ -185,7 +126,7 @@ void SideScroller::FixedUpdate() {
 							}
 						}
 					}
-
+					
 					if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j] && !entities[j]->isStatic) {
 						float yPenetration = fabs(fabs(entities[j]->y - entities[i]->y) - entities[i]->height / 2.0f - entities[j]->height / 2.0f);
 						if (entities[i]->y > entities[j]->y) {
@@ -227,13 +168,12 @@ void SideScroller::FixedUpdate() {
 
 			//shoot ai
 			if (enemy->aiShootTimer > 1.5f && enemy->dist_to_player < 3.0f) {
-				Projectile* tempProjectile = new Projectile();
-				tempProjectile->sprite = projectile_raygun_bullet_sprite;
-				tempProjectile->changeProjectile(7.5f, 7.5f, 20);
-				tempProjectile->damages_player = true;
-				projectiles.push_back(tempProjectile);
-				enemy->shoot(tempProjectile);
-				enemy->aiShootTimer = 0.0f;
+				Projectile* tempProjectile = enemy->shoot();
+				if (tempProjectile != NULL)  {
+					tempProjectile->damages_player = true;
+					projectiles.push_back(tempProjectile);
+					enemy->aiShootTimer = 0.0f;
+				}
 			}
 			
 			//melee ai
@@ -400,19 +340,19 @@ void SideScroller::Render(float elapsed) {
 		tempMatrix.m[3][0] = -1.2f;
 		tempMatrix.m[3][1] = -0.2f;
 		glMultMatrixf(tempMatrix.ml);
-		DrawText(fontTexture, "Press 1 for Level Green", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(tex->fontTexture, "Press 1 for Level Green", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		tempMatrix.identity();
 		tempMatrix.m[3][1] = -0.2f;
 		glMultMatrixf(tempMatrix.ml);
-		DrawText(fontTexture, "Press 2 for Level Blue", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(tex->fontTexture, "Press 2 for Level Blue", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		tempMatrix.identity();
 		tempMatrix.m[3][1] = -0.2f;
 		glMultMatrixf(tempMatrix.ml);
-		DrawText(fontTexture, "Press 3 for Level Pink", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(tex->fontTexture, "Press 3 for Level Pink", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		tempMatrix.identity();
 		tempMatrix.m[3][1] = -0.2f;
 		glMultMatrixf(tempMatrix.ml);
-		DrawText(fontTexture, "Press Q to quit", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(tex->fontTexture, "Press Q to quit", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 	else if (state == STATE_GAME)
 	{
@@ -425,13 +365,13 @@ void SideScroller::Render(float elapsed) {
 		tempMatrix.m[3][0] = -2.4f;
 		tempMatrix.m[3][1] = 1.85f;
 		glMultMatrixf(tempMatrix.ml);
-		DrawText(fontTexture, "HP: " + to_string(player->hp) + "/50", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(tex->fontTexture, "HP: " + to_string(player->hp) + "/50", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		
 		if (player->weapon) {
 			tempMatrix.identity();
 			tempMatrix.m[3][0] = 1.4f;
 			glMultMatrixf(tempMatrix.ml);
-			DrawText(fontTexture, "AMMO: " + to_string(player->weapon->ammo) + "/" + to_string(player->weapon->max_ammo), 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+			DrawText(tex->fontTexture, "AMMO: " + to_string(player->weapon->ammo) + "/" + to_string(player->weapon->max_ammo), 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		}
 		glPopMatrix();
 
@@ -478,7 +418,7 @@ void SideScroller::Render(float elapsed) {
 		{
 			tempMatrix.m[3][0] = -0.8f;
 			glMultMatrixf(tempMatrix.ml);
-			DrawText(fontTexture, "Game Over! You Died!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+			DrawText(tex->fontTexture, "Game Over! You Died!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 			tempMatrix.identity();
 			tempMatrix.m[3][0] = -0.8f;
 			tempMatrix.m[3][1] = -0.8f;
@@ -488,13 +428,13 @@ void SideScroller::Render(float elapsed) {
 		{
 			tempMatrix.m[3][0] = -0.5f;
 			glMultMatrixf(tempMatrix.ml);
-			DrawText(fontTexture, "You Won!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+			DrawText(tex->fontTexture, "You Won!", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 			tempMatrix.identity();
 			tempMatrix.m[3][0] = -1.1f;
 			tempMatrix.m[3][1] = -0.8f;
 			glMultMatrixf(tempMatrix.ml);
 		}
-		DrawText(fontTexture, "Press ENTER to return to main menu", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(tex->fontTexture, "Press ENTER to return to main menu", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	SDL_GL_SwapWindow(displayWindow);
@@ -562,18 +502,13 @@ bool SideScroller::UpdateAndRender() {
 		else {
 			player->setIdle();
 		}
-		if (keys[SDL_SCANCODE_SPACE]) {
-
-
-			Projectile* tempProjectile = new Projectile();
-			tempProjectile->sprite = projectile_raygun_bullet_sprite;
-			tempProjectile->changeProjectile(7.5f, 7.5f, 20);
-			tempProjectile->damages_enemy = true;
-			projectiles.push_back(tempProjectile);
-			if (player->shoot(tempProjectile)) {
+		if (keys[SDL_SCANCODE_SPACE]) {		
+			Projectile* tempProjectile = player->shoot();
+			if (tempProjectile != NULL)  {
+				tempProjectile->damages_enemy = true;
+				projectiles.push_back(tempProjectile);
 				Mix_PlayChannel(-1, gunshot, 0);
 			}
-				
 
 		}
 	}
@@ -720,34 +655,18 @@ bool SideScroller::readEntityData(ifstream& stream) {
 
 void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 	if (type == "Player") {
-		player = new Player();
-		player->sprite = player_sprite;
+		player = new Player(tex);
 		player->x = placeX;
 		player->y = placeY;
 		player->setScale(3.0f);
 		player->friction_x = 3.0f;
 		player->hp = 50;
 
-		player->sprite_face_right = player_sprite_face_right;
-		player->sprite_face_left = player_sprite_face_left;
-		player->sprite_jump_right = player_sprite_jump_right;
-		player->sprite_jump_left = player_sprite_jump_left;
-
-		//walk right animation
-		player->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
-		player->animation_walk_right.setAnimated(true, 8.0f, player_frames_walk_right);
-		
-
-		//walk left animation
-		player->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
-		player->animation_walk_left.setAnimated(true, 8.0f, player_frames_walk_left);
-
-		Weapon* weapon = new Weapon();
+		Weapon* weapon = new Weapon(tex);
 		//weapon->sprite = weapon_raygun_sprite;
 		//weapon->changeWeapon(RAY_GUN);
 		//weapon->sprite = weapon_minigun_sprite;
 		//weapon->changeWeapon(MINI_GUN);
-		weapon->sprite = weapon_machinegun_sprite;
 		weapon->changeWeapon(MACHINE_GUN); 
 		player->equip(weapon);
 		entities.push_back(weapon);
@@ -756,66 +675,35 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		entities.push_back(player);
 	} 
 	else if (type == "PewRunner") {
-		Enemy* enemy = new PewRunner();
-		enemy->sprite = enemy_sprite;
+		Enemy* enemy = new PewRunner(tex);
 		enemy->x = placeX;
 		enemy->y = placeY;
 		enemy->setScale(2.5f);
-		enemy->setWalkLeft(0.8f);
 
-		enemy->sprite_face_right = enemy_sprite_face_right;
-		enemy->sprite_face_left = enemy_sprite_face_left;
-		enemy->sprite_jump_right = enemy_sprite_jump_right;
-		enemy->sprite_jump_left = enemy_sprite_jump_left;
-
-		//walk right animation
-		enemy->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
-		enemy->animation_walk_right.setAnimated(true, 8.0f, enemy_frames_walk_right);
-
-
-		//walk left animation
-		enemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
-		enemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
-
-		Weapon* weapon = new Weapon();
-		weapon->sprite = weapon_sword_sprite;
-		weapon->sprite.invert = true;
+		Weapon* weapon = new Weapon(tex);
 		weapon->changeWeapon(SWORD);
 		enemy->equip(weapon);
 		entities.push_back(weapon);
+
+		enemy->setWalkLeft(0.8f);
 
 		enemies.push_back(enemy);
 		entities.push_back(enemy);
 	}
 	else if (type == "PewShooter") {
-		Enemy* enemy = new PewShooter();
-		enemy->sprite = enemy_sprite;
+		Enemy* enemy = new PewShooter(tex);
 		enemy->x = placeX;
 		enemy->y = placeY;
 		enemy->setScale(2.5f);
-		enemy->setWalkLeft(0.8f);
-
-		enemy->sprite_face_right = enemy_sprite_face_right;
-		enemy->sprite_face_left = enemy_sprite_face_left;
-		enemy->sprite_jump_right = enemy_sprite_jump_right;
-		enemy->sprite_jump_left = enemy_sprite_jump_left;
-
-		//walk right animation
-		enemy->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
-		enemy->animation_walk_right.setAnimated(true, 8.0f, enemy_frames_walk_right);
-
-
-		//walk left animation
-		enemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
-		enemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
 		
-		Weapon* weapon = new Weapon();
-		weapon->sprite = weapon_raygun_sprite;
-		weapon->sprite.invert = true;
+		Weapon* weapon = new Weapon(tex);
 		weapon->changeWeapon(RAY_GUN);
 		enemy->equip(weapon);
 		entities.push_back(weapon);
 		
+
+		enemy->setWalkLeft(0.8f);
+
 		enemies.push_back(enemy);
 		entities.push_back(enemy);
 
@@ -825,7 +713,7 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 void SideScroller::RenderLevel() {
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, brickSpriteSheetTexture);
+	glBindTexture(GL_TEXTURE_2D, tex->brickSpriteSheetTexture);
 
 	vector<float> vertexData;
 	vector<float> texCoordData;
@@ -1015,25 +903,7 @@ void DrawText(int textureID, string text, float size, float spacing, float r, fl
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-GLuint LoadTexture(const char *image_path) {
-	SDL_Surface *surface = IMG_Load(image_path);
 
-	GLuint textureID;
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, 4, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	SDL_FreeSurface(surface);
-
-	return textureID;
-}
 
 float genRandomNumber(float low, float high) {
 	return low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - low)));

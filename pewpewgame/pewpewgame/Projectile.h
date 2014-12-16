@@ -2,15 +2,18 @@
 
 #include "Entity.h"
 
+enum projectile_type {PLASMA_BALL};
 
 class Projectile : public Entity {
 public:
-	Projectile();
+	Projectile(Textures* tex);
 
-	void changeProjectile(float scale_x, float scale_y, int damage);
+	void changeProjectile(int type);
 
 	void Update(float elapsed);
 	void Render(float elapsed = 0.0f);
+
+	int type;
 
 	int damage;
 

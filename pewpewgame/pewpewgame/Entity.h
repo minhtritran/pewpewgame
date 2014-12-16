@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include "Textures.h"
 #include "SheetSprite.h"
 #include "Matrix.h"
 
@@ -15,6 +16,7 @@ using namespace std;
 class Entity {
 public:
 	Entity();
+	Entity(Textures* tex);
 	~Entity();
 
 	void setScale(float scale);
@@ -25,6 +27,7 @@ public:
 
 	bool collidesWith(Entity* entity);
 	
+	Textures* tex;
 
 	SheetSprite sprite;
 	int sprite_in_use;
