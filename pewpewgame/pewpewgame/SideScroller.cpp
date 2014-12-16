@@ -271,6 +271,13 @@ void SideScroller::FixedUpdate() {
 					if (checkPointForGridCollisionX(point_1F2T_x, point_1F2T_y) == 0)
 						enemy->jump();
 				}
+
+				for each (auto otherenemy in enemies) {
+					if (point_1F_x > otherenemy->x - otherenemy->width && point_1F_x < otherenemy->x + otherenemy->width)
+						if (point_1F_y > otherenemy->y - otherenemy->height && point_1F_y < otherenemy->y + otherenemy->height)
+							enemy->jump();
+				}
+				
 			}
 		
 			//go backwards near dead-end cliff
