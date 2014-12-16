@@ -98,10 +98,6 @@ location=4542,718,0,0
 
 [Object Layer 1]
 type=PewShooter
-location=6494,740,0,0
-
-[Object Layer 1]
-type=PewShooter
 location=6844,544,0,0
 
 [Object Layer 1]
@@ -115,10 +111,6 @@ location=7982,1100,0,0
 [Object Layer 1]
 type=PewShooter
 location=8414,1088,0,0
-
-[Object Layer 1]
-type=PewShooter
-location=8202,998,0,0
 
 [Object Layer 1]
 type=PewShooter
@@ -143,8 +135,4 @@ location=10782,714,0,0
 [Object Layer 1]
 type=PewShooter
 location=11442,412,0,0
-
-[Object Layer 1]
-type=PewShooter
-location=11680,284,0,0
 

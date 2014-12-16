@@ -58,7 +58,7 @@ location=1506,998,0,0
 
 [Object Layer 1]
 type=PewShooter
-location=2014,490,0,0
+location=1892,620,0,0
 
 [Object Layer 1]
 type=PewShooter

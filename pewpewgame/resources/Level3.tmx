@@ -10,11 +10,10 @@
  </layer>
  <objectgroup name="Object Layer 1">
   <object name="Player" type="Player" gid="190" x="195" y="1434"/>
-  <object type="PewShooter" gid="188" x="800" y="1376"/>
   <object type="PewShooter" gid="188" x="1255" y="1444"/>
   <object type="PewShooter" gid="188" x="1860" y="1260"/>
   <object type="PewShooter" gid="188" x="2381" y="1253"/>
-  <object type="PewShooter" gid="188" x="3181" y="1243"/>
+  <object type="PewShooter" gid="188" x="3029" y="1237"/>
   <object type="PewShooter" gid="188" x="3789" y="1249"/>
   <object type="PewShooter" gid="188" x="4393" y="1250"/>
   <object type="PewShooter" gid="188" x="4853" y="1250"/>

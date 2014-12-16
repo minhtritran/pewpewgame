@@ -12,7 +12,7 @@
   <object name="Player" type="Player" gid="190" x="226" y="1624"/>
   <object type="PewShooter" gid="188" x="1122" y="1380"/>
   <object type="PewShooter" gid="188" x="1506" y="998"/>
-  <object type="PewShooter" gid="188" x="2014" y="490"/>
+  <object type="PewShooter" gid="188" x="1892" y="620"/>
   <object type="PewShooter" gid="188" x="2832" y="1384"/>
   <object type="PewShooter" gid="188" x="3338" y="1376"/>
   <object type="PewShooter" gid="188" x="4316" y="486"/>

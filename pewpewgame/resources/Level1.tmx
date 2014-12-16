@@ -22,18 +22,15 @@
   <object type="PewShooter" gid="188" x="4906" y="734"/>
   <object type="PewShooter" gid="188" x="5298" y="716"/>
   <object type="PewShooter" gid="188" x="4542" y="718"/>
-  <object type="PewShooter" gid="188" x="6494" y="740"/>
   <object type="PewShooter" gid="188" x="6844" y="544"/>
   <object type="PewShooter" gid="188" x="7068" y="1084"/>
   <object type="PewShooter" gid="188" x="7982" y="1100"/>
   <object type="PewShooter" gid="188" x="8414" y="1088"/>
-  <object type="PewShooter" gid="188" x="8202" y="998"/>
   <object type="PewShooter" gid="188" x="9472" y="1116"/>
   <object type="PewShooter" gid="188" x="9840" y="1100"/>
   <object type="PewShooter" gid="188" x="10478" y="918"/>
   <object type="PewShooter" gid="188" x="10994" y="544"/>
   <object type="PewShooter" gid="188" x="10782" y="714"/>
   <object type="PewShooter" gid="188" x="11442" y="412"/>
-  <object type="PewShooter" gid="188" x="11680" y="284"/>
  </objectgroup>
 </map>
