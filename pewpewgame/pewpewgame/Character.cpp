@@ -2,7 +2,7 @@
 #include "Projectile.h"
 
 Character::Character() {
-	hp = 1;
+	hp = 10;
 	face_left = false;
 	isJumping = false;
 	jumpTimer = 0.0f;
@@ -131,6 +131,18 @@ bool Character::shoot(Projectile* projectile) {
 		return true;
 	}
 	return false;
+}
+
+int Character::melee() {
+	if (weapon) {
+		if (weapon->melee_damage != 0)
+			return weapon->melee_damage;
+		else
+			return 0;
+	}
+	else {
+		return 1;
+	}
 }
 
 void Character::equip(Weapon* newWeapon) {	

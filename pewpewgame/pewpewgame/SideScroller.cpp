@@ -215,14 +215,21 @@ void SideScroller::FixedUpdate() {
 			if (enemy->aiShootTimer > 1.5f && enemy->dist_to_player < 3.0f) {
 				Projectile* tempProjectile = new Projectile();
 				tempProjectile->sprite = projectile_raygun_bullet_sprite;
-				tempProjectile->changeProjectile(7.5f, 7.5f, 2);
+				tempProjectile->changeProjectile(7.5f, 7.5f, 20);
 				tempProjectile->damages_player = true;
 				projectiles.push_back(tempProjectile);
 				enemy->shoot(tempProjectile);
 				enemy->aiShootTimer = 0.0f;
 			}
 			
-			
+			//melee ai
+			if (enemy->aiMeleeTimer > 0.2f && enemy->dist_to_player < 0.2f) {
+				int damage = enemy->melee();
+				if (damage != 0) {
+					player->hp -= damage;
+				}
+				enemy->aiMeleeTimer = 0.0f;
+			}
 
 			//jump ai
 			float point_1F_x = 0.0f;
@@ -389,7 +396,7 @@ void SideScroller::Render(float elapsed) {
 		tempMatrix.m[3][0] = -2.4f;
 		tempMatrix.m[3][1] = 1.85f;
 		glMultMatrixf(tempMatrix.ml);
-		DrawText(fontTexture, "HP: " + to_string(player->hp) + "/5", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		DrawText(fontTexture, "HP: " + to_string(player->hp) + "/50", 0.1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 		
 		if (player->weapon) {
 			tempMatrix.identity();
@@ -531,7 +538,7 @@ bool SideScroller::UpdateAndRender() {
 
 			Projectile* tempProjectile = new Projectile();
 			tempProjectile->sprite = projectile_raygun_bullet_sprite;
-			tempProjectile->changeProjectile(7.5f, 7.5f, 2);
+			tempProjectile->changeProjectile(7.5f, 7.5f, 20);
 			tempProjectile->damages_enemy = true;
 			projectiles.push_back(tempProjectile);
 			if (player->shoot(tempProjectile)) {
@@ -690,7 +697,7 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->y = placeY;
 		player->setScale(3.0f);
 		player->friction_x = 3.0f;
-		player->hp = 5;
+		player->hp = 50;
 
 		player->sprite_face_right = player_sprite_face_right;
 		player->sprite_face_left = player_sprite_face_left;
@@ -708,7 +715,7 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 
 		Weapon* weapon = new Weapon();
 		weapon->sprite = weapon_raygun_sprite;
-		weapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350);
+		weapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350, 0.0f);
 		entities.push_back(weapon);
 		player->equip(weapon);
 
@@ -764,7 +771,7 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		Weapon* weapon = new Weapon();
 		weapon->sprite = weapon_raygun_sprite;
 		weapon->sprite.invert = true;
-		weapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350);
+		weapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350, 0);
 		enemy->equip(weapon);
 		entities.push_back(weapon);
 		

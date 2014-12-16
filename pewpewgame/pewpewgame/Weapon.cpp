@@ -12,7 +12,7 @@ Weapon::Weapon() {
 	dropped = false;
 }
 
-void Weapon::changeWeapon(int type, float scale_x, float scale_y, float rateOfFire, int ammo, int max_ammo)
+void Weapon::changeWeapon(int type, float scale_x, float scale_y, float rateOfFire, int ammo, int max_ammo, int melee_damage)
 {
 	this->type = type;
 	this->scale_x = scale_x;
@@ -21,6 +21,7 @@ void Weapon::changeWeapon(int type, float scale_x, float scale_y, float rateOfFi
 	this->rateOfFire = rateOfFire;
 	this->ammo = ammo;
 	this->max_ammo = max_ammo;
+	this->melee_damage = melee_damage;
 }
 
 void Weapon::Update(float elapsed) {

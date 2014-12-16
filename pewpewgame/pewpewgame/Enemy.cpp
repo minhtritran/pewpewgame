@@ -7,6 +7,7 @@ Enemy::Enemy() {
 void Enemy::Update(float elapsed) {
 	Character::Update(elapsed);
 	aiShootTimer += elapsed;
+	aiMeleeTimer += elapsed;
 }
 
 void Enemy::FixedUpdate() {

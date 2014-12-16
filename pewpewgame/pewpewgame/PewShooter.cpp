@@ -2,6 +2,6 @@
 #include "Projectile.h"
 
 PewShooter::PewShooter() {
-	hp = 2;
+	hp = 20;
 	friction_x = 15.0f;
 }

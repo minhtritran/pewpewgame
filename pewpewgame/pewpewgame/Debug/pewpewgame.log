@@ -1,25 +1,33 @@
-﻿Build started 12/15/2014 11:04:56 PM.
+﻿Build started 12/16/2014 11:14:27 AM.
      1>Project "E:\Git Repositories\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SideScroller.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Enemy.cpp PewRunner.cpp PewShooter.cpp SideScroller.cpp main.cpp
          SideScroller.cpp
      1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(7): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(621): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(636): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(641): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(787): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(788): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(854): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(855): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(861): warning C4018: '>' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(875): warning C4018: '>' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(890): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(892): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(902): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(904): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(918): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(927): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(948): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(628): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(643): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(648): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(718): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(794): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(795): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(861): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(862): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(868): warning C4018: '>' : signed/unsigned mismatch
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(882): warning C4018: '>' : signed/unsigned mismatch
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(897): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(899): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(909): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(911): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(925): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(934): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(955): warning C4018: '<' : signed/unsigned mismatch
+         Enemy.cpp
+         Generating Code...
+         Compiling...
+         main.cpp
+         PewShooter.cpp
+         PewRunner.cpp
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\SDL2_mixer\lib\x86 SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.lib" /MACHINE:X86 Debug\Character.obj
          Debug\Enemy.obj
@@ -39,4 +47,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.04
+Time Elapsed 00:00:03.26

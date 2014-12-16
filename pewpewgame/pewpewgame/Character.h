@@ -18,6 +18,7 @@ public:
 	void setIdle();
 
 	bool shoot(Projectile* projectile);
+	int melee();
 	void equip(Weapon* weapon);
 	void die();
 
