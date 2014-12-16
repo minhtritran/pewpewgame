@@ -132,10 +132,10 @@ bool Character::shoot(Projectile* projectile) {
 
 void Character::equip(Weapon* newWeapon) {	
 	if (weapon && weapon->type == newWeapon->type) {
-		weapon->ammo += newWeapon->ammo;
+		weapon->ammo = weapon->ammo + newWeapon->ammo;
 		if (weapon->ammo > weapon->max_ammo)
 			weapon->ammo = weapon->max_ammo;
-		weapon->should_remove = true;
+		newWeapon->should_remove = true;
 	}
 	else {
 		weapon = newWeapon;

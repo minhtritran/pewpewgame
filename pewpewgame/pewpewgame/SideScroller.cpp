@@ -148,6 +148,7 @@ void SideScroller::FixedUpdate() {
 	}
 	else if (state == STATE_GAME)
 	{
+
 		for (size_t i = 0; i < entities.size(); i++) {
 			
 			if (entities[i]->gravity_affected) {
@@ -162,6 +163,16 @@ void SideScroller::FixedUpdate() {
 			//do Y collisions
 			if (!entities[i]->isStatic) {
 				for (size_t j = 0; j < entities.size(); j++) {
+
+					
+					if (Player* player = dynamic_cast<Player*>(entities[i])) {
+						if (Weapon* weapon = dynamic_cast<Weapon*>(entities[j])) {
+							if (player->collidesWith(weapon) && weapon->gravity_affected) {
+								player->equip(weapon);
+							}
+						}
+					}
+
 					if (entities[i]->collidesWith(entities[j]) && entities[i] != entities[j] && !entities[j]->isStatic) {
 						float yPenetration = fabs(fabs(entities[j]->y - entities[i]->y) - entities[i]->height / 2.0f - entities[j]->height / 2.0f);
 						if (entities[i]->y > entities[j]->y) {
