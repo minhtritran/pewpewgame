@@ -157,18 +157,21 @@ void Character::equip(Weapon* newWeapon) {
 				newWeapon->should_remove = true;
 			}
 			else {
-				weapon->gravity_affected = true;
-				weapon->sprite.invert = false;
-				weapon->velocity_y = 4.0f;
-				if (face_left)
-					weapon->velocity_x = 1.5f;
-				else
-					weapon->velocity_x = -1.5f;
-				weapon = NULL;
-				weapon = newWeapon;
-				weapon->gravity_affected = false;
-				if (face_left)
-					weapon->sprite.invert = true;
+				if (velocity_x == 0.0f && velocity_y == 0.0f) {
+					weapon->gravity_affected = true;
+					weapon->sprite.invert = false;
+					weapon->velocity_y = 4.0f;
+					if (face_left)
+						weapon->velocity_x = 1.5f;
+					else
+						weapon->velocity_x = -1.5f;
+					weapon = NULL;
+					weapon = newWeapon;
+					weapon->gravity_affected = false;
+					if (face_left)
+						weapon->sprite.invert = true;
+				}
+				
 			}
 		}
 		else {

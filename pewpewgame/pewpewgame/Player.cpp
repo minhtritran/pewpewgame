@@ -8,6 +8,7 @@ void Player::Update(float elapsed) {
 
 void Player::FixedUpdate() {
 	Character::FixedUpdate();
+	
 }
 
 void Player::Render(float elapsed) {

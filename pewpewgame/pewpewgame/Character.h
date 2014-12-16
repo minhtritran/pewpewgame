@@ -34,5 +34,6 @@ public:
 	bool isJumping;
 	float jumpTimer;
 	float equipTimer;
+
 	Weapon* weapon;
 };
