@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 
-enum type {RAY_GUN, SWORD, MINI_GUN};
+enum type {RAY_GUN, SWORD, MINI_GUN, MACHINE_GUN};
 
 class Weapon : public Entity {
 public:

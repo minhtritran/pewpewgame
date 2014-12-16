@@ -48,6 +48,17 @@ void Weapon::changeWeapon(int type)
 
 		droppable = true;
 	}
+	if (type == MACHINE_GUN) {
+		scale_x = 1.0f;
+		scale_y = 1.0f;
+
+		rateOfFire = 1.5f;
+		ammo = 150;
+		max_ammo = 350;
+		melee_damage = 0;
+
+		droppable = true;
+	}
 }
 
 void Weapon::Update(float elapsed) {
