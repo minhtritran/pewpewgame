@@ -161,8 +161,14 @@ void Character::equip(Weapon* newWeapon) {
 
 void Character::die() {
 	if (weapon) {
-		weapon->gravity_affected = true;
-		weapon->velocity_y = 1.5f;
+		if (weapon->droppable) {
+			weapon->gravity_affected = true;
+			weapon->velocity_y = 1.5f;
+		}
+		else {
+			weapon->should_remove = true;
+		}
+		weapon = NULL;		
 	}
 	should_remove = true;
 }

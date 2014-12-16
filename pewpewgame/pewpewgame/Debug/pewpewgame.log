@@ -1,26 +1,8 @@
-﻿Build started 12/16/2014 11:34:50 AM.
+﻿Build started 12/16/2014 12:04:25 PM.
      1>Project "E:\Git Repositories\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SideScroller.cpp
-         SideScroller.cpp
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(7): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(639): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(654): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(659): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(729): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(800): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(801): warning C4018: '<' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(867): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(868): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(874): warning C4018: '>' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(888): warning C4018: '>' : signed/unsigned mismatch
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(903): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(905): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(915): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(917): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(931): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(940): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>e:\git repositories\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(961): warning C4018: '<' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Character.cpp
+         Character.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\SDL2_mixer\lib\x86 SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.lib" /MACHINE:X86 Debug\Character.obj
          Debug\Enemy.obj
@@ -40,4 +22,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.23
+Time Elapsed 00:00:00.72

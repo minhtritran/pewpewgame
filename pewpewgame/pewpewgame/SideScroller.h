@@ -72,6 +72,7 @@ private:
 	SheetSprite projectile_raygun_bullet_sprite;
 	 
 	SheetSprite weapon_raygun_sprite;
+	SheetSprite weapon_sword_sprite;
 
 	SheetSprite player_sprite;
 	SheetSprite player_sprite_face_right;

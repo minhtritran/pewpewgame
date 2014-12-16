@@ -9,19 +9,33 @@ Weapon::Weapon() {
 	ammo = 100;
 	max_ammo = 100;
 
-	dropped = false;
 }
 
-void Weapon::changeWeapon(int type, float scale_x, float scale_y, float rateOfFire, int ammo, int max_ammo, int melee_damage)
+void Weapon::changeWeapon(int type)
 {
 	this->type = type;
-	this->scale_x = scale_x;
-	this->scale_y = scale_y;
+	if (type == RAY_GUN) {
+		scale_x = 1.5f;
+		scale_y = 1.5f;
 
-	this->rateOfFire = rateOfFire;
-	this->ammo = ammo;
-	this->max_ammo = max_ammo;
-	this->melee_damage = melee_damage;
+		rateOfFire = 1.0f;
+		ammo = 150;
+		max_ammo = 350;
+		melee_damage = 0;
+
+		droppable = true;
+	}
+	else if (type == SWORD) {
+		scale_x = 1.2f;
+		scale_y = 0.4f;
+
+		rateOfFire = 0.0f;
+		ammo = 0;
+		max_ammo = 0;
+		melee_damage = 20;
+
+		droppable = false;
+	}
 }
 
 void Weapon::Update(float elapsed) {

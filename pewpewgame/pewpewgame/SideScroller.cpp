@@ -24,6 +24,7 @@ SideScroller::SideScroller() {
 
 	//Weapon sprites
 	weapon_raygun_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 2);
+	weapon_sword_sprite = SheetSprite(characterAnimationSpriteSheetTexture, 481.0f / 1320.0f, 987.0f / 1320.0f, 111.0f / 1320.0f, 33.0f / 1320.0f);
 	
 	//Player static sprites
 	player_sprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
@@ -118,7 +119,15 @@ void SideScroller::Update(float elapsed) {
 			tempEnemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 			tempEnemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
 
-
+			if (genRandomNumber(0.0f, 1.0f) > 0.9f) {
+				//Grant him knighthood
+				Weapon* weapon = new Weapon();
+				weapon->sprite = weapon_sword_sprite;
+				weapon->sprite.invert = true;
+				weapon->changeWeapon(SWORD);
+				tempEnemy->equip(weapon);
+				entities.push_back(weapon);
+			}
 			enemies.push_back(tempEnemy);
 			entities.push_back(tempEnemy);
 			
@@ -726,9 +735,10 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 
 		Weapon* weapon = new Weapon();
 		weapon->sprite = weapon_raygun_sprite;
-		weapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350, 0.0f);
+		weapon->changeWeapon(RAY_GUN);
 		entities.push_back(weapon);
 		player->equip(weapon);
+
 
 		entities.push_back(player);
 	} 
@@ -754,6 +764,13 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		enemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 		enemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
 
+		Weapon* weapon = new Weapon();
+		weapon->sprite = weapon_sword_sprite;
+		weapon->sprite.invert = true;
+		weapon->changeWeapon(SWORD);
+		enemy->equip(weapon);
+		entities.push_back(weapon);
+
 		enemies.push_back(enemy);
 		entities.push_back(enemy);
 	}
@@ -778,11 +795,11 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		//walk left animation
 		enemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 		enemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
-
+		
 		Weapon* weapon = new Weapon();
-		weapon->sprite = weapon_raygun_sprite;
+		weapon->sprite = weapon_sword_sprite;
 		weapon->sprite.invert = true;
-		weapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350, 0);
+		weapon->changeWeapon(SWORD);
 		enemy->equip(weapon);
 		entities.push_back(weapon);
 		
