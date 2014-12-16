@@ -19,13 +19,15 @@ SideScroller::SideScroller() {
 	characterAnimationSpriteSheetTexture = LoadTexture("resources/character_animations.png");
 	fontTexture = LoadTexture("resources/pixel_font.png");
 	weaponSpriteSheetTexture = LoadTexture("resources/sheet.png");
+	minigunTexture = LoadTexture("resources/minigun.png");
 
 	projectile_raygun_bullet_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 7);
 
 	//Weapon sprites
 	weapon_raygun_sprite = SheetSprite(weaponSpriteSheetTexture, 14, 7, 2);
 	weapon_sword_sprite = SheetSprite(characterAnimationSpriteSheetTexture, 481.0f / 1320.0f, 987.0f / 1320.0f, 111.0f / 1320.0f, 33.0f / 1320.0f);
-	
+	weapon_minigun_sprite = SheetSprite(minigunTexture, 1, 1, 0);
+
 	//Player static sprites
 	player_sprite = SheetSprite(characterSpriteSheetTexture, 272.0f / 2048.0f, 0.0f / 2048.0f, 132.0f / 2048.0f, 165.0f / 2048.0f);
 	player_sprite_face_right = SheetSprite(characterSpriteSheetTexture, 918.0f / 2048.0f, 1323.0f / 2048.0f, 120.0f / 2048.0f, 165.0f / 2048.0f);
@@ -739,8 +741,10 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->animation_walk_left.setAnimated(true, 8.0f, player_frames_walk_left);
 
 		Weapon* weapon = new Weapon();
-		weapon->sprite = weapon_raygun_sprite;
-		weapon->changeWeapon(RAY_GUN);
+		//weapon->sprite = weapon_raygun_sprite;
+		//weapon->changeWeapon(RAY_GUN);
+		weapon->sprite = weapon_minigun_sprite;
+		weapon->changeWeapon(MINI_GUN);
 		entities.push_back(weapon);
 		player->equip(weapon);
 

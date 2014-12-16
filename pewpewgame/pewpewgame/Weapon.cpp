@@ -36,6 +36,17 @@ void Weapon::changeWeapon(int type)
 
 		droppable = false;
 	}
+	if (type == MINI_GUN) {
+		scale_x = 1.5f;
+		scale_y = 1.5f;
+
+		rateOfFire = 2.0f;
+		ammo = 250;
+		max_ammo = 500;
+		melee_damage = 0;
+
+		droppable = true;
+	}
 }
 
 void Weapon::Update(float elapsed) {

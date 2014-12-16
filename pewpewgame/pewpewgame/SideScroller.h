@@ -68,11 +68,13 @@ private:
 	GLuint brickSpriteSheetTexture;
 	GLuint fontTexture;
 	GLuint weaponSpriteSheetTexture;
+	GLuint minigunTexture;
 
 	SheetSprite projectile_raygun_bullet_sprite;
-	 
+	
 	SheetSprite weapon_raygun_sprite;
 	SheetSprite weapon_sword_sprite;
+	SheetSprite weapon_minigun_sprite;
 
 	SheetSprite player_sprite;
 	SheetSprite player_sprite_face_right;
