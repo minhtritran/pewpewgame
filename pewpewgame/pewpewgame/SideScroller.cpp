@@ -468,6 +468,11 @@ bool SideScroller::UpdateAndRender() {
 				buildLevel("resources/Level2.txt");
 				state = STATE_GAME;
 			}
+			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_3)
+			{
+				buildLevel("resources/Level3.txt");
+				state = STATE_GAME;
+			}
 			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_Q)
 			{
 				done = true;
