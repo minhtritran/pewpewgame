@@ -226,7 +226,11 @@ void SideScroller::FixedUpdate() {
 			if (enemy->aiMeleeTimer > 0.2f && enemy->dist_to_player < 0.2f) {
 				int damage = enemy->melee();
 				if (damage != 0) {
-					player->hp -= damage;
+					if ((player->face_left && enemy->face_left && enemy->x < player->x) || (!player->face_left && !enemy->face_left && enemy->x > player->x)) {
+
+					}
+					else
+						player->hp -= damage;
 				}
 				enemy->aiMeleeTimer = 0.0f;
 			}
@@ -279,12 +283,19 @@ void SideScroller::FixedUpdate() {
 						enemy->jump();
 				}
 
+				//jump pass pews
 				for each (auto otherenemy in enemies) {
-					if (point_1F_x > otherenemy->x - otherenemy->width && point_1F_x < otherenemy->x + otherenemy->width)
+					//the addtional 0.1f helps resolve pew jumping deadlocks
+					if (point_1F_x > otherenemy->x - otherenemy->width + 0.1f && point_1F_x < otherenemy->x + otherenemy->width + 0.1f)
 						if (point_1F_y > otherenemy->y - otherenemy->height && point_1F_y < otherenemy->y + otherenemy->height)
 							enemy->jump();
 				}
-				
+
+				//if jumper is behind and far away from player, move him forward 
+				if (enemy->dist_to_player > 10.0f && enemy->x < player->x) {
+					enemy->x = player->x + 10.0f;
+					enemy->y = player->y + 4.0f;
+				}
 			}
 		
 			//go backwards near dead-end cliff
