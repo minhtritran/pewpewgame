@@ -7,7 +7,9 @@ public:
 	Enemy();
 	void Update(float elapsed);
 	void FixedUpdate();
-	void Render();
+	void Render(float elapsed = 0.0f);
 
 	bool is_jumper;
+	float aiShootTimer;
+	bool near_player;
 };

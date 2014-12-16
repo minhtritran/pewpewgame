@@ -1,4 +1,5 @@
 #include "PewShooter.h"
+#include "Projectile.h"
 
 PewShooter::PewShooter() {
 	hp = 2;

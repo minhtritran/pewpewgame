@@ -95,11 +95,11 @@ void SideScroller::Update(float elapsed) {
 	}
 	else if (state == STATE_GAME)
 	{
-		if (enemySpawnTimer > 0.01f && enemies.size() < 100) {
-			Enemy* tempEnemy = new PewShooter();
+		if (enemySpawnTimer > 0.5f && enemies.size() < 50) {
+			Enemy* tempEnemy = new PewRunner();
 			tempEnemy->sprite = enemy_sprite;
-			tempEnemy->y = 0.85f;
-			tempEnemy->x = -10.0f;
+			tempEnemy->y = player->y + 4.0f;
+			tempEnemy->x = player->x + 10.0f;
 			tempEnemy->setScale(2.5f);
 			tempEnemy->setWalkLeft(0.8f);
 
@@ -117,11 +117,6 @@ void SideScroller::Update(float elapsed) {
 			tempEnemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
 			tempEnemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
 
-			Weapon* enemyWeapon = new Weapon();
-			enemyWeapon->sprite = weapon_raygun_sprite;
-			enemyWeapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350);
-			tempEnemy->equip(enemyWeapon);
-			entities.push_back(enemyWeapon);
 
 			enemies.push_back(tempEnemy);
 			entities.push_back(tempEnemy);
@@ -153,6 +148,7 @@ void SideScroller::FixedUpdate() {
 			
 			if (entities[i]->gravity_affected) {
 				entities[i]->velocity_x += gravity_x * FIXED_TIMESTEP;
+				if (entities[i]->velocity_y > -7.0f)
 				entities[i]->velocity_y += gravity_y * FIXED_TIMESTEP;
 			}
 			
@@ -210,6 +206,24 @@ void SideScroller::FixedUpdate() {
 		}
 
 		for each (auto enemy in enemies) {
+			if (sqrt(pow(enemy->x - player->x, 2) + pow(enemy->y - player->y, 2)) < 3.0f) {
+				enemy->near_player = true;
+			}
+			else
+				enemy->near_player = false;
+	
+
+			//shoot ai
+			if (enemy->aiShootTimer > 1.5f && enemy->near_player) {
+				Projectile* tempProjectile = new Projectile();
+				tempProjectile->sprite = projectile_raygun_bullet_sprite;
+				tempProjectile->changeProjectile(7.5f, 7.5f, 2);
+				projectiles.push_back(tempProjectile);
+				enemy->shoot(tempProjectile);
+				enemy->aiShootTimer = 0.0f;
+			}
+			
+			
 
 			//jump ai
 			float point_1F_x = 0.0f;
@@ -667,6 +681,64 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->equip(weapon);
 
 		entities.push_back(player);
+	} 
+	else if (type == "PewRunner") {
+		Enemy* enemy = new PewRunner();
+		enemy->sprite = enemy_sprite;
+		enemy->x = placeX;
+		enemy->y = placeY;
+		enemy->setScale(2.5f);
+		enemy->setWalkLeft(0.8f);
+
+		enemy->sprite_face_right = enemy_sprite_face_right;
+		enemy->sprite_face_left = enemy_sprite_face_left;
+		enemy->sprite_jump_right = enemy_sprite_jump_right;
+		enemy->sprite_jump_left = enemy_sprite_jump_left;
+
+		//walk right animation
+		enemy->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
+		enemy->animation_walk_right.setAnimated(true, 8.0f, enemy_frames_walk_right);
+
+
+		//walk left animation
+		enemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
+		enemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
+
+		enemies.push_back(enemy);
+		entities.push_back(enemy);
+	}
+	else if (type == "PewShooter") {
+		Enemy* enemy = new PewShooter();
+		enemy->sprite = enemy_sprite;
+		enemy->x = placeX;
+		enemy->y = placeY;
+		enemy->setScale(2.5f);
+		enemy->setWalkLeft(0.8f);
+
+		enemy->sprite_face_right = enemy_sprite_face_right;
+		enemy->sprite_face_left = enemy_sprite_face_left;
+		enemy->sprite_jump_right = enemy_sprite_jump_right;
+		enemy->sprite_jump_left = enemy_sprite_jump_left;
+
+		//walk right animation
+		enemy->animation_walk_right = SheetSprite(characterSpriteSheetTexture);
+		enemy->animation_walk_right.setAnimated(true, 8.0f, enemy_frames_walk_right);
+
+
+		//walk left animation
+		enemy->animation_walk_left = SheetSprite(characterSpriteSheetTexture);
+		enemy->animation_walk_left.setAnimated(true, 8.0f, enemy_frames_walk_left);
+
+		Weapon* weapon = new Weapon();
+		weapon->sprite = weapon_raygun_sprite;
+		weapon->sprite.invert = true;
+		weapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350);
+		enemy->equip(weapon);
+		entities.push_back(weapon);
+		
+		enemies.push_back(enemy);
+		entities.push_back(enemy);
+
 	}
 }
 

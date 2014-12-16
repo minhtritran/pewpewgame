@@ -4,4 +4,5 @@
 class PewShooter : public Enemy {
 public:
 	PewShooter();
+	
 };

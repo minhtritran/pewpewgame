@@ -115,7 +115,10 @@ void Character::setIdle() {
 
 bool Character::shoot(Projectile* projectile) {
 	if (weapon && weapon->shootTimer > (0.2f / weapon->rateOfFire) && weapon->ammo > 0) {
-		projectile->x = weapon->x;
+		if (face_left)
+			projectile->x = weapon->x - 0.1f;
+		else
+			projectile->x = weapon->x + 0.1f;
 		projectile->y = weapon->y;
 		projectile->rotation = 0.0f;
 		projectile->velocity_x = 3.5f;
@@ -145,7 +148,9 @@ void Character::equip(Weapon* newWeapon) {
 }
 
 void Character::die() {
-	weapon->gravity_affected = true;
-	weapon->velocity_y = 1.5f;
+	if (weapon) {
+		weapon->gravity_affected = true;
+		weapon->velocity_y = 1.5f;
+	}
 	should_remove = true;
 }
