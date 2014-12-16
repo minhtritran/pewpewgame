@@ -5,10 +5,31 @@
  </tileset>
  <layer name="Tile Layer 1" width="192" height="32">
   <data encoding="base64" compression="zlib">
-   eJztm1GOwyAMRDlJe4H0AnvInLm7Uit1UQBjj+0mzJPmZwOxgbGbptpSCCGErMT2q1t2EoQksb9EyIrQ/2Rl6H+yMvQ/IYSQLH5K7juo7ZVDS165veNq7j/K+Sh36Zwofeb2cF7LfbCHmWQ/g+0Cece1zJXmblnnTDxNbrP5aWO05mbwrr0z+B/9GbBV9x993tT9zsP/EWi8eVX/e3tMQu3DKH8gzszT/5neQPlfc98Iej0smhkfoepTUnOWPNH+jzgbSfyr+D/CYxJmej9yn9Bnh/K/1IOf4/6+t94Hc3r3rP8+ij+Tm3bdXkifXaPQeMlan9KaQ+Rq9X9vTgur/zXjz+L/KI9J0PR+xF5pY0T5v7dGzRitn1tzpHFaYzL8b3ln4YXFT636HL3Pt3zXXs3/rXnS8a0xGX5DegyBpfdLz350/dv9L/GuNE8J0vhH46X36snj/wA0fT+iJq3eP6rPuqZG11Frjdo/7xiz6/DuFQjQHkOA6P1He6W5fgX/z8ZpzUXsD/pMtVj7vlcNIL2/l/HvsdrfazXn1Ds/1L0z/S+J8y3+R581ogbQ3s9WDdL/K8uCV6/by/9eqlH2vkafV3ZeZ5WF7NxXFM8iZj97XL3HUutIQ3bOFIUSn60piqIoiqIoiqIoiqKuqSeClrLh
+   eJztmwFuwyAMRXOS9QLZBXbInLmrlkpZFMDY33YK/0lfkxbABj5Omm7LQgghZCbWX31lJ0FIEtsuQmaE/iczQ/+PzU92AhV6c9PMpdWH/h+bO+9tb26audx5/sSfO+8//f/H6x6V+Q5q3XMoySu3d1zN+K2c39oUfaJ0zO3baS7b/vPRWMNMsp/BNoG841r6SnO3zLMnnia33vy0MUp9Mzie0bv7H30PWE/jt+4353rn4f8INN4c1f/eHpNw9mGUPxB75un/TG+g/K8ZN4JaDYumx0eo8yk5c5Y80f6P2BtJ/FH8H+ExCT21H7lO6L1D+V/qwWO71+fWR6NPbczz71vxe3LTztsL6bNrFBovWc+n9MwhcrX6v9anhNX/mvaf4v8oj0nQ1H7EWmljRPm/NkdNG62fS32kcUptMvxveWfhhcVPpfPZep9v+aw9m/9L/aTtS20y/Ib0GAJL7Zfufev63f0v8a40TwnS+FftpWPV5PF/AJq6H3Emrd6/Op/nM9W6jppr1Pp5x+idh3etQID2GAJE7b9aK831EfzfG6fUF7E+6D3VYq37XmcA6f1taX8fq/2+VrNPtf1DjZ3pf0mcu/gfvdeIM4D2frbOIP0/syx41bpt+V9LtX9rOKJKZOf1qbKQnfuM4l7ErGeN0WssNY80ZOdMUSjx2ZqiKIqiKIqiKIqiKGpMPQGXpLnd
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object name="Player" type="Player" gid="28" x="252" y="1588"/>
+  <object name="Player" type="Player" gid="190" x="226" y="1624"/>
+  <object type="PewShooter" gid="188" x="1122" y="1380"/>
+  <object type="PewShooter" gid="188" x="1506" y="998"/>
+  <object type="PewShooter" gid="188" x="2014" y="490"/>
+  <object type="PewShooter" gid="188" x="2832" y="1384"/>
+  <object type="PewShooter" gid="188" x="3338" y="1376"/>
+  <object type="PewShooter" gid="188" x="4316" y="486"/>
+  <object type="PewShooter" gid="188" x="5254" y="996"/>
+  <object type="PewShooter" gid="188" x="6010" y="484"/>
+  <object type="PewShooter" gid="188" x="6760" y="624"/>
+  <object type="PewShooter" gid="188" x="6222" y="1258"/>
+  <object type="PewShooter" gid="188" x="7198" y="1518"/>
+  <object type="PewShooter" gid="188" x="7968" y="1258"/>
+  <object type="PewShooter" gid="188" x="8478" y="1318"/>
+  <object type="PewShooter" gid="188" x="7254" y="488"/>
+  <object type="PewShooter" gid="188" x="9148" y="494"/>
+  <object type="PewShooter" gid="188" x="9482" y="812"/>
+  <object type="PewShooter" gid="188" x="9488" y="1330"/>
+  <object type="PewShooter" gid="188" x="10584" y="496"/>
+  <object type="PewShooter" gid="188" x="11396" y="498"/>
+  <object type="PewShooter" gid="188" x="11044" y="1330"/>
+  <object type="PewShooter" gid="188" x="8396" y="492"/>
  </objectgroup>
 </map>

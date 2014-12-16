@@ -9,6 +9,27 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object name="Player" type="Player" gid="188" x="202" y="1431"/>
+  <object name="Player" type="Player" gid="190" x="195" y="1434"/>
+  <object type="PewShooter" gid="188" x="800" y="1376"/>
+  <object type="PewShooter" gid="188" x="1255" y="1444"/>
+  <object type="PewShooter" gid="188" x="1860" y="1260"/>
+  <object type="PewShooter" gid="188" x="2381" y="1253"/>
+  <object type="PewShooter" gid="188" x="3181" y="1243"/>
+  <object type="PewShooter" gid="188" x="3789" y="1249"/>
+  <object type="PewShooter" gid="188" x="4393" y="1250"/>
+  <object type="PewShooter" gid="188" x="4853" y="1250"/>
+  <object type="PewShooter" gid="188" x="5233" y="1056"/>
+  <object type="PewShooter" gid="188" x="5619" y="934"/>
+  <object type="PewShooter" gid="188" x="5993" y="803"/>
+  <object type="PewShooter" gid="188" x="6572" y="798"/>
+  <object type="PewShooter" gid="188" x="7236" y="810"/>
+  <object type="PewShooter" gid="188" x="7853" y="810"/>
+  <object type="PewShooter" gid="188" x="8334" y="810"/>
+  <object type="PewShooter" gid="188" x="8803" y="618"/>
+  <object type="PewShooter" gid="188" x="9386" y="615"/>
+  <object type="PewShooter" gid="188" x="9960" y="616"/>
+  <object type="PewShooter" gid="188" x="10604" y="425"/>
+  <object type="PewShooter" gid="188" x="11214" y="426"/>
+  <object type="PewShooter" gid="188" x="11816" y="427"/>
  </objectgroup>
 </map>

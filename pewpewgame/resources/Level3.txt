@@ -46,5 +46,89 @@ data=
 [Object Layer 1]
 # Player
 type=Player
-location=202,1431,0,0
+location=195,1434,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=800,1376,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=1255,1444,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=1860,1260,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=2381,1253,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=3181,1243,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=3789,1249,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=4393,1250,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=4853,1250,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=5233,1056,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=5619,934,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=5993,803,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=6572,798,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=7236,810,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=7853,810,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=8334,810,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=8803,618,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=9386,615,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=9960,616,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=10604,425,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=11214,426,0,0
+
+[Object Layer 1]
+type=PewShooter
+location=11816,427,0,0
 
