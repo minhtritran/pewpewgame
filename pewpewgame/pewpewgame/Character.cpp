@@ -137,5 +137,6 @@ void Character::equip(Weapon* weapon) {
 
 void Character::die() {
 	weapon->gravity_affected = true;
+	weapon->velocity_y = 1.5f;
 	should_remove = true;
 }

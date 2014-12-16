@@ -95,7 +95,7 @@ void SideScroller::Update(float elapsed) {
 	}
 	else if (state == STATE_GAME)
 	{
-		if (enemySpawnTimer > 0.01f && enemies.size() < 1000) {
+		if (enemySpawnTimer > 0.01f && enemies.size() < 100) {
 			Enemy* tempEnemy = new PewShooter();
 			tempEnemy->sprite = enemy_sprite;
 			tempEnemy->y = 0.85f;
