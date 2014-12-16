@@ -84,12 +84,10 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ProjRaygunBullet.cpp" />
     <ClCompile Include="SheetSprite.cpp" />
     <ClCompile Include="SideScroller.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Weapon.cpp" />
-    <ClCompile Include="WepRaygun.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />

@@ -130,9 +130,18 @@ bool Character::shoot(Projectile* projectile) {
 	return false;
 }
 
-void Character::equip(Weapon* weapon) {
-	this->weapon = weapon;
-	weapon->gravity_affected = false;
+void Character::equip(Weapon* newWeapon) {	
+	if (weapon && weapon->type == newWeapon->type) {
+		weapon->ammo += newWeapon->ammo;
+		if (weapon->ammo > weapon->max_ammo)
+			weapon->ammo = weapon->max_ammo;
+		weapon->should_remove = true;
+	}
+	else {
+		weapon = newWeapon;
+		weapon->gravity_affected = false;
+	}
+	
 }
 
 void Character::die() {

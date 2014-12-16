@@ -119,7 +119,7 @@ void SideScroller::Update(float elapsed) {
 
 			Weapon* enemyWeapon = new Weapon();
 			enemyWeapon->sprite = weapon_raygun_sprite;
-			enemyWeapon->changeWeapon(1.5f, 1.5f, 1.0f, 150, 350);
+			enemyWeapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350);
 			tempEnemy->equip(enemyWeapon);
 			entities.push_back(enemyWeapon);
 
@@ -352,8 +352,8 @@ void SideScroller::Render(float elapsed) {
 		float translateY = -player->y;
 
 		//scrolling boundaries
-		if (translateY > (float)(mapHeight * TILE_SIZE / 2.0f) - 2.00f)
-			translateY = (float)(mapHeight * TILE_SIZE / 2.0f) - 2.00f;
+		if (translateY > (float)(mapHeight * TILE_SIZE / 2.0f) - 2.0f - 0.2f)
+			translateY = (float)(mapHeight * TILE_SIZE / 2.0f) - 2.0f - 0.2f;
 		else if (translateY < -(float)(mapHeight * TILE_SIZE / 2.0f) + 2.00f)
 			translateY = -(float)(mapHeight * TILE_SIZE / 2.0f) + 2.00f;
 
@@ -433,7 +433,7 @@ bool SideScroller::UpdateAndRender() {
 			}
 			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_1)
 			{
-				buildLevel("resources/Level11.txt");
+				buildLevel("resources/Level1.txt");
 				state = STATE_GAME;
 			}
 			else if (state == STATE_TITLE && event.key.keysym.scancode == SDL_SCANCODE_2)
@@ -651,7 +651,7 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 
 		Weapon* weapon = new Weapon();
 		weapon->sprite = weapon_raygun_sprite;
-		weapon->changeWeapon(1.5f, 1.5f, 1.0f, 150, 350);
+		weapon->changeWeapon(RAY_GUN, 1.5f, 1.5f, 1.0f, 150, 350);
 		entities.push_back(weapon);
 		player->equip(weapon);
 
