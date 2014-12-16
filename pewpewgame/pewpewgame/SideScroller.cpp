@@ -745,8 +745,8 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		//weapon->changeWeapon(RAY_GUN);
 		weapon->sprite = weapon_minigun_sprite;
 		weapon->changeWeapon(MINI_GUN);
-		entities.push_back(weapon);
 		player->equip(weapon);
+		entities.push_back(weapon);
 
 
 		entities.push_back(player);

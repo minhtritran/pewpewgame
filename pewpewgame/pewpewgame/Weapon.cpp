@@ -8,6 +8,7 @@ Weapon::Weapon() {
 	rateOfFire = 1.0f;
 	ammo = 100;
 	max_ammo = 100;
+	friction_x = 5.0f;
 
 }
 

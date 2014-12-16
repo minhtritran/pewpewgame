@@ -1,37 +1,10 @@
-﻿Build started 12/16/2014 1:56:24 PM.
-     1>Project "C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" on node 2 (Build target(s)).
+﻿Build started 12/16/2014 2:55:52 PM.
+     1>Project "E:\Git Repositories\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Character.cpp Enemy.cpp PewRunner.cpp PewShooter.cpp Player.cpp SideScroller.cpp Weapon.cpp main.cpp
-         Weapon.cpp
-         SideScroller.cpp
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(7): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(655): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(670): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(675): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(831): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(832): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(898): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(899): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(905): warning C4018: '>' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(919): warning C4018: '>' : signed/unsigned mismatch
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(934): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(936): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(946): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(948): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(962): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(971): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\wilson\desktop\github\pewpewgame\pewpewgame\pewpewgame\sidescroller.cpp(992): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Compiling...
-         main.cpp
-         Player.cpp
-         PewShooter.cpp
-         PewRunner.cpp
-         Enemy.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2_mixer\include /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Character.cpp
          Character.cpp
-         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\SDL2_mixer\lib\x86 SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.lib" /MACHINE:X86 Debug\Character.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\SDL2_mixer\lib\x86 SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.lib" /MACHINE:X86 Debug\Character.obj
          Debug\Enemy.obj
          Debug\Matrix.obj
          Debug\PewRunner.obj
@@ -44,9 +17,9 @@
          Debug\SideScroller.obj
          Debug\Vector.obj
          Debug\Weapon.obj
-         pewpewgame.vcxproj -> C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\Debug\pewpewgame.exe
-     1>Done Building Project "C:\Users\Wilson\Desktop\GitHub\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" (Build target(s)).
+         pewpewgame.vcxproj -> E:\Git Repositories\pewpewgame\pewpewgame\Debug\pewpewgame.exe
+     1>Done Building Project "E:\Git Repositories\pewpewgame\pewpewgame\pewpewgame\pewpewgame.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.43
+Time Elapsed 00:00:00.64

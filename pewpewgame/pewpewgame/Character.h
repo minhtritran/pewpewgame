@@ -33,5 +33,6 @@ public:
 	bool face_left;
 	bool isJumping;
 	float jumpTimer;
+	float equipTimer;
 	Weapon* weapon;
 };

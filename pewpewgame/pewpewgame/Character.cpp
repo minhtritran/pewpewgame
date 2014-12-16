@@ -6,6 +6,7 @@ Character::Character() {
 	face_left = false;
 	isJumping = false;
 	jumpTimer = 0.0f;
+	equipTimer = 1.0f;
 	weapon = NULL;
 }
 
@@ -23,6 +24,7 @@ void Character::Update(float elapsed) {
 	
 	Entity::Update(elapsed);
 	jumpTimer += elapsed;
+	equipTimer += elapsed;
 	
 }
 
@@ -145,18 +147,36 @@ int Character::melee() {
 	}
 }
 
-void Character::equip(Weapon* newWeapon) {	
-	if (weapon && weapon->type == newWeapon->type) {
-		weapon->ammo = weapon->ammo + newWeapon->ammo;
-		if (weapon->ammo > weapon->max_ammo)
-			weapon->ammo = weapon->max_ammo;
-		newWeapon->should_remove = true;
+void Character::equip(Weapon* newWeapon) {
+	if (equipTimer > 0.5f) {
+		if (weapon) {
+			if (weapon->type == newWeapon->type) {
+				weapon->ammo = weapon->ammo + newWeapon->ammo;
+				if (weapon->ammo > weapon->max_ammo)
+					weapon->ammo = weapon->max_ammo;
+				newWeapon->should_remove = true;
+			}
+			else {
+				weapon->gravity_affected = true;
+				weapon->sprite.invert = false;
+				weapon->velocity_y = 4.0f;
+				if (face_left)
+					weapon->velocity_x = 1.5f;
+				else
+					weapon->velocity_x = -1.5f;
+				weapon = NULL;
+				weapon = newWeapon;
+				weapon->gravity_affected = false;
+				if (face_left)
+					weapon->sprite.invert = true;
+			}
+		}
+		else {
+			weapon = newWeapon;
+			weapon->gravity_affected = false;
+		}
+		equipTimer = 0.0f;
 	}
-	else {
-		weapon = newWeapon;
-		weapon->gravity_affected = false;
-	}
-	
 }
 
 void Character::die() {
