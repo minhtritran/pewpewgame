@@ -11,5 +11,5 @@ public:
 
 	bool is_jumper;
 	float aiShootTimer;
-	bool near_player;
+	float dist_to_player;
 };

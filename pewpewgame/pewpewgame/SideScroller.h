@@ -12,6 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include <typeinfo>
+#include <time.h>
 #include "Entity.h"
 #include "Projectile.h"
 #include "Character.h"
@@ -121,3 +122,4 @@ private:
 float lerp(float v0, float v1, float t);
 void DrawText(int textureID, string text, float size, float spacing, float r, float g, float b, float a);
 GLuint LoadTexture(const char *image_path);
+float genRandomNumber(float low, float high);

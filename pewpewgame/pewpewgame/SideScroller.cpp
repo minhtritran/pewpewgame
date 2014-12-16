@@ -4,7 +4,8 @@ enum GameState { STATE_TITLE, STATE_GAME, STATE_GAMEOVER };
 
 SideScroller::SideScroller() {
 	Init();
-	
+	srand(time(NULL));
+
 	state = STATE_TITLE;
 	done = false;
 	lastFrameTicks = 0.0f;
@@ -95,7 +96,7 @@ void SideScroller::Update(float elapsed) {
 	}
 	else if (state == STATE_GAME)
 	{
-		if (enemySpawnTimer > 0.5f && enemies.size() < 50) {
+		if (enemySpawnTimer > 0.55f && enemies.size() < 50) {
 			Enemy* tempEnemy = new PewRunner();
 			tempEnemy->sprite = enemy_sprite;
 			tempEnemy->y = player->y + 4.0f;
@@ -121,7 +122,7 @@ void SideScroller::Update(float elapsed) {
 			enemies.push_back(tempEnemy);
 			entities.push_back(tempEnemy);
 			
-			enemySpawnTimer = 0.0f;
+			enemySpawnTimer = genRandomNumber(0.0f, 0.5f);
 		}
 
 		for (size_t i = 0; i < entities.size(); i++) {
@@ -208,15 +209,10 @@ void SideScroller::FixedUpdate() {
 		}
 
 		for each (auto enemy in enemies) {
-			if (sqrt(pow(enemy->x - player->x, 2) + pow(enemy->y - player->y, 2)) < 3.0f) {
-				enemy->near_player = true;
-			}
-			else
-				enemy->near_player = false;
-	
+			enemy->dist_to_player = sqrt(pow(enemy->x - player->x, 2) + pow(enemy->y - player->y, 2));
 
 			//shoot ai
-			if (enemy->aiShootTimer > 1.5f && enemy->near_player) {
+			if (enemy->aiShootTimer > 1.5f && enemy->dist_to_player < 3.0f) {
 				Projectile* tempProjectile = new Projectile();
 				tempProjectile->sprite = projectile_raygun_bullet_sprite;
 				tempProjectile->changeProjectile(7.5f, 7.5f, 2);
@@ -298,6 +294,11 @@ void SideScroller::FixedUpdate() {
 					if (enemy->collidesWith(projectile) && !projectile->should_remove) {
 						projectile->should_remove = true;
 						enemy->hp -= projectile->damage;
+						enemy->velocity_y += 0.5f;
+						if (projectile->velocity_x > 0)
+							enemy->velocity_x += 0.5f;
+						else
+							enemy->velocity_x -= 0.5f;
 					}
 				}
 			}
@@ -307,6 +308,10 @@ void SideScroller::FixedUpdate() {
 				if (player->collidesWith(projectile) && !projectile->should_remove) {
 					projectile->should_remove = true;
 					player->hp -= projectile->damage;
+					if (projectile->velocity_x > 0)
+						player->velocity_x += 2.5f;
+					else
+						player->velocity_x -= 2.5f;
 				}
 			}
 		}
@@ -973,4 +978,8 @@ GLuint LoadTexture(const char *image_path) {
 	SDL_FreeSurface(surface);
 
 	return textureID;
+}
+
+float genRandomNumber(float low, float high) {
+	return low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - low)));
 }
