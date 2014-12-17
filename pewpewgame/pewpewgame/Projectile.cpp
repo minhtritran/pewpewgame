@@ -18,7 +18,7 @@ void Projectile::changeProjectile(int type)
 	if (type == PLASMA_BALL) {
 		scale_x = 7.5f;
 		scale_y = 7.5f;
-		damage = 20;
+		damage = 25;
 		sprite = SheetSprite(tex->weaponSpriteSheetTexture, 14, 7, 7);
 		penetration = 1;
 		speed_multiplier = 1.0f;
@@ -44,7 +44,7 @@ void Projectile::changeProjectile(int type)
 		scale_y = 4.0f;
 		damage = 20;
 		sprite = SheetSprite(tex->fruitSpriteSheetTexture, 176.0f/272.0f, 94.0f/300.0f, 17.0f/272.0f, 18.0f/300.0f);
-		penetration = 4;
+		penetration = 7;
 		speed_multiplier = 0.7f;
 	}
 }

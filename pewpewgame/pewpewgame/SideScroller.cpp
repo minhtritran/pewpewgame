@@ -61,14 +61,14 @@ void SideScroller::Update(float elapsed) {
 	}
 	else if (state == STATE_GAME)
 	{
-		if (enemySpawnTimer > 0.55f && enemies.size() < 50) {
+		if (enemySpawnTimer > 0.8f && enemies.size() < 50) {
 			Enemy* tempEnemy = new PewRunner(tex);
 			tempEnemy->y = player->y + 4.0f;
 			tempEnemy->x = player->x + 10.0f;
 			tempEnemy->setScale(2.5f);
-
 			if (genRandomNumber(0.0f, 1.0f) > 0.93f) {
 				//Grant him knighthood
+				tempEnemy->hp += 30;
 				Weapon* weapon = new Weapon(tex);
 				weapon->changeWeapon(SWORD);
 				tempEnemy->equip(weapon);
@@ -80,7 +80,7 @@ void SideScroller::Update(float elapsed) {
 			enemies.push_back(tempEnemy);
 			entities.push_back(tempEnemy);
 			
-			enemySpawnTimer = genRandomNumber(0.0f, 0.5f);
+			enemySpawnTimer = genRandomNumber(0.0f, 0.75f);
 		}
 
 		for (size_t i = 0; i < entities.size(); i++) {

@@ -188,6 +188,7 @@ void Character::die() {
 		if (weapon->droppable) {
 			weapon->gravity_affected = true;
 			weapon->velocity_y = 1.5f;
+			weapon->sprite.invert = false;
 		}
 		else {
 			weapon->should_remove = true;

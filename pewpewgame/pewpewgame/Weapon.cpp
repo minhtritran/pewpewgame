@@ -45,8 +45,8 @@ void Weapon::changeWeapon(int type)
 		scale_y = 1.5f;
 
 		rateOfFire = 2.0f;
-		ammo = 75;
-		max_ammo = 125;
+		ammo = 125;
+		max_ammo = 200;
 		melee_damage = 0;
 
 		droppable = true;
@@ -58,8 +58,8 @@ void Weapon::changeWeapon(int type)
 		scale_y = 1.0f;
 
 		rateOfFire = 1.5f;
-		ammo = 75;
-		max_ammo = 300;
+		ammo = 150;
+		max_ammo = 400;
 		melee_damage = 0;
 
 		droppable = true;
