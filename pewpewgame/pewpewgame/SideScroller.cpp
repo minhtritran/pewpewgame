@@ -170,14 +170,17 @@ void SideScroller::FixedUpdate() {
 			enemy->dist_to_player = sqrt(pow(enemy->x - player->x, 2) + pow(enemy->y - player->y, 2));
 
 			//shoot ai
-			if (enemy->aiShootTimer > 1.5f && enemy->dist_to_player < 3.0f) {
-				Projectile* tempProjectile = enemy->shoot();
-				if (tempProjectile != NULL)  {
-					tempProjectile->damages_player = true;
-					projectiles.push_back(tempProjectile);
-					enemy->aiShootTimer = 0.0f;
+			if (enemy->weapon && enemy->weapon->melee_damage == 0) {
+				if (enemy->aiShootTimer > (1.5f / (enemy->weapon->rateOfFire)) && enemy->dist_to_player < 3.0f) {
+					Projectile* tempProjectile = enemy->shoot();
+					if (tempProjectile != NULL)  {
+						tempProjectile->damages_player = true;
+						projectiles.push_back(tempProjectile);
+						enemy->aiShootTimer = 0.0f;
+					}
 				}
 			}
+			
 			
 			//melee ai
 			if (enemy->aiMeleeTimer > 0.2f && enemy->dist_to_player < 0.2f) {
@@ -277,7 +280,9 @@ void SideScroller::FixedUpdate() {
 					if (checkPointForGridCollisionX(projectile->x, projectile->y) != 0)
 						projectile->should_remove = true;
 					if (enemy->collidesWith(projectile) && !projectile->should_remove) {
-						projectile->should_remove = true;
+						if (projectile->penetration <= 0)
+							projectile->should_remove = true;
+						projectile->penetration--;
 						enemy->hp -= projectile->damage;
 						enemy->velocity_y += 0.5f;
 						if (projectile->velocity_x > 0)
@@ -678,10 +683,15 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		player->hp = 100;
 
 		Weapon* weapon = new Weapon(tex);
-		//weapon->changeWeapon(RAY_GUN);
-		//weapon->changeWeapon(MINI_GUN);
-		//weapon->changeWeapon(MACHINE_GUN); 
-		weapon->changeWeapon(SHOTGUN);
+		int random = (int)(genRandomNumber(0.0, 4.0f));
+		if (random == 0)
+			weapon->changeWeapon(RAY_GUN);
+		else if (random == 1)
+			weapon->changeWeapon(MINI_GUN);
+		else if (random == 2)
+			weapon->changeWeapon(MACHINE_GUN);
+		else
+			weapon->changeWeapon(SHOTGUN);
 		player->equip(weapon);
 		entities.push_back(weapon);
 
@@ -711,7 +721,15 @@ void SideScroller::placeEntity(string& type, float placeX, float placeY) {
 		enemy->setScale(2.5f);
 		
 		Weapon* weapon = new Weapon(tex);
-		weapon->changeWeapon(RAY_GUN);
+		int random = (int)(genRandomNumber(0.0, 4.0f));
+		if (random == 0)
+			weapon->changeWeapon(RAY_GUN);
+		else if (random == 1)
+			weapon->changeWeapon(MINI_GUN);
+		else if (random == 2)
+			weapon->changeWeapon(MACHINE_GUN);
+		else
+			weapon->changeWeapon(SHOTGUN);
 		enemy->equip(weapon);
 		entities.push_back(weapon);
 		

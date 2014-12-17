@@ -4,7 +4,7 @@ Weapon::Weapon(Textures* tex) : Entity(tex) {
 	isStatic = true;
 	z = 1.0f;
 
-	shootTimer = 0.0f;
+	shootTimer = 5.0f;
 	rateOfFire = 1.0f;
 	ammo = 100;
 	max_ammo = 100;
@@ -45,8 +45,8 @@ void Weapon::changeWeapon(int type)
 		scale_y = 1.5f;
 
 		rateOfFire = 2.0f;
-		ammo = 250;
-		max_ammo = 500;
+		ammo = 75;
+		max_ammo = 125;
 		melee_damage = 0;
 
 		droppable = true;
@@ -58,8 +58,8 @@ void Weapon::changeWeapon(int type)
 		scale_y = 1.0f;
 
 		rateOfFire = 1.5f;
-		ammo = 150;
-		max_ammo = 350;
+		ammo = 75;
+		max_ammo = 300;
 		melee_damage = 0;
 
 		droppable = true;
@@ -70,9 +70,9 @@ void Weapon::changeWeapon(int type)
 		scale_x = 1.3f;
 		scale_y = 0.5f;
 
-		rateOfFire = 1.0f;
-		ammo = 150;
-		max_ammo = 350;
+		rateOfFire = 0.3f;
+		ammo = 20;
+		max_ammo = 40;
 		melee_damage = 0;
 
 		droppable = true;

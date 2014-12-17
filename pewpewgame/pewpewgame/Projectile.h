@@ -16,6 +16,8 @@ public:
 	int type;
 
 	int damage;
+	int penetration;
+	float speed_multiplier;
 
 	bool damages_player;
 	bool damages_enemy;;
