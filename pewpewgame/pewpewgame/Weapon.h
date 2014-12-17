@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include "Projectile.h"
 
-enum weapon_type {RAY_GUN, SWORD, MINI_GUN, MACHINE_GUN};
+enum weapon_type {RAY_GUN, SWORD, MINI_GUN, MACHINE_GUN, SHOTGUN};
 
 class Weapon : public Entity {
 public:
