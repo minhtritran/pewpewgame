@@ -22,8 +22,8 @@ SideScroller::SideScroller() {
 	fruitshot = Mix_LoadWAV("resources/fruitshot.wav");
 	jump = Mix_LoadWAV("resources/jump.wav");
 	hurt = Mix_LoadWAV("resources/hurt.wav");
-	//music = Mix_LoadMUS("resources/music.wav");
-	if (Mix_PlayMusic(music, -1) < 0) {
+	music = Mix_LoadMUS("resources/music.wav");
+	if (Mix_PlayMusic(music, -1) == -1) {
 		cout << "Error";
 	}
 	
@@ -937,6 +937,3 @@ void DrawText(int textureID, string text, float size, float spacing, float r, fl
 
 
 
-float genRandomNumber(float low, float high) {
-	return low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - low)));
-}

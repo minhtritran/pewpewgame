@@ -51,6 +51,7 @@ void Projectile::changeProjectile(int type)
 
 void Projectile::Update(float elapsed) {
 	x += velocity_x * elapsed * speed_multiplier;
+	y += velocity_y * elapsed;
 }
 
 void Projectile::Render(float elapsed) {

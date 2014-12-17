@@ -111,4 +111,3 @@ private:
 
 float lerp(float v0, float v1, float t);
 void DrawText(int textureID, string text, float size, float spacing, float r, float g, float b, float a);
-float genRandomNumber(float low, float high);

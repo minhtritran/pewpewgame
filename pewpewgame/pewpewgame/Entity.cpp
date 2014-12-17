@@ -128,3 +128,6 @@ bool Entity::collidesWith(Entity* entity) {
 float lerp(float v0, float v1, float t) {
 	return (1.0f - t)*v0 + t*v1;
 }
+float genRandomNumber(float low, float high) {
+	return low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - low)));
+}

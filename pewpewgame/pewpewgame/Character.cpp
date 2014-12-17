@@ -122,7 +122,9 @@ Projectile* Character::shoot() {
 			projectile->x = weapon->x - 0.1f;
 		else
 			projectile->x = weapon->x + 0.1f;
-		projectile->y = weapon->y;
+
+		projectile->y = weapon->y + genRandomNumber(-0.05f, 0.05f);
+		projectile->velocity_y = genRandomNumber(-0.25f, 0.25f);
 		projectile->rotation = 0.0f;
 		projectile->velocity_x = 3.5f;
 		if (face_left)
