@@ -73,6 +73,11 @@ void Weapon::Update(float elapsed) {
 	shootTimer += elapsed;
 }
 void Weapon::FixedUpdate() {
+	//remove if fell
+	if (y < -2.8f) {
+		should_remove = true;
+	}
+
 	Entity::FixedUpdate();
 }
 void Weapon::Render(float elapsed) {

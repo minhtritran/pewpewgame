@@ -70,11 +70,6 @@ void Entity::Update(float elapsed) {
 
 void Entity::FixedUpdate() {
 
-	//remove if fell
-	if (y < -2.8f) {
-		should_remove = true;
-	}
-
 	if (!isStatic) {
 		if (collidedBottom) {
 			velocity_y = 0.0f;
